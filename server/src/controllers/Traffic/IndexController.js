@@ -59,7 +59,12 @@ class TrafficIndexController {
 
         const data =
             between && typeof between === 'object' && between.from && between.to
-                ? testData.filter(data => dayjs(data.date).isBetween(between.from, between.to, 'day'))
+                ? testData.filter(
+                      data =>
+                          data.date === between.from ||
+                          data.date === between.to ||
+                          dayjs(data.date).isBetween(between.from, between.to, 'day')
+                  )
                 : testData;
 
         return res.send(data);
