@@ -44,10 +44,10 @@ export default {
     data() {
         return {
             form: {
-                date: null,
-                cameFrom: null,
-                user: null,
-                action: null
+                date: dayjs().toISOString(),
+                cameFrom: 'facebook',
+                user: 'user1',
+                action: 'homepage'
             },
             selectValues: {
                 date: (() => {
@@ -66,6 +66,7 @@ export default {
                 })(),
                 cameFrom: [
                     { text: 'Google Ads', value: 'google' },
+                    { text: 'Facebook Ads', value: 'facebook' },
                     { text: 'Email', value: 'email' },
                     { text: 'Direct', value: 'direct' },
                     { text: 'Referral', value: 'referral' },
@@ -85,6 +86,7 @@ export default {
                 })(),
                 action: [
                     { text: 'Register', value: 'register' },
+                    { text: 'Visit Homepage', value: 'homepage' },
                     { text: 'Visit Product1 Page', value: 'product1page' },
                     { text: 'Visit Product2 Page', value: 'product2page' },
                     { text: 'Visit Product3 Page', value: 'product3page' },

@@ -7,9 +7,9 @@ const state = () => ({
 });
 
 const getters = {
-    totalTraffic: state => state.entries.length,
-    trafficPerPage: state => page => state.entries.filter(entry => entry.page === page).length,
-    trafficPerSource: state => source => state.entries.filter(entry => entry.source === source).length
+    total: state => state.entries.length,
+    perPage: state => page => state.entries.filter(entry => entry.page === page).length,
+    perSource: state => source => state.entries.filter(entry => entry.source === source).length
 };
 
 const mutations = {
