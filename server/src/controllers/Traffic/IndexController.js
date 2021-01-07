@@ -1,3 +1,5 @@
+const dayjs = require('dayjs');
+
 const testData = [
     { page: 'homepage', from: 'google', date: '2021-01-07' },
     { page: 'product1page', from: 'email', date: '2021-01-07' },
@@ -53,7 +55,14 @@ const testData = [
 
 class TrafficIndexController {
     async invoke(req, res) {
-        return res.send(testData);
+        const { filter: { between = null } = {} } = req.query;
+
+        const data =
+            between && typeof between === 'object' && between.from && between.to
+                ? testData.filter(data => dayjs(data.date).isBetween(between.from, between.to, 'day'))
+                : testData;
+
+        return res.send(data);
     }
 }
 
