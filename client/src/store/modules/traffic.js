@@ -18,7 +18,12 @@ const mutations = {
 
 const actions = {
     async fetchEtriesByTime({ commit }, between) {
-        const { data } = await axios.get('/traffic', { params: { between } });
+        const params = {
+            'filter[between][from]': between.from,
+            'filter[between][to]': between.to
+        };
+
+        const { data } = await axios.get('/traffic', { params });
 
         commit('SET_ENTRIES', data);
     }
