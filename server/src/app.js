@@ -9,4 +9,8 @@ app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
 
+const router = require('./routes')(app);
+
+app.use('/api', router);
+
 module.exports = app;
