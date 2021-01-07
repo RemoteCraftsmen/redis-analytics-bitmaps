@@ -1,5 +1,5 @@
 import globalAxios from 'axios';
-import { apiUrl } from '../config';
+import { apiUrl } from '@/config';
 
 const axios = globalAxios.create({
     baseURL: apiUrl

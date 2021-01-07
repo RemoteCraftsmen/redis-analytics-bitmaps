@@ -1,3 +1,3 @@
-module.exports = {
+export default {
     apiUrl: process.env.VUE_APP_API_URL
 };
