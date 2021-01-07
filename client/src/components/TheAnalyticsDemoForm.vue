@@ -1,12 +1,6 @@
 <template>
     <form @submit.prevent="submitForm">
-        <v-select
-            v-model="form.date"
-            :items="selectValues.date"
-            item-text="text"
-            item-value="value"
-            label="Date"
-        />
+        <v-select v-model="form.date" :items="selectValues.date" item-text="text" item-value="value" label="Date" />
 
         <v-select
             v-model="form.cameFrom"
@@ -16,13 +10,7 @@
             label="Came From"
         />
 
-        <v-select
-            v-model="form.user"
-            :items="selectValues.user"
-            item-text="text"
-            item-value="value"
-            label="User"
-        />
+        <v-select v-model="form.user" :items="selectValues.user" item-text="text" item-value="value" label="User" />
 
         <v-select
             v-model="form.action"
