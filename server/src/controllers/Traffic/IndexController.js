@@ -19,6 +19,10 @@ const makeFakeData = numberOfEntries => {
 const testData = makeFakeData(500);
 
 class TrafficIndexController {
+    constructor(redisService) {
+        this.redisService = redisService;
+    }
+
     async invoke(req, res) {
         const { filter } = req.query;
 
