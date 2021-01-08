@@ -6,7 +6,7 @@ const router = express.Router();
 module.exports = app => {
     const storeController = new DataStoreController(new RedisService());
 
-    router.get('/', (...args) => storeController.invoke(...args));
+    router.post('/', (...args) => storeController.invoke(...args));
 
     return router;
 };
