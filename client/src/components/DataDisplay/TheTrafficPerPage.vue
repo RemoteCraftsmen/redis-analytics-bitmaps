@@ -2,6 +2,10 @@
     <v-card>
         <v-card-title>Traffic per Page</v-card-title>
 
+        <v-card-actions>
+            <base-period-select />
+        </v-card-actions>
+
         <v-card-text>
             <v-row>
                 <v-col cols="6">
@@ -31,7 +35,8 @@ import { mapGetters } from 'vuex';
 
 export default {
     components: {
-        baseTrafficCard: () => import('@/components/UI/BaseTrafficCard')
+        baseTrafficCard: () => import('@/components/UI/BaseTrafficCard'),
+        basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
     },
 
     computed: {

@@ -2,6 +2,10 @@
     <v-card>
         <v-card-title>{{ title }}</v-card-title>
 
+        <v-card-actions>
+            <slot />
+        </v-card-actions>
+
         <v-card-text>{{ traffic }}</v-card-text>
     </v-card>
 </template>

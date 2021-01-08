@@ -21,12 +21,6 @@
                 </v-card>
             </v-col>
         </v-row>
-
-        <v-row>
-            <v-col cols="12">
-                <base-period-select />
-            </v-col>
-        </v-row>
     </v-container>
 </template>
 
@@ -34,8 +28,7 @@
 export default {
     components: {
         theAnalyticsDemoForm: () => import('@/components/TheAnalyticsDemoForm'),
-        theAnalyticsData: () => import('@/components/TheAnalyticsData'),
-        basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
+        theAnalyticsData: () => import('@/components/TheAnalyticsData')
     }
 };
 </script>
