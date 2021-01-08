@@ -25,6 +25,10 @@ export default {
         }
     },
 
+    created() {
+        this.fetchTrafficByTime();
+    },
+
     methods: {
         ...mapActions({ fetchTrafficEntriesByTime: 'traffic/fetchEtriesByTime' }),
 
@@ -56,10 +60,6 @@ export default {
 
             await this.fetchTrafficEntriesByTime(between);
         }
-    },
-
-    created() {
-        this.fetchTrafficByTime();
     }
 };
 </script>

@@ -1,20 +1,32 @@
 <template>
     <form @submit.prevent="submitForm">
-        <v-select v-model="form.date" :items="selectValues.date" item-text="text" item-value="value" label="Date" />
-
         <v-select
-            v-model="form.cameFrom"
-            :items="selectValues.cameFrom"
+            v-model="form.date"
+            :items="selectValues.dateValues"
             item-text="text"
             item-value="value"
-            label="Came From"
+            label="Date"
         />
 
-        <v-select v-model="form.user" :items="selectValues.user" item-text="text" item-value="value" label="User" />
+        <v-select
+            v-model="form.source"
+            :items="selectValues.sourceValues"
+            item-text="text"
+            item-value="value"
+            label="Came From (Source)"
+        />
+
+        <v-select
+            v-model="form.user"
+            :items="selectValues.userValues"
+            item-text="text"
+            item-value="value"
+            label="User"
+        />
 
         <v-select
             v-model="form.action"
-            :items="selectValues.action"
+            :items="selectValues.actionValues"
             item-text="text"
             item-value="value"
             label="Action"
@@ -42,29 +54,35 @@ export default {
     },
 
     data() {
+        const dateValues = [];
+        const userValues = [];
+
+        for (let i = 0; i <= 30; i++) {
+            const date = dayjs('2015-12-01').add(i, 'day');
+
+            dateValues.push({
+                text: date.format('ddd, DD MMM YYYY'),
+                value: date.format('YYYY-MM-DD')
+            });
+        }
+
+        for (let i = 1; i <= this.maxUsers; i++) {
+            userValues.push({
+                text: `User${i}`,
+                value: i
+            });
+        }
+
         return {
             form: {
-                date: dayjs().toISOString(),
-                cameFrom: 'facebook',
-                user: 'user1',
+                date: dayjs('2015-12-01').format('YYYY-MM-DD'),
+                source: 'facebook',
+                user: 1,
                 action: 'homepage'
             },
             selectValues: {
-                date: (() => {
-                    const dates = [];
-
-                    for (let i = 0; i < this.maxDaysInFuture; i++) {
-                        const date = dayjs().add(i, 'day');
-
-                        dates.push({
-                            text: date.toString(),
-                            value: date.toISOString()
-                        });
-                    }
-
-                    return dates;
-                })(),
-                cameFrom: [
+                dateValues,
+                sourceValues: [
                     { text: 'Google Ads', value: 'google' },
                     { text: 'Facebook Ads', value: 'facebook' },
                     { text: 'Email', value: 'email' },
@@ -72,19 +90,8 @@ export default {
                     { text: 'Referral', value: 'referral' },
                     { text: 'None', value: 'none' }
                 ],
-                user: (() => {
-                    const users = [];
-
-                    for (let i = 1; i <= this.maxUsers; i++) {
-                        users.push({
-                            text: `User${i}`,
-                            value: `user${i}`
-                        });
-                    }
-
-                    return users;
-                })(),
-                action: [
+                userValues,
+                actionValues: [
                     { text: 'Register', value: 'register' },
                     { text: 'Visit Homepage', value: 'homepage' },
                     { text: 'Visit Product1 Page', value: 'product1page' },
@@ -103,7 +110,7 @@ export default {
 
     methods: {
         submitForm() {
-            console.log(this.form);
+            // TODO
         }
     }
 };
