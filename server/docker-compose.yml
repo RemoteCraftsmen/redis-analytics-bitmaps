@@ -3,24 +3,25 @@ version: '3'
 services:
     redis:
         image: redislabs/rejson:latest
-        hostname: redis.redisanalyticsbitmaps.docker
         container_name: redis.redisanalyticsbitmaps.docker
         restart: unless-stopped
         ports:
             - '127.0.0.1:${REDIS_PORT}:6379'
         networks:
             - global
+        links:
+            - redis-commander
 
     redis-commander:
         container_name: redis-commander.redisanalyticsbitmaps.docker
-        hostname: redis-commander
         image: rediscommander/redis-commander:latest
         restart: always
         environment:
-            - REDIS_PORT=${REDIS_PORT}
-            - REDIS_HOST=local:redis:${REDIS_PORT}
+            - REDIS_HOST=redis
         ports:
             - '127.0.0.1:8081:8081'
+        networks:
+            - global
 networks:
     global:
         external: true
