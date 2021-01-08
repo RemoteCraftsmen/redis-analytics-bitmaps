@@ -1,11 +1,11 @@
 <template>
     <base-traffic-card title="Total Traffic" :traffic="totalTraffic">
-        <base-period-select />
+        <base-period-select @onSelect="onSelect" />
     </base-traffic-card>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     components: {
@@ -13,8 +13,20 @@ export default {
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
     },
 
-    computed: {
-        ...mapGetters({ totalTraffic: 'traffic/total' })
+    data() {
+        return {
+            totalTraffic: 0
+        };
+    },
+
+    methods: {
+        ...mapActions({ fetchEtriesByTime: 'traffic/fetchEtriesByTime' }),
+
+        async onSelect(between) {
+            const data = await this.fetchEtriesByTime(between);
+
+            this.totalTraffic = data.length;
+        }
     }
 };
 </script>

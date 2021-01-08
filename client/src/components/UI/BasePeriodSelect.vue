@@ -3,37 +3,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
     data() {
         return {
             periodId: 0,
-            values: [
-                { text: '1st week of December', value: 0 },
-                { text: '2nd week of December', value: 1 },
-                { text: '3rd week of December', value: 2 },
-                { text: '4th week of December', value: 3 },
-                { text: '5th week of December', value: 4 }
-            ]
-        };
-    },
-
-    watch: {
-        periodId() {
-            this.fetchTrafficByTime();
-        }
-    },
-
-    created() {
-        this.fetchTrafficByTime();
-    },
-
-    methods: {
-        ...mapActions({ fetchTrafficEntriesByTime: 'traffic/fetchEtriesByTime' }),
-
-        async fetchTrafficByTime() {
-            const periods = [
+            periods: [
                 {
                     from: '2015-12-01',
                     to: '2015-12-07'
@@ -53,13 +27,33 @@ export default {
                 {
                     from: '2015-12-29',
                     to: '2015-12-31'
+                },
+                {
+                    from: '2015-12-01',
+                    to: '2015-12-31'
                 }
-            ];
+            ],
+            values: [
+                { text: '1st week of December', value: 0 },
+                { text: '2nd week of December', value: 1 },
+                { text: '3rd week of December', value: 2 },
+                { text: '4th week of December', value: 3 },
+                { text: '5th week of December', value: 4 },
+                { text: 'December', value: 5 }
+            ]
+        };
+    },
 
-            let between = periods[this.periodId];
+    watch: {
+        periodId(id) {
+            const period = this.periods[id];
 
-            await this.fetchTrafficEntriesByTime(between);
+            this.$emit('onSelect', period);
         }
+    },
+
+    created() {
+        this.$emit('onSelect', this.periods[this.periodId]);
     }
 };
 </script>

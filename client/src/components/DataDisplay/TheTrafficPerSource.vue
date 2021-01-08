@@ -3,7 +3,7 @@
         <v-card-title>Traffic per Source</v-card-title>
 
         <v-card-actions>
-            <base-period-select />
+            <base-period-select @onSelect="onSelect" />
         </v-card-actions>
 
         <v-card-text>
@@ -41,32 +41,41 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     components: {
         baseTrafficCard: () => import('@/components/UI/BaseTrafficCard'),
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
     },
-    computed: {
-        ...mapGetters({ trafficPerSource: 'traffic/perSource' }),
-        googleTraffic() {
-            return this.trafficPerSource('google');
+
+    data() {
+        return {
+            googleTraffic: 0,
+            facebookTraffic: 0,
+            emailTraffic: 0,
+            directTraffic: 0,
+            referralTraffic: 0,
+            noneTraffic: 0
+        };
+    },
+
+    methods: {
+        ...mapActions({ fetchEtriesByTime: 'traffic/fetchEtriesByTime' }),
+
+        countEntriesBySource(entries, source) {
+            return entries.filter(entry => entry.source === source).length;
         },
-        facebookTraffic() {
-            return this.trafficPerSource('facebook');
-        },
-        emailTraffic() {
-            return this.trafficPerSource('email');
-        },
-        directTraffic() {
-            return this.trafficPerSource('direct');
-        },
-        referralTraffic() {
-            return this.trafficPerSource('referral');
-        },
-        noneTraffic() {
-            return this.trafficPerSource('none');
+
+        async onSelect(between) {
+            const data = await this.fetchEtriesByTime(between);
+
+            this.googleTraffic = this.countEntriesBySource(data, 'google');
+            this.facebookTraffic = this.countEntriesBySource(data, 'facebook');
+            this.emailTraffic = this.countEntriesBySource(data, 'email');
+            this.directTraffic = this.countEntriesBySource(data, 'direct');
+            this.referralTraffic = this.countEntriesBySource(data, 'referral');
+            this.noneTraffic = this.countEntriesBySource(data, 'none');
         }
     }
 };

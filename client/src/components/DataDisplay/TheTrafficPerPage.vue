@@ -3,7 +3,7 @@
         <v-card-title>Traffic per Page</v-card-title>
 
         <v-card-actions>
-            <base-period-select />
+            <base-period-select @onSelect="onSelect" />
         </v-card-actions>
 
         <v-card-text>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     components: {
@@ -39,19 +39,29 @@ export default {
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
     },
 
-    computed: {
-        ...mapGetters({ trafficPerPage: 'traffic/perPage' }),
-        homepageTraffic() {
-            return this.trafficPerPage('homepage');
+    data() {
+        return {
+            homepageTraffic: 0,
+            product1pageTraffic: 0,
+            product2pageTraffic: 0,
+            product3pageTraffic: 0
+        };
+    },
+
+    methods: {
+        ...mapActions({ fetchEtriesByTime: 'traffic/fetchEtriesByTime' }),
+
+        countEntriesByPage(entries, page) {
+            return entries.filter(entry => entry.page === page).length;
         },
-        product1pageTraffic() {
-            return this.trafficPerPage('product1page');
-        },
-        product2pageTraffic() {
-            return this.trafficPerPage('product2page');
-        },
-        product3pageTraffic() {
-            return this.trafficPerPage('product3page');
+
+        async onSelect(between) {
+            const data = await this.fetchEtriesByTime(between);
+
+            this.homepageTraffic = this.countEntriesByPage(data, 'homepage');
+            this.product1pageTraffic = this.countEntriesByPage(data, 'product1page');
+            this.product2pageTraffic = this.countEntriesByPage(data, 'product2page');
+            this.product3pageTraffic = this.countEntriesByPage(data, 'product3page');
         }
     }
 };
