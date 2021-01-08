@@ -1,57 +1,21 @@
 const dayjs = require('dayjs');
+const faker = require('faker');
 
-const testData = [
-    { page: 'homepage', source: 'google', date: '2021-01-07' },
-    { page: 'product1page', source: 'email', date: '2021-01-07' },
-    { page: 'product1page', source: 'direct', date: '2021-01-07' },
-    { page: 'homepage', source: 'referral', date: '2021-01-08' },
-    { page: 'product2page', source: 'google', date: '2021-01-08' },
-    { page: 'product2page', source: 'email', date: '2021-01-08' },
-    { page: 'homepage', source: 'direct', date: '2021-01-08' },
-    { page: 'product1page', source: 'referral', date: '2021-01-08' },
-    { page: 'product3page', source: 'referral', date: '2021-01-09' },
-    { page: 'product2page', source: 'referral', date: '2021-01-09' },
-    { page: 'homepage', source: 'google', date: '2021-01-10' },
-    { page: 'product1page', source: 'email', date: '2021-01-10' },
-    { page: 'product1page', source: 'direct', date: '2021-01-10' },
-    { page: 'homepage', source: 'referral', date: '2021-01-11' },
-    { page: 'product2page', source: 'google', date: '2021-01-11' },
-    { page: 'product2page', source: 'email', date: '2021-01-11' },
-    { page: 'homepage', source: 'direct', date: '2021-01-11' },
-    { page: 'product1page', source: 'referral', date: '2021-01-11' },
-    { page: 'product3page', source: 'referral', date: '2021-01-12' },
-    { page: 'product2page', source: 'referral', date: '2021-01-12' },
-    { page: 'homepage', source: 'google', date: '2021-01-13' },
-    { page: 'product1page', source: 'email', date: '2021-01-13' },
-    { page: 'product1page', source: 'direct', date: '2021-01-13' },
-    { page: 'homepage', source: 'referral', date: '2021-01-14' },
-    { page: 'product2page', source: 'google', date: '2021-01-14' },
-    { page: 'product2page', source: 'email', date: '2021-01-14' },
-    { page: 'homepage', source: 'direct', date: '2021-01-14' },
-    { page: 'product1page', source: 'referral', date: '2021-01-14' },
-    { page: 'product3page', source: 'referral', date: '2021-01-15' },
-    { page: 'product2page', source: 'referral', date: '2021-01-15' },
-    { page: 'homepage', source: 'google', date: '2021-01-16' },
-    { page: 'product1page', source: 'email', date: '2021-01-16' },
-    { page: 'product1page', source: 'direct', date: '2021-01-16' },
-    { page: 'homepage', source: 'referral', date: '2021-01-17' },
-    { page: 'product2page', source: 'google', date: '2021-01-17' },
-    { page: 'product2page', source: 'email', date: '2021-01-17' },
-    { page: 'homepage', source: 'direct', date: '2021-01-17' },
-    { page: 'product1page', source: 'referral', date: '2021-01-17' },
-    { page: 'product3page', source: 'referral', date: '2021-01-18' },
-    { page: 'product2page', source: 'referral', date: '2021-01-18' },
-    { page: 'homepage', source: 'google', date: '2021-01-19' },
-    { page: 'product1page', source: 'email', date: '2021-01-19' },
-    { page: 'product1page', source: 'direct', date: '2021-01-19' },
-    { page: 'homepage', source: 'referral', date: '2021-01-20' },
-    { page: 'product2page', source: 'google', date: '2021-01-20' },
-    { page: 'product2page', source: 'email', date: '2021-01-20' },
-    { page: 'homepage', source: 'direct', date: '2021-01-20' },
-    { page: 'product1page', source: 'referral', date: '2021-01-20' },
-    { page: 'product3page', source: 'referral', date: '2021-01-21' },
-    { page: 'product2page', source: 'referral', date: '2021-01-21' }
-];
+const makeFakeData = numberOfEntries => {
+    const entries = [];
+
+    for (let i = 0; i < numberOfEntries; i++) {
+        entries.push({
+            page: faker.random.arrayElement(['homepage', 'product1page', 'product2page', 'product3page']),
+            source: faker.random.arrayElement(['google', 'email', 'direct', 'referral', 'facebook', 'none']),
+            date: faker.date.between('2015-12-01', '2015-12-31')
+        });
+    }
+
+    return entries;
+};
+
+const testData = makeFakeData(500);
 
 class TrafficIndexController {
     async invoke(req, res) {

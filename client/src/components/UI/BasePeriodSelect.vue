@@ -1,5 +1,5 @@
 <template>
-    <v-select v-model="period" :items="values" item-text="text" item-value="value" label="Time Period" />
+    <v-select v-model="periodId" :items="values" item-text="text" item-value="value" label="Time Period" />
 </template>
 
 <script>
@@ -8,19 +8,19 @@ import { mapActions } from 'vuex';
 export default {
     data() {
         return {
-            period: 1,
+            periodId: 0,
             values: [
-                { text: '1st week of January', value: 1 },
-                { text: '2nd week of January', value: 2 },
-                { text: '3rd week of January', value: 3 },
-                { text: '4th week of January', value: 4 },
-                { text: '5th week of January', value: 5 }
+                { text: '1st week of December', value: 0 },
+                { text: '2nd week of December', value: 1 },
+                { text: '3rd week of December', value: 2 },
+                { text: '4th week of December', value: 3 },
+                { text: '5th week of December', value: 4 }
             ]
         };
     },
 
     watch: {
-        period() {
+        periodId() {
             this.fetchTrafficByTime();
         }
     },
@@ -29,40 +29,30 @@ export default {
         ...mapActions({ fetchTrafficEntriesByTime: 'traffic/fetchEtriesByTime' }),
 
         async fetchTrafficByTime() {
-            let between;
+            const periods = [
+                {
+                    from: '2015-12-01',
+                    to: '2015-12-07'
+                },
+                {
+                    from: '2015-12-08',
+                    to: '2015-12-14'
+                },
+                {
+                    from: '2015-12-15',
+                    to: '2015-12-21'
+                },
+                {
+                    from: '2015-12-22',
+                    to: '2015-12-28'
+                },
+                {
+                    from: '2015-12-29',
+                    to: '2015-12-31'
+                }
+            ];
 
-            switch (this.period) {
-                case 1:
-                    between = {
-                        from: '2021-01-01',
-                        to: '2021-01-07'
-                    };
-                    break;
-                case 2:
-                    between = {
-                        from: '2021-01-08',
-                        to: '2021-01-14'
-                    };
-                    break;
-                case 3:
-                    between = {
-                        from: '2021-01-15',
-                        to: '2021-01-21'
-                    };
-                    break;
-                case 4:
-                    between = {
-                        from: '2021-01-22',
-                        to: '2021-01-28'
-                    };
-                    break;
-                case 5:
-                    between = {
-                        from: '2021-01-29',
-                        to: '2021-01-31'
-                    };
-                    break;
-            }
+            let between = periods[this.periodId];
 
             await this.fetchTrafficEntriesByTime(between);
         }
