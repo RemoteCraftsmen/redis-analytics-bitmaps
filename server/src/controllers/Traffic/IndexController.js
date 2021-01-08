@@ -10,21 +10,19 @@ class TrafficIndexController {
         const { filter } = req.query;
 
         try {
-            const { between = null } = filter ? JSON.parse(filter) : {};
+            const { period = null, search = null, type = 'source' } = filter ? JSON.parse(filter) : {};
 
-            const periods = ['dec_week_1', 'dec_week_2', 'dec_week_3', 'dec_week_4', 'dec_week_5'];
+            if (search && Array.isArray(search)) {
+                const totals = {};
 
-            const pages = ['homepage', 'product1page', 'product2page', 'product3page'];
+                for (const item of search) {
+                    totals[item] = await this._search(period, item, type);
+                }
 
-            const keys = [];
+                return res.send(totals);
+            }
 
-            pages.forEach(page => {
-                const _key = `traffic_per_page:${page}`;
-
-                periods.forEach(period => keys.push(`${_key}:${period}`));
-            });
-
-            const total = await this.redisService.calculateOr(keys);
+            const total = await this._search(period, search, type);
 
             return res.send({ total });
         } catch (err) {
@@ -36,6 +34,26 @@ class TrafficIndexController {
 
             return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    async _search(period, search, type) {
+        const periods = period ? [period] : ['dec_week_1', 'dec_week_2', 'dec_week_3', 'dec_week_4', 'dec_week_5'];
+
+        const searches = search ? [search] : ['google', 'facebook', 'email', 'direct', 'referral', 'none'];
+
+        const prefix = type === 'page' ? 'traffic_per_page' : 'traffic_per_source';
+
+        const keys = [];
+
+        searches.forEach(_search => {
+            const _key = `${prefix}:${_search}`;
+
+            periods.forEach(period => keys.push(`${_key}:${period}`));
+        });
+
+        const total = await this.redisService.calculateOr(keys);
+
+        return total;
     }
 }
 
