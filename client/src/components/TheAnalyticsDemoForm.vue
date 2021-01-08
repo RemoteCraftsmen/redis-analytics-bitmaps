@@ -62,9 +62,9 @@ export default {
             });
         }
 
-        for (let i = 1; i <= this.maxUsers; i++) {
+        for (let i = 0; i < this.maxUsers; i++) {
             userValues.push({
-                text: `User${i}`,
+                text: `User${i + 1}`,
                 value: i
             });
         }

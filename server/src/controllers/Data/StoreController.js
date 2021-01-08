@@ -1,30 +1,32 @@
 const { StatusCodes } = require('http-status-codes');
-const { redis } = require('../../config');
 
 class DataStoreController {
-    constructor(redisService) {
+    constructor(redisService, periodService) {
         this.redisService = redisService;
+        this.periodService = periodService;
     }
 
     async invoke(req, res) {
         const { userId, date, action, source } = req.body;
 
+        const period = this.periodService.getPeriodByDate(date);
+
         const actions = {
             homepage: {
                 method: 'storeTrafficPerPage',
-                params: [userId, date, 'homepage']
+                params: [userId, period, 'homepage']
             },
             product1page: {
                 method: 'storeTrafficPerPage',
-                params: [userId, date, 'product1page']
+                params: [userId, period, 'product1page']
             },
             product2page: {
                 method: 'storeTrafficPerPage',
-                params: [userId, date, 'product2page']
+                params: [userId, period, 'product2page']
             },
             product3page: {
                 method: 'storeTrafficPerPage',
-                params: [userId, date, 'product2page']
+                params: [userId, period, 'product2page']
             }
         };
 
@@ -36,7 +38,7 @@ class DataStoreController {
 
         await this.redisService[_action.method](..._action.params);
 
-        await this.redisService.storeTrafficPerSource(userId, date, source);
+        await this.redisService.storeTrafficPerSource(userId, period, source);
 
         return res.sendStatus(StatusCodes.CREATED);
     }

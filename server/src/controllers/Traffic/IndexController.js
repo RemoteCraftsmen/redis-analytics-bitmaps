@@ -19,8 +19,9 @@ const makeFakeData = numberOfEntries => {
 const testData = makeFakeData(500);
 
 class TrafficIndexController {
-    constructor(redisService) {
+    constructor(redisService, periodService) {
         this.redisService = redisService;
+        this.periodService = periodService;
     }
 
     async invoke(req, res) {
@@ -29,17 +30,21 @@ class TrafficIndexController {
         try {
             const { between = null } = filter ? JSON.parse(filter) : {};
 
-            const data =
-                between && typeof between === 'object' && between.from && between.to
-                    ? testData.filter(
-                          data =>
-                              data.date === between.from ||
-                              data.date === between.to ||
-                              dayjs(data.date).isBetween(between.from, between.to, 'day')
-                      )
-                    : testData;
+            // const data =
+            //     between && typeof between === 'object' && between.from && between.to
+            //         ? testData.filter(
+            //               data =>
+            //                   data.date === between.from ||
+            //                   data.date === between.to ||
+            //                   dayjs(data.date).isBetween(between.from, between.to, 'day')
+            //           )
+            //         : testData;
 
-            return res.send(data);
+            // return res.send(data);
+
+            const test = await this.redisService.bitCount('traffic_per_page:homepage:2015-12-01');
+
+            return res.send({ test });
         } catch (err) {
             if (err instanceof SyntaxError) {
                 return res.sendStatus(StatusCodes.BAD_REQUEST);
