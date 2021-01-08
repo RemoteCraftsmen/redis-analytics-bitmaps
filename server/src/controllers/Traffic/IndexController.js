@@ -16,15 +16,15 @@ class TrafficIndexController {
                 const totals = {};
 
                 for (const item of search) {
-                    totals[item] = await this._search(period, item, type);
+                    totals[`${item}Traffic`] = await this._search(period, item, type);
                 }
 
                 return res.send(totals);
             }
 
-            const total = await this._search(period, search, type);
+            const totalTraffic = await this._search(period, search, type);
 
-            return res.send({ total });
+            return res.send({ totalTraffic });
         } catch (err) {
             if (err instanceof SyntaxError) {
                 return res.sendStatus(StatusCodes.BAD_REQUEST);

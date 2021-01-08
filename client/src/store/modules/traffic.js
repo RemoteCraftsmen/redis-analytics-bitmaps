@@ -9,8 +9,8 @@ const getters = {};
 const mutations = {};
 
 const actions = {
-    async fetchEtriesByTime(vuexContext, between) {
-        const { data } = await axios.get('/traffic', { params: { filter: { between } } });
+    async fetch(vuexContext, params) {
+        const { data } = await axios.get('/traffic', { params });
 
         return data;
     }

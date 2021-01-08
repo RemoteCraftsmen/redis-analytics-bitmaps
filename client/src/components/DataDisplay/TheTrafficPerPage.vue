@@ -49,19 +49,22 @@ export default {
     },
 
     methods: {
-        ...mapActions({ fetchEtriesByTime: 'traffic/fetchEtriesByTime' }),
+        ...mapActions({ fetchTraffic: 'traffic/fetch' }),
 
-        countEntriesByPage(entries, page) {
-            return entries.filter(entry => entry.page === page).length;
-        },
+        async onSelect(period) {
+            const {
+                homepageTraffic,
+                product1pageTraffic,
+                product2pageTraffic,
+                product3pageTraffic
+            } = await this.fetchTraffic({
+                filter: { period, search: ['homepage', 'product1page', 'product2page', 'product3page'], type: 'page' }
+            });
 
-        async onSelect(between) {
-            const data = await this.fetchEtriesByTime(between);
-
-            this.homepageTraffic = this.countEntriesByPage(data, 'homepage');
-            this.product1pageTraffic = this.countEntriesByPage(data, 'product1page');
-            this.product2pageTraffic = this.countEntriesByPage(data, 'product2page');
-            this.product3pageTraffic = this.countEntriesByPage(data, 'product3page');
+            this.homepageTraffic = homepageTraffic;
+            this.product1pageTraffic = product1pageTraffic;
+            this.product2pageTraffic = product2pageTraffic;
+            this.product3pageTraffic = product3pageTraffic;
         }
     }
 };

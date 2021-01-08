@@ -1,59 +1,31 @@
 <template>
-    <v-select v-model="periodId" :items="values" item-text="text" item-value="value" label="Time Period" />
+    <v-select v-model="period" :items="values" item-text="text" item-value="value" label="Time Period" />
 </template>
 
 <script>
 export default {
     data() {
         return {
-            periodId: 0,
-            periods: [
-                {
-                    from: '2015-12-01',
-                    to: '2015-12-07'
-                },
-                {
-                    from: '2015-12-08',
-                    to: '2015-12-14'
-                },
-                {
-                    from: '2015-12-15',
-                    to: '2015-12-21'
-                },
-                {
-                    from: '2015-12-22',
-                    to: '2015-12-28'
-                },
-                {
-                    from: '2015-12-29',
-                    to: '2015-12-31'
-                },
-                {
-                    from: '2015-12-01',
-                    to: '2015-12-31'
-                }
-            ],
+            period: null,
             values: [
-                { text: '1st week of December', value: 0 },
-                { text: '2nd week of December', value: 1 },
-                { text: '3rd week of December', value: 2 },
-                { text: '4th week of December', value: 3 },
-                { text: '5th week of December', value: 4 },
-                { text: 'December', value: 5 }
+                { text: '1st week of December', value: 'dec_week_1' },
+                { text: '2nd week of December', value: 'dec_week_2' },
+                { text: '3rd week of December', value: 'dec_week_3' },
+                { text: '4th week of December', value: 'dec_week_4' },
+                { text: '5th week of December', value: 'dec_week_5' },
+                { text: 'December', value: null }
             ]
         };
     },
 
     watch: {
-        periodId(id) {
-            const period = this.periods[id];
-
-            this.$emit('onSelect', period);
+        period() {
+            this.$emit('onSelect', this.period);
         }
     },
 
     created() {
-        this.$emit('onSelect', this.periods[this.periodId]);
+        this.$emit('onSelect', this.period);
     }
 };
 </script>

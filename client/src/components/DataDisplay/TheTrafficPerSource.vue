@@ -61,21 +61,30 @@ export default {
     },
 
     methods: {
-        ...mapActions({ fetchEtriesByTime: 'traffic/fetchEtriesByTime' }),
+        ...mapActions({ fetchTraffic: 'traffic/fetch' }),
 
-        countEntriesBySource(entries, source) {
-            return entries.filter(entry => entry.source === source).length;
-        },
+        async onSelect(period) {
+            const {
+                googleTraffic,
+                facebookTraffic,
+                emailTraffic,
+                directTraffic,
+                referralTraffic,
+                noneTraffic
+            } = await this.fetchTraffic({
+                filter: {
+                    period,
+                    search: ['google', 'facebook', 'email', 'direct', 'referral', 'none'],
+                    type: 'source'
+                }
+            });
 
-        async onSelect(between) {
-            const data = await this.fetchEtriesByTime(between);
-
-            this.googleTraffic = this.countEntriesBySource(data, 'google');
-            this.facebookTraffic = this.countEntriesBySource(data, 'facebook');
-            this.emailTraffic = this.countEntriesBySource(data, 'email');
-            this.directTraffic = this.countEntriesBySource(data, 'direct');
-            this.referralTraffic = this.countEntriesBySource(data, 'referral');
-            this.noneTraffic = this.countEntriesBySource(data, 'none');
+            this.googleTraffic = googleTraffic;
+            this.facebookTraffic = facebookTraffic;
+            this.emailTraffic = emailTraffic;
+            this.directTraffic = directTraffic;
+            this.referralTraffic = referralTraffic;
+            this.noneTraffic = noneTraffic;
         }
     }
 };

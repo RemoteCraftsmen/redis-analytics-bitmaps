@@ -20,12 +20,12 @@ export default {
     },
 
     methods: {
-        ...mapActions({ fetchEtriesByTime: 'traffic/fetchEtriesByTime' }),
+        ...mapActions({ fetchTraffic: 'traffic/fetch' }),
 
-        async onSelect(between) {
-            const data = await this.fetchEtriesByTime(between);
+        async onSelect(period) {
+            const { totalTraffic } = await this.fetchTraffic({ filter: { period } });
 
-            this.totalTraffic = data.length;
+            this.totalTraffic = totalTraffic;
         }
     }
 };

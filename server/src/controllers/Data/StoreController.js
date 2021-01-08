@@ -26,7 +26,7 @@ class DataStoreController {
             },
             product3page: {
                 method: 'storeTrafficPerPage',
-                params: [userId, period, 'product2page']
+                params: [userId, period, 'product3page']
             }
         };
 
