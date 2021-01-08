@@ -1,10 +1,13 @@
 const { promisify } = require('util');
+const faker = require('faker');
 const redisClient = require('./RedisClient');
 
 class RedisService {
     constructor() {
         this.redis = redisClient;
-        ['SETBIT', 'BITCOUNT'].forEach(method => (this.redis[method] = promisify(this.redis[method])));
+        ['SETBIT', 'BITCOUNT', 'BITOP', 'EXPIRE'].forEach(
+            method => (this.redis[method] = promisify(this.redis[method]))
+        );
     }
 
     storeTrafficPerPage(userId, period, page) {
@@ -17,6 +20,15 @@ class RedisService {
 
     bitCount(key) {
         return this.redis.BITCOUNT(key);
+    }
+
+    async calculateOr(keys) {
+        const key = `or:${faker.random.uuid()}`;
+
+        await this.redis.BITOP('OR', key, ...keys);
+        await this.redis.EXPIRE(key, 1);
+
+        return this.bitCount(key);
     }
 }
 

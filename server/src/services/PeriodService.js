@@ -27,11 +27,6 @@ class PeriodService {
                 from: '2015-12-29',
                 to: '2015-12-31',
                 name: 'dec_week_5'
-            },
-            {
-                from: '2015-12-01',
-                to: '2015-12-31',
-                name: 'dec'
             }
         ];
     }
