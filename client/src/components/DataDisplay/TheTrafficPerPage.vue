@@ -3,7 +3,7 @@
         <v-card-title>Traffic per Page</v-card-title>
 
         <v-card-actions>
-            <base-period-select @onSelect="onSelect" />
+            <base-period-select @onSelect="fetchTrafficData" />
         </v-card-actions>
 
         <v-card-text>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -44,14 +44,27 @@ export default {
             homepageTraffic: 0,
             product1pageTraffic: 0,
             product2pageTraffic: 0,
-            product3pageTraffic: 0
+            product3pageTraffic: 0,
+            period: null
         };
+    },
+
+    computed: {
+        ...mapGetters({ refreshSignal: 'data/refreshSignal' })
+    },
+
+    watch: {
+        refreshSignal() {
+            this.fetchTrafficData(this.period);
+        }
     },
 
     methods: {
         ...mapActions({ fetchTraffic: 'traffic/fetch' }),
 
-        async onSelect(period) {
+        async fetchTrafficData(period) {
+            this.period = period;
+
             const {
                 homepageTraffic,
                 product1pageTraffic,

@@ -2,11 +2,17 @@ import axios from '@/plugins/axios';
 
 const namespaced = true;
 
-const state = () => ({});
+const state = () => ({
+    refreshSignal: true
+});
 
-const getters = {};
+const getters = {
+    refreshSignal: state => state.refreshSignal
+};
 
-const mutations = {};
+const mutations = {
+    NEGATE_REFRESH_SIGNAL: state => (state.refreshSignal = !state.refreshSignal)
+};
 
 const actions = {
     save(vuexContext, data) {
