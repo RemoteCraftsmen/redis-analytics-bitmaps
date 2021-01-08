@@ -9,31 +9,31 @@
         <v-card-text>
             <v-row>
                 <v-col cols="6">
-                    <base-traffic-card title="Google Ads" :traffic="googleTraffic" />
+                    <base-traffic-card title="Google Ads" :traffic="googleTraffic" :loading="loading" />
                 </v-col>
 
                 <v-col cols="6">
-                    <base-traffic-card title="Facebook Ads" :traffic="facebookTraffic" />
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col cols="6">
-                    <base-traffic-card title="Email" :traffic="emailTraffic" />
-                </v-col>
-
-                <v-col cols="6">
-                    <base-traffic-card title="Direct" :traffic="directTraffic" />
+                    <base-traffic-card title="Facebook Ads" :traffic="facebookTraffic" :loading="loading" />
                 </v-col>
             </v-row>
 
             <v-row>
                 <v-col cols="6">
-                    <base-traffic-card title="Referral" :traffic="referralTraffic" />
+                    <base-traffic-card title="Email" :traffic="emailTraffic" :loading="loading" />
                 </v-col>
 
                 <v-col cols="6">
-                    <base-traffic-card title="None" :traffic="noneTraffic" />
+                    <base-traffic-card title="Direct" :traffic="directTraffic" :loading="loading" />
+                </v-col>
+            </v-row>
+
+            <v-row>
+                <v-col cols="6">
+                    <base-traffic-card title="Referral" :traffic="referralTraffic" :loading="loading" />
+                </v-col>
+
+                <v-col cols="6">
+                    <base-traffic-card title="None" :traffic="noneTraffic" :loading="loading" />
                 </v-col>
             </v-row>
         </v-card-text>
@@ -57,7 +57,8 @@ export default {
             directTraffic: 0,
             referralTraffic: 0,
             noneTraffic: 0,
-            period: null
+            period: null,
+            loading: false
         };
     },
 
@@ -76,6 +77,7 @@ export default {
 
         async fetchTrafficData(period) {
             this.period = period;
+            this.loading = true;
 
             const {
                 googleTraffic,
@@ -92,6 +94,7 @@ export default {
                 }
             });
 
+            this.loading = false;
             this.googleTraffic = googleTraffic;
             this.facebookTraffic = facebookTraffic;
             this.emailTraffic = emailTraffic;

@@ -1,5 +1,5 @@
 <template>
-    <base-traffic-card title="Total Traffic" :traffic="totalTraffic">
+    <base-traffic-card title="Total Traffic" :traffic="totalTraffic" :loading="loading">
         <base-period-select @onSelect="fetchTrafficData" />
     </base-traffic-card>
 </template>
@@ -16,7 +16,8 @@ export default {
     data() {
         return {
             totalTraffic: 0,
-            period: null
+            period: null,
+            loading: false
         };
     },
 
@@ -35,9 +36,11 @@ export default {
 
         async fetchTrafficData(period) {
             this.period = period;
+            this.loading = true;
 
             const { totalTraffic } = await this.fetchTraffic({ filter: { period } });
 
+            this.loading = false;
             this.totalTraffic = totalTraffic;
         }
     }

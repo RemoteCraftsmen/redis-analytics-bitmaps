@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card :loading="loading">
         <v-card-title>{{ title }}</v-card-title>
 
         <v-card-actions>
@@ -7,6 +7,10 @@
         </v-card-actions>
 
         <v-card-text>{{ traffic }}</v-card-text>
+
+        <template #progress>
+            <v-progress-linear indeterminate />
+        </template>
     </v-card>
 </template>
 
@@ -21,6 +25,11 @@ export default {
             type: Number,
             required: false,
             default: 0
+        },
+        loading: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     }
 };
