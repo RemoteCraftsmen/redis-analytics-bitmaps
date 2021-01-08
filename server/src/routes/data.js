@@ -1,5 +1,5 @@
 const express = require('express');
-const DataStoreController = require('../controllers/Traffic/IndexController');
+const DataStoreController = require('../controllers/Data/StoreController');
 const RedisService = require('../services/RedisService');
 const router = express.Router();
 

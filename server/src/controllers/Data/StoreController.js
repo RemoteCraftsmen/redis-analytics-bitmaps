@@ -22,7 +22,7 @@ class DataStoreController {
                 method: 'storeTrafficPerPage',
                 params: [userId, date, 'product2page']
             },
-            product2page: {
+            product3page: {
                 method: 'storeTrafficPerPage',
                 params: [userId, date, 'product2page']
             }
@@ -34,9 +34,9 @@ class DataStoreController {
             return res.sendStatus(StatusCodes.BAD_REQUEST);
         }
 
-        await redis.redisService[_action.method](..._action.params);
+        await this.redisService[_action.method](..._action.params);
 
-        await storeTrafficPerSource(userId, date, source);
+        await this.redisService.storeTrafficPerSource(userId, date, source);
 
         return res.sendStatus(StatusCodes.CREATED);
     }
