@@ -10,7 +10,7 @@
             </v-col>
 
             <v-col cols="4">
-                <the-traffic-per-source />
+                <the-trend />
             </v-col>
         </v-row>
 
@@ -27,7 +27,8 @@ export default {
     components: {
         theTotalTraffic: () => import('@/components/DataDisplay/TheTotalTraffic'),
         theTrafficPerPage: () => import('@/components/DataDisplay/TheTrafficPerPage'),
-        theTrafficPerSource: () => import('@/components/DataDisplay/TheTrafficPerSource')
+        theTrafficPerSource: () => import('@/components/DataDisplay/TheTrafficPerSource'),
+        theTrend: () => import('@/components/DataDisplay/TheTrend')
     }
 };
 </script>

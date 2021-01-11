@@ -1,7 +1,12 @@
-<template>
-    <div>The Trend Chart</div>
-</template>
-
 <script>
-export default {};
+import { Line, mixins } from 'vue-chartjs';
+const { reactiveProp } = mixins;
+
+export default {
+    mixins: [Line, reactiveProp],
+
+    mounted() {
+        this.renderChart(this.chartData);
+    }
+};
 </script>
