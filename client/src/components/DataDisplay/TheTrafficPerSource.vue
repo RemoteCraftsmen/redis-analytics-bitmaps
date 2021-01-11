@@ -39,7 +39,7 @@
 
                 <v-col cols="3">
                     <div style="position: relative">
-                        <the-source-chart :chart-data="chartData" />
+                        <base-pie-chart :chart-data="chartData" />
                     </div>
                 </v-col>
             </v-row>
@@ -54,7 +54,7 @@ export default {
     components: {
         baseCard: () => import('@/components/UI/BaseCard'),
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect'),
-        theSourceChart: () => import('@/components/DataDisplay/Charts/TheSourceChart')
+        basePieChart: () => import('@/components/UI/Charts/BasePieChart')
     },
 
     data() {

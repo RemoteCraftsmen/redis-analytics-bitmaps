@@ -7,7 +7,7 @@
         </v-card-actions>
 
         <v-card-text>
-            <the-trend-chart :chart-data="chartData" />
+            <base-line-chart :chart-data="chartData" />
         </v-card-text>
     </v-card>
 </template>
@@ -17,7 +17,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
     components: {
-        theTrendChart: () => import('@/components/DataDisplay/Charts/TheTrendChart'),
+        baseLineChart: () => import('@/components/UI/Charts/BaseLineChart'),
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
     },
 
