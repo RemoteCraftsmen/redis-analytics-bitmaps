@@ -43,6 +43,12 @@
                 <h2>Sales Analytics Data</h2>
             </v-col>
         </v-row>
+
+        <v-row>
+            <v-col cols="4">
+                <the-total-products-bought />
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -52,7 +58,8 @@ export default {
         theTotalTraffic: () => import('@/components/DataDisplay/TheTotalTraffic'),
         theTrafficPerPage: () => import('@/components/DataDisplay/TheTrafficPerPage'),
         theTrafficPerSource: () => import('@/components/DataDisplay/TheTrafficPerSource'),
-        theTrend: () => import('@/components/DataDisplay/TheTrend')
+        theTrend: () => import('@/components/DataDisplay/TheTrend'),
+        theTotalProductsBought: () => import('@/components/DataDisplay/TheTotalProductsBought')
     }
 };
 </script>
