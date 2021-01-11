@@ -35,6 +35,14 @@ class SalesIndexController {
         const productsIds = [1, 2, 3];
 
         const keys = [];
+
+        productsIds.forEach(productId => {
+            const _key = `${prefix}:${productId}`;
+
+            periods.forEach(period => keys.push(`${_key}:${period}`));
+        });
+
+        return this.redisService.calculateOr(keys);
     }
 }
 

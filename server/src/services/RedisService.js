@@ -34,9 +34,11 @@ class RedisService {
         const key = `or:${faker.random.uuid()}`;
 
         await this.redis.BITOP('OR', key, ...keys);
+        const count = await this.bitCount(key);
+
         await this.redis.DEL(key);
 
-        return this.bitCount(key);
+        return count;
     }
 }
 
