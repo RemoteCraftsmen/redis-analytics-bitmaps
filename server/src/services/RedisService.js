@@ -18,7 +18,7 @@ class RedisService {
         return this.redis.SETBIT(`traffic_per_source:${source}:${period}`, userId, 1);
     }
 
-    async storeProductsBought(userId, period, productId) {
+    async storeProductBought(userId, period, productId) {
         await this.storeProductAddedToCart(userId, period, productId);
 
         return this.redis.SETBIT(`product_bought:${productId}:${period}`, userId, 1);
