@@ -52,6 +52,10 @@
             <v-col cols="4">
                 <the-abandoned-cart />
             </v-col>
+
+            <v-col cols="4">
+                <the-share-of-products-bought />
+            </v-col>
         </v-row>
     </div>
 </template>
@@ -64,7 +68,8 @@ export default {
         theTrafficPerSource: () => import('@/components/DataDisplay/TheTrafficPerSource'),
         theTrend: () => import('@/components/DataDisplay/TheTrend'),
         theTotalProductsBought: () => import('@/components/DataDisplay/TheTotalProductsBought'),
-        theAbandonedCart: () => import('@/components/DataDisplay/TheAbandonedCart')
+        theAbandonedCart: () => import('@/components/DataDisplay/TheAbandonedCart'),
+        theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought')
     }
 };
 </script>
