@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     components: {
@@ -21,12 +21,26 @@ export default {
         };
     },
 
+    computed: {
+        ...mapGetters({ refreshSignal: 'data/refreshSignal' })
+    },
+
+    watch: {
+        refreshSignal() {
+            this.fetchSalesData(this.period);
+        }
+    },
+
     methods: {
         ...mapActions({ fetchSales: 'sales/fetch' }),
 
         async fetchSalesData(period) {
+            this.period = period;
+            this.loading = true;
+
             const { productsBought } = await this.fetchSales({ filter: { period } });
 
+            this.loading = false;
             this.totalProductBought = productsBought;
         }
     }
