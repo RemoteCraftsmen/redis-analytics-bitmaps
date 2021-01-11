@@ -1,5 +1,5 @@
 <template>
-    <base-card title="Total Product Bought" :data="totalProductBought">
+    <base-card title="Total Product Bought" :height="580" :data="totalProductBought">
         <base-period-select @onSelect="fetchSalesData" />
     </base-card>
 </template>
