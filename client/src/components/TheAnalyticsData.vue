@@ -15,7 +15,7 @@
         </v-row>
 
         <v-row>
-            <v-col cols="4">
+            <v-col cols="12">
                 <the-traffic-per-source />
             </v-col>
         </v-row>
