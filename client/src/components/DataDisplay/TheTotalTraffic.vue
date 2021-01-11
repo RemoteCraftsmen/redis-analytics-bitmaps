@@ -1,7 +1,7 @@
 <template>
-    <base-traffic-card title="Total Traffic" :height="650" :traffic="totalTraffic" :loading="loading">
+    <base-card title="Total Traffic" :height="650" :data="totalTraffic" :loading="loading">
         <base-period-select @onSelect="fetchTrafficData" />
-    </base-traffic-card>
+    </base-card>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
     components: {
-        baseTrafficCard: () => import('@/components/UI/BaseTrafficCard'),
+        baseCard: () => import('@/components/UI/BaseCard'),
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
     },
 
