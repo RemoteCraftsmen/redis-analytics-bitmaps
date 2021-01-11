@@ -1,5 +1,5 @@
 <template>
-    <v-card :height="650" :loading="loading">
+    <v-card :height="580" :loading="loading">
         <v-card-title>Trend chart (pages)</v-card-title>
 
         <v-card-actions>

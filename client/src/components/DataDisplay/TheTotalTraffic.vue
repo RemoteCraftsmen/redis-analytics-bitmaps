@@ -1,5 +1,5 @@
 <template>
-    <base-card title="Total Traffic" :height="650" :data="totalTraffic" :loading="loading">
+    <base-card title="Total Traffic" :height="580" :data="totalTraffic" :loading="loading">
         <base-period-select @onSelect="fetchTrafficData" />
     </base-card>
 </template>
