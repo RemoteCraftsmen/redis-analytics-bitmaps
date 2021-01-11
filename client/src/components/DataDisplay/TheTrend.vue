@@ -23,39 +23,76 @@ export default {
 
     data() {
         return {
-            chartData: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [
-                    {
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }
-                ]
-            },
             period: null,
-            loading: false
+            loading: false,
+            datasets: []
         };
     },
 
     computed: {
-        ...mapGetters({ refreshSignal: 'data/refreshSignal' })
+        ...mapGetters({ refreshSignal: 'data/refreshSignal' }),
+
+        chartData() {
+            const backgroundColor = [
+                'rgba(0, 0, 0, 0)',
+                'rgba(0, 0, 0, 0)',
+                'rgba(0, 0, 0, 0)',
+                'rgba(0, 0, 0, 0)',
+                'rgba(0, 0, 0, 0)'
+            ];
+
+            const boderColors = [
+                [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ],
+                [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ]
+            ];
+
+            const borderWidth = 1;
+
+            const labels = ['Homepage', 'Product1 Page', 'Product2 Page', 'Product3 Page'];
+
+            const chartData = {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+                datasets: []
+            };
+
+            this.datasets.forEach((dataset, index) => {
+                chartData.datasets.push({
+                    backgroundColor,
+                    borderWidth,
+                    data: dataset,
+                    borderColor: boderColors[index],
+                    label: labels[index]
+                });
+            });
+
+            return chartData;
+        }
     },
 
     watch: {
@@ -71,21 +108,15 @@ export default {
             this.period = period;
             this.loading = true;
 
-            console.log(period);
-
             const periods = {
                 dec_week_1: ['dec_week_1'],
-                dec_week_2: ['dec_week_2', 'dec_week_1'],
+                dec_week_2: ['dec_week_1', 'dec_week_2'],
                 dec_week_3: ['dec_week_3', 'dec_week_2', 'dec_week_1'],
                 dec_week_4: ['dec_week_4', 'dec_week_3', 'dec_week_2', 'dec_week_1'],
                 dec_week_5: ['dec_week_5', 'dec_week_4', 'dec_week_3', 'dec_week_2', 'dec_week_1']
             };
 
-            const _period = !period
-                ? ['dec_week_5', 'dec_week_4', 'dec_week_3', 'dec_week_2', 'dec_week_1']
-                : periods[period];
-
-            console.log(_period);
+            const _period = !period ? periods.dec_week_5 : periods[period];
 
             const {
                 homepageTraffic,
@@ -101,10 +132,28 @@ export default {
             });
 
             this.loading = false;
-            this.homepageTraffic = homepageTraffic;
-            this.product1pageTraffic = product1pageTraffic;
-            this.product2pageTraffic = product2pageTraffic;
-            this.product3pageTraffic = product3pageTraffic;
+            this.datasets = [];
+
+            const homepageData = [];
+            const product1pageData = [];
+            const product2pageData = [];
+            const product3pageData = [];
+
+            for (let i = 1; i <= 5; i++) {
+                if (
+                    typeof homepageTraffic[`dec_week_${i}`] !== 'undefined' &&
+                    typeof product1pageTraffic[`dec_week_${i}`] !== 'undefined' &&
+                    typeof product2pageTraffic[`dec_week_${i}`] !== 'undefined' &&
+                    typeof product3pageTraffic[`dec_week_${i}`] !== 'undefined'
+                ) {
+                    homepageData.push(homepageTraffic[`dec_week_${i}`]);
+                    product1pageData.push(product1pageTraffic[`dec_week_${i}`]);
+                    product2pageData.push(product2pageTraffic[`dec_week_${i}`]);
+                    product3pageData.push(product3pageTraffic[`dec_week_${i}`]);
+                }
+            }
+
+            this.datasets.push(homepageData, product1pageData, product2pageData, product3pageData);
         }
     }
 };
