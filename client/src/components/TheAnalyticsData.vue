@@ -1,6 +1,18 @@
 <template>
     <div>
         <v-row>
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <h2>Traffic Analytics Data</h2>
+            </v-col>
+        </v-row>
+
+        <v-row>
             <v-col cols="4">
                 <the-total-traffic />
             </v-col>
@@ -17,6 +29,18 @@
         <v-row>
             <v-col cols="12">
                 <the-traffic-per-source />
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <h2>Sales Analytics Data</h2>
             </v-col>
         </v-row>
     </div>
