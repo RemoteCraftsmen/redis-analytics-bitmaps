@@ -1,8 +1,10 @@
+const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
 
 class TrafficIndexController {
-    constructor(redisService) {
+    constructor(redisService, periodService) {
         this.redisService = redisService;
+        this.periodService = periodService;
     }
 
     async invoke(req, res) {
@@ -46,7 +48,10 @@ class TrafficIndexController {
             return results;
         }
 
-        const periods = period ? [period] : ['dec_week_1', 'dec_week_2', 'dec_week_3', 'dec_week_4', 'dec_week_5'];
+        const dates =
+            period && typeof period === 'object' && period.from && period.to
+                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [])
+                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', []);
 
         const searches = search ? [search] : ['google', 'facebook', 'email', 'direct', 'referral', 'none'];
 
@@ -57,7 +62,7 @@ class TrafficIndexController {
         searches.forEach(_search => {
             const _key = `${prefix}:${_search}`;
 
-            periods.forEach(period => keys.push(`${_key}:${period}`));
+            dates.forEach(date => keys.push(`${_key}:${date}`));
         });
 
         const total = await this.redisService.calculateOr(keys);

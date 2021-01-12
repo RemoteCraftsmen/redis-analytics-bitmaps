@@ -1,5 +1,3 @@
-const dayjs = require('dayjs');
-
 class PeriodService {
     constructor() {
         this.periods = [
@@ -31,14 +29,18 @@ class PeriodService {
         ];
     }
 
-    getPeriodByDate(date) {
-        const period = this.periods.find(p => date === p.from || date === p.to || dayjs(date).isBetween(p.from, p.to));
-
-        if (!period) {
-            throw new Error();
+    getRangeOfDates(start, end, key, arr = []) {
+        if (start.isAfter(end)) {
+            throw new Error('start must precede end');
         }
 
-        return period.name;
+        const next = start.add(1, key).startOf(key);
+
+        if (next.isAfter(end, key)) {
+            return arr;
+        }
+
+        return this.getRangeOfDates(next, end, key, arr.concat(next));
     }
 }
 
