@@ -1,4 +1,6 @@
-# Redis shopping cart UI
+# Redis shopping cart API
+
+## Development
 
 ```
 # copy file and set proper data inside
