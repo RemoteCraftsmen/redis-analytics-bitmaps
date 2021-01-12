@@ -26,15 +26,26 @@ class RedisService {
         return this.redis.SETBIT(`product_added_to_cart:${productId}:${date}`, userId, 1);
     }
 
-    bitCount(key) {
+    count(key) {
         return this.redis.BITCOUNT(key);
     }
 
-    async calculateOr(keys) {
+    async calculateSum(keys) {
+        let sum = 0;
+
+        for (const key of keys) {
+            const count = await this.count(key);
+            sum += count;
+        }
+
+        return sum;
+    }
+
+    async calculateUniques(keys) {
         const key = `or:${faker.random.uuid()}`;
 
         await this.redis.BITOP('OR', key, ...keys);
-        const count = await this.bitCount(key);
+        const count = await this.count(key);
 
         await this.redis.DEL(key);
 

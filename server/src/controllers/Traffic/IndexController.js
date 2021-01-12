@@ -60,7 +60,7 @@ class TrafficIndexController {
                 const key = `${_key}:${formatedDate}`;
 
                 if (trend) {
-                    _trend[formatedDate] = await this.redisService.bitCount(key);
+                    _trend[formatedDate] = await this.redisService.count(key);
                 }
 
                 keys.push(key);
@@ -71,7 +71,7 @@ class TrafficIndexController {
             return 0;
         }
 
-        const total = await this.redisService.calculateOr(keys);
+        const total = await this.redisService.calculateUniques(keys);
 
         const result = trend ? { total, trend: _trend } : total;
 

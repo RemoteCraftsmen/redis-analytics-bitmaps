@@ -61,7 +61,7 @@ class SalesIndexController {
             return 0;
         }
 
-        return this.redisService.calculateOr(keys);
+        return this.redisService.calculateSum(keys);
     }
 }
 
