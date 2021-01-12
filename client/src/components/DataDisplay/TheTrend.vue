@@ -42,35 +42,21 @@ export default {
                 'rgba(0, 0, 0, 0)'
             ];
 
+            const borderColorGenerator = borderColor => {
+                const colors = [];
+
+                for (let i = 0; i < 31; i++) {
+                    colors.push(borderColor);
+                }
+
+                return colors;
+            };
+
             const boderColors = [
-                [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                [
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(255, 206, 86, 1)'
-                ],
-                [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ]
+                borderColorGenerator('rgba(255, 99, 132, 1)'),
+                borderColorGenerator('rgba(54, 162, 235, 1)'),
+                borderColorGenerator('rgba(255, 206, 86, 1)'),
+                borderColorGenerator('rgba(75, 192, 192, 1)')
             ];
 
             const borderWidth = 1;
