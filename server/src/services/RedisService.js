@@ -26,6 +26,10 @@ class RedisService {
         return this.redis.SETBIT(`product_added_to_cart:${productId}:${date}`, userId, 1);
     }
 
+    storeRegisterUsers(userId, date) {
+        return this.redis.SETBIT(`registration:${date}`, userId, 1);
+    }
+
     count(key) {
         return this.redis.BITCOUNT(key);
     }
