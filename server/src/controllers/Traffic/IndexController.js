@@ -62,8 +62,10 @@ class TrafficIndexController {
         searches.forEach(_search => {
             const _key = `${prefix}:${_search}`;
 
-            dates.forEach(date => keys.push(`${_key}:${date}`));
+            dates.forEach(date => keys.push(`${_key}:${date.format('YYYY-MM-DD')}`));
         });
+
+        console.log(keys);
 
         const total = await this.redisService.calculateOr(keys);
 

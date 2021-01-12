@@ -59,7 +59,7 @@ class DataStoreController {
 
         await this.redisService[_action.method](..._action.params);
 
-        await this.redisService.storeTrafficPerSource(userId, period, source);
+        await this.redisService.storeTrafficPerSource(userId, date, source);
 
         return res.sendStatus(StatusCodes.CREATED);
     }
