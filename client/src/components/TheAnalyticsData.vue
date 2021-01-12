@@ -7,21 +7,21 @@
         </v-row>
 
         <v-row>
-            <v-col cols="12">
+            <v-col cols="12" lg="4">
                 <h2>Traffic Analytics Data</h2>
             </v-col>
         </v-row>
 
         <v-row>
-            <v-col cols="4">
+            <v-col cols="12" lg="4">
                 <the-total-traffic />
             </v-col>
 
-            <v-col cols="4">
+            <v-col cols="12" lg="4">
                 <the-traffic-per-page />
             </v-col>
 
-            <v-col cols="4">
+            <v-col cols="12" lg="4">
                 <the-trend />
             </v-col>
         </v-row>
@@ -45,15 +45,15 @@
         </v-row>
 
         <v-row>
-            <v-col cols="4">
+            <v-col cols="12" lg="4">
                 <the-total-products-bought />
             </v-col>
 
-            <v-col cols="4">
+            <v-col cols="12" lg="4">
                 <the-abandoned-cart />
             </v-col>
 
-            <v-col cols="4">
+            <v-col cols="12" lg="4">
                 <the-share-of-products-bought />
             </v-col>
         </v-row>

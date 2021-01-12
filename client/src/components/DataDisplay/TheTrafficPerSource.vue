@@ -1,5 +1,5 @@
 <template>
-    <v-card :height="500">
+    <v-card>
         <v-card-title>Traffic per Source</v-card-title>
 
         <v-card-actions>
@@ -8,36 +8,35 @@
 
         <v-card-text>
             <v-row>
-                <v-col cols="9">
+                <v-col cols="12" lg="9">
                     <v-row>
-                        <v-col cols="4">
+                        <v-col cols="12" sm="6">
                             <base-card title="Google Ads" :data="googleTraffic" :loading="loading" />
                         </v-col>
 
-                        <v-col cols="4">
+                        <v-col cols="12" sm="6">
                             <base-card title="Facebook Ads" :data="facebookTraffic" :loading="loading" />
                         </v-col>
 
-                        <v-col cols="4">
+                        <v-col cols="12" sm="6">
                             <base-card title="Email" :data="emailTraffic" :loading="loading" />
                         </v-col>
-                    </v-row>
 
-                    <v-row>
-                        <v-col cols="4">
+                        <v-col cols="12" sm="6">
                             <base-card title="Direct" :data="directTraffic" :loading="loading" />
                         </v-col>
-                        <v-col cols="4">
+
+                        <v-col cols="12" sm="6">
                             <base-card title="Referral" :data="referralTraffic" :loading="loading" />
                         </v-col>
 
-                        <v-col cols="4">
+                        <v-col cols="12" sm="6">
                             <base-card title="None" :data="noneTraffic" :loading="loading" />
                         </v-col>
                     </v-row>
                 </v-col>
 
-                <v-col cols="3">
+                <v-col cols="12" lg="3">
                     <div style="position: relative">
                         <base-pie-chart :chart-data="chartData" />
                     </div>
