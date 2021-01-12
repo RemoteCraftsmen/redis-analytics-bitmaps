@@ -34,14 +34,8 @@ class SalesIndexController {
     async _search(period, prefix, search) {
         const dates =
             period && typeof period === 'object' && period.from && period.to
-                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [
-                      dayjs(period.from),
-                      dayjs(period.to)
-                  ])
-                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [
-                      dayjs('2015-12-01'),
-                      dayjs('2015-12-01')
-                  ]);
+                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [dayjs(period.from)])
+                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [dayjs('2015-12-01')]);
 
         if (search && typeof search === 'object' && Array.isArray(search)) {
             const results = {};

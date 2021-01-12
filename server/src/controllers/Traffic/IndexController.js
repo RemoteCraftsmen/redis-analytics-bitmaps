@@ -40,14 +40,8 @@ class TrafficIndexController {
     async _search(period, search, type, trend) {
         const dates =
             period && typeof period === 'object' && period.from && period.to
-                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [
-                      dayjs(period.from),
-                      dayjs(period.to)
-                  ])
-                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [
-                      dayjs('2015-12-01'),
-                      dayjs('2015-12-01')
-                  ]);
+                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [dayjs(period.from)])
+                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [dayjs('2015-12-01')]);
 
         const searches = search ? [search] : ['google', 'facebook', 'email', 'direct', 'referral', 'none'];
 
