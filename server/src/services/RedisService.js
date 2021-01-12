@@ -45,15 +45,40 @@ class RedisService {
         return sum;
     }
 
-    async calculateUniques(keys) {
+    async calculateUniques(keys, keep = false) {
         const key = `or:${faker.random.uuid()}`;
 
         await this.redis.BITOP('OR', key, ...keys);
+
+        if (keep) {
+            return key;
+        }
+
         const count = await this.count(key);
 
-        await this.redis.DEL(key);
+        await this.delete(key);
 
         return count;
+    }
+
+    async calculateIntersection(keys, keep = false) {
+        const key = `and:${faker.random.uuid()}`;
+
+        await this.redis.BITOP('AND', key, ...keys);
+
+        if (keep) {
+            return key;
+        }
+
+        const count = await this.count(key);
+
+        await this.delete(key);
+
+        return count;
+    }
+
+    delete(key) {
+        return this.redis.DEL(key);
     }
 }
 
