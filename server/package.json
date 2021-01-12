@@ -1,7 +1,7 @@
 {
-    "name": "redis-analitycs-bitmaps-api",
+    "name": "redis-analytics-bitmaps-api",
     "version": "1.0.0",
-    "description": "This app demonstrates how we can use Redis bitmap methods to gather analytic statistics. It utilizes such methods as SETBIT BITCOUNT BITOP.",
+    "description": "This app demonstrates how we can use Redis bitmap methods to gather analytic statistics. It utilizes such methods as SETBIT, BITCOUNT and BITOP.",
     "keywords": [
         "NodeJS",
         "ExpressJS",

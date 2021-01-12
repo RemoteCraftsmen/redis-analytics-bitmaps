@@ -1,6 +1,6 @@
 {
   "name": "Redis Analytics Bitmaps",
-  "description": "This app demonstrates how we can use Redis bitmap methods to gather analytic statistics. It utilizes such methods as SETBIT BITCOUNT BITOP.",
+  "description": "This app demonstrates how we can use Redis bitmap methods to gather analytic statistics. It utilizes such methods as SETBIT, BITCOUNT and BITOP.",
   "repository": "https://github.com/RemoteCraftsmen/redis-analytics-bitmaps.git",
   "keywords": [
     "NodeJS",

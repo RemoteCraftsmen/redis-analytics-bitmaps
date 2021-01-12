@@ -1,7 +1,7 @@
 {
-    "name": "redis-analitycs-bitmaps-ui",
+    "name": "redis-analytics-bitmaps-ui",
     "version": "0.1.0",
-    "description": "This app demonstrates how we can use Redis bitmap methods to gather analytic statistics. It utilizes such methods as SETBIT BITCOUNT BITOP.",
+    "description": "This app demonstrates how we can use Redis bitmap methods to gather analytic statistics. It utilizes such methods as SETBIT, BITCOUNT and BITOP.",
     "keywords": [
         "VueJS",
         "Analytics",
