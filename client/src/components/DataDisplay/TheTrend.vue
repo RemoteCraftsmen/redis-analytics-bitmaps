@@ -25,7 +25,8 @@ export default {
         return {
             period: null,
             loading: false,
-            datasets: []
+            datasets: [],
+            labels: []
         };
     },
 
@@ -77,7 +78,7 @@ export default {
             const labels = ['Homepage', 'Product1 Page', 'Product2 Page', 'Product3 Page'];
 
             const chartData = {
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+                labels: this.labels,
                 datasets: []
             };
 
@@ -131,40 +132,42 @@ export default {
                 }
             };
 
-            const filter = { search: ['homepage', 'product1page', 'product2page', 'product3page'], type: 'page' };
+            const filter = {
+                search: ['homepage', 'product1page', 'product2page', 'product3page'],
+                type: 'page',
+                trend: true
+            };
 
             if (period) {
                 filter.period = periods[period];
             }
 
             const {
-                homepageTraffic,
-                product1pageTraffic,
-                product2pageTraffic,
-                product3pageTraffic
+                homepageTraffic: { trend: homepageTrend },
+                product1pageTraffic: { trend: product1pageTrend },
+                product2pageTraffic: { trend: product2pageTrend },
+                product3pageTraffic: { trend: product3pageTrend }
             } = await this.fetchTraffic({ filter });
 
             this.loading = false;
             this.datasets = [];
+            this.labels = [];
 
             const homepageData = [];
             const product1pageData = [];
             const product2pageData = [];
             const product3pageData = [];
 
-            for (let i = 1; i <= 5; i++) {
-                if (
-                    typeof homepageTraffic[`dec_week_${i}`] !== 'undefined' &&
-                    typeof product1pageTraffic[`dec_week_${i}`] !== 'undefined' &&
-                    typeof product2pageTraffic[`dec_week_${i}`] !== 'undefined' &&
-                    typeof product3pageTraffic[`dec_week_${i}`] !== 'undefined'
-                ) {
-                    homepageData.push(homepageTraffic[`dec_week_${i}`]);
-                    product1pageData.push(product1pageTraffic[`dec_week_${i}`]);
-                    product2pageData.push(product2pageTraffic[`dec_week_${i}`]);
-                    product3pageData.push(product3pageTraffic[`dec_week_${i}`]);
-                }
-            }
+            const dates = Object.keys(homepageTrend);
+
+            dates.forEach(date => {
+                homepageData.push(homepageTrend[date]);
+                product1pageData.push(product1pageTrend[date]);
+                product2pageData.push(product2pageTrend[date]);
+                product3pageData.push(product3pageTrend[date]);
+
+                this.labels.push(date);
+            });
 
             this.datasets.push(homepageData, product1pageData, product2pageData, product3pageData);
         }

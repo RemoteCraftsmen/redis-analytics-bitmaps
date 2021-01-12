@@ -34,8 +34,14 @@ class SalesIndexController {
     async _search(period, prefix, search) {
         const dates =
             period && typeof period === 'object' && period.from && period.to
-                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [])
-                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', []);
+                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [
+                      dayjs(period.from),
+                      dayjs(period.to)
+                  ])
+                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [
+                      dayjs('2015-12-01'),
+                      dayjs('2015-12-01')
+                  ]);
 
         if (search && typeof search === 'object' && Array.isArray(search)) {
             const results = {};
@@ -54,8 +60,12 @@ class SalesIndexController {
         productsIds.forEach(productId => {
             const _key = `${prefix}:${productId}`;
 
-            dates.forEach(date => keys.push(`${_key}:${date}`));
+            dates.forEach(date => keys.push(`${_key}:${date.format('YYYY-MM-DD')}`));
         });
+
+        if (keys.length === 0) {
+            return 0;
+        }
 
         return this.redisService.calculateOr(keys);
     }
