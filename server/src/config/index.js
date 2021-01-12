@@ -12,6 +12,6 @@ module.exports = {
     },
     redis: {
         uri: `redis://${redisEndpointUri}`,
-        password: REDIS_PASSWORD
+        password: REDIS_PASSWORD.length ? REDIS_PASSWORD : undefined
     }
 };

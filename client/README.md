@@ -1,4 +1,4 @@
-# Redis shopping cart UI
+# Redis Analytics Bitmaps UI
 
 ```
 # copy file and set proper data inside
