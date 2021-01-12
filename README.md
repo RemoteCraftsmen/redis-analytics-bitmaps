@@ -7,7 +7,7 @@ Check each README.md in client or server folders.
 ### Google Cloud Run
 
 [![Run on Google
-Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/RemoteCraftsmen/redis-analytics-bitmaps.git)
+Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/RemoteCraftsmen/redis-analytics-bitmaps.git&revision=feature/deploy-buttons)
 
 ### Heroku
 
