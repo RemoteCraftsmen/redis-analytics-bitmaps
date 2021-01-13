@@ -57,6 +57,38 @@
                 <the-share-of-products-bought />
             </v-col>
         </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <h2>Customer and Cohort Analysis</h2>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" lg="6">
+                <the-cohort />
+            </v-col>
+
+            <v-col cols="12" lg="6">
+                <the-total-products-bought />
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" lg="6">
+                <the-total-products-bought />
+            </v-col>
+
+            <v-col cols="12" lg="6">
+                <the-total-products-bought />
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -69,7 +101,8 @@ export default {
         theTrend: () => import('@/components/DataDisplay/TheTrend'),
         theTotalProductsBought: () => import('@/components/DataDisplay/TheTotalProductsBought'),
         theAbandonedCart: () => import('@/components/DataDisplay/TheAbandonedCart'),
-        theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought')
+        theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought'),
+        theCohort: () => import('@/components/DataDisplay/TheCohort')
     }
 };
 </script>

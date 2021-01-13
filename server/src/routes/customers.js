@@ -10,7 +10,8 @@ module.exports = app => {
 
     const cohortIndexController = new CustomerCohortIndexController(redisService, periodService);
 
-    router.get('/cohort', (...args) => cohortIndexController.invoke(...args));
+    router.get('/cohort', (...args) => cohortIndexController.invoke(...args)); //api/customers/cohort
+    router.get('/products', (...args) => cohortIndexController.invoke(...args)); //api/customers/products
 
     return router;
 };
