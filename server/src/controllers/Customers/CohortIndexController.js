@@ -60,10 +60,14 @@ class CustomerCohortIndexController {
             const registerThenBought = await this.redisService.calculateUniques(cohortKeys);
             const register = await this.redisService.calculateUniques(registrationKeys);
             const bought = await this.redisService.calculateUniques(boughtKeys);
-            const dropoff = 0;
+            const dropoff = 100 - ((registerThenBought / register) * 100).toFixed(2);
 
             for (const cohortKey of cohortKeys) {
                 await this.redisService.delete(cohortKey);
+            }
+
+            for (const boughtKey of boughtKeys) {
+                await this.redisService.delete(boughtKey);
             }
 
             return res.send({ registerThenBought, register, bought, dropoff });
