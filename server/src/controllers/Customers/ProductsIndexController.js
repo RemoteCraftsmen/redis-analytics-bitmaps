@@ -30,17 +30,7 @@ class CustomersProductIndexController {
             productsIds.forEach(productId => {
                 const _key = `product_bought:${productId}`;
 
-                dates.forEach(date => {
-                    keys[`product${productId}`].push(`${_key}:${date.format('YYYY-MM-DD')}`);
-
-                    // const _dates = dates.filter(d => d.format('YYYY-MM-DD') !== date.format('YYYY-MM-DD'));
-
-                    // const _dateKeys = [];
-
-                    // _dates.forEach(_date => _dateKeys.push(`${_key}:${_date.format('YYYY-MM-DD')}`));
-
-                    // keys.dates.push({ items: _dateKeys, excludedDate: date.format('YYYY-MM-DD') });
-                });
+                dates.forEach(date => keys[`product${productId}`].push(`${_key}:${date.format('YYYY-MM-DD')}`));
             });
 
             const result = {};
