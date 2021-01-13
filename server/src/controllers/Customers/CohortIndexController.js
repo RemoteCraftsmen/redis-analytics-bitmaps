@@ -8,50 +8,74 @@ class CustomerCohortIndexController {
     }
 
     async invoke(req, res) {
-        const startDate = dayjs('2015-12-01');
+        const { filter } = req.query;
 
-        const dates = this.periodService.getRangeOfDates(startDate, '2015-12-31', 'day', [startDate]);
+        try {
+            const { period = null, search = null } = filter ? JSON.parse(filter) : {};
 
-        const iterations = [];
+            const dates =
+                period && typeof period === 'object' && period.from && period.to
+                    ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [dayjs(period.from)])
+                    : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [
+                          dayjs('2015-12-01')
+                      ]);
 
-        const productsIds = [1, 2, 3];
+            const iterations = [];
 
-        for (const date of dates) {
-            const productsKeys = [];
-            const _dates = dates.filter(d => dayjs(d).isAfter(date));
+            const productsIds = search ? [search] : [1, 2, 3];
 
-            productsIds.forEach(productId => {
-                const _key = `product_bought:${productId}`;
+            for (const date of dates) {
+                const productsKeys = [];
+                const _dates = dates.filter(d => dayjs(d).isAfter(date));
 
-                _dates.forEach(d => productsKeys.push(`${_key}:${d.format('YYYY-MM-DD')}`));
-            });
+                productsIds.forEach(productId => {
+                    const _key = `product_bought:${productId}`;
 
-            iterations.push({ registrationKey: `registration:${date.format('YYYY-MM-DD')}`, productsKeys });
-        }
+                    _dates.forEach(d => productsKeys.push(`${_key}:${d.format('YYYY-MM-DD')}`));
+                });
 
-        const cohortKeys = [];
-
-        for (const iteration of iterations) {
-            if (iteration.productsKeys.length === 0) {
-                continue;
+                iterations.push({ registrationKey: `registration:${date.format('YYYY-MM-DD')}`, productsKeys });
             }
 
-            const productBoughtKey = await this.redisService.calculateUniques(iteration.productsKeys, true);
-            const cohortKey = await this.redisService.calculateIntersection(
-                [iteration.registrationKey, productBoughtKey],
-                true
-            );
+            const cohortKeys = [];
+            const registrationKeys = [];
+            const boughtKeys = [];
 
-            cohortKeys.push(cohortKey);
+            for (const iteration of iterations) {
+                if (iteration.productsKeys.length === 0) {
+                    continue;
+                }
+
+                const productBoughtKey = await this.redisService.calculateUniques(iteration.productsKeys, true);
+                const cohortKey = await this.redisService.calculateIntersection(
+                    [iteration.registrationKey, productBoughtKey],
+                    true
+                );
+
+                boughtKeys.push(productBoughtKey);
+                registrationKeys.push(iteration.registrationKey);
+                cohortKeys.push(cohortKey);
+            }
+
+            const registerThenBought = await this.redisService.calculateUniques(cohortKeys);
+            const register = await this.redisService.calculateUniques(registrationKeys);
+            const bought = await this.redisService.calculateUniques(boughtKeys);
+            const dropoff = 0;
+
+            for (const cohortKey of cohortKeys) {
+                await this.redisService.delete(cohortKey);
+            }
+
+            return res.send({ registerThenBought, register, bought, dropoff });
+        } catch (err) {
+            if (err instanceof SyntaxError) {
+                return res.sendStatus(StatusCodes.BAD_REQUEST);
+            }
+
+            console.error(err);
+
+            return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
         }
-
-        const registerThenBought = await this.redisService.calculateUniques(cohortKeys);
-
-        for (const cohortKey of cohortKeys) {
-            await this.redisService.delete(cohortKey);
-        }
-
-        return res.send({ registerThenBought });
     }
 }
 
