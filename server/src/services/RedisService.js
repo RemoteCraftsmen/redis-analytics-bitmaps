@@ -5,7 +5,9 @@ const redisClient = require('./RedisClient');
 class RedisService {
     constructor() {
         this.redis = redisClient;
-        ['SETBIT', 'BITCOUNT', 'BITOP', 'DEL'].forEach(method => (this.redis[method] = promisify(this.redis[method])));
+        ['SETBIT', 'GETBIT', 'BITCOUNT', 'BITOP', 'DEL', 'GET'].forEach(
+            method => (this.redis[method] = promisify(this.redis[method]))
+        );
     }
 
     storeTrafficPerPage(userId, date, page) {
@@ -79,6 +81,14 @@ class RedisService {
 
     delete(key) {
         return this.redis.DEL(key);
+    }
+
+    get(key) {
+        return this.redis.GET(key);
+    }
+
+    getBit(key, bit) {
+        return this.redis.GETBIT(key, bit);
     }
 }
 

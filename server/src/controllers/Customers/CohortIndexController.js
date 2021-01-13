@@ -1,7 +1,7 @@
 const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
 
-class CustomerCohortIndexController {
+class CustomersCohortIndexController {
     constructor(redisService, periodService) {
         this.redisService = redisService;
         this.periodService = periodService;
@@ -83,4 +83,4 @@ class CustomerCohortIndexController {
     }
 }
 
-module.exports = CustomerCohortIndexController;
+module.exports = CustomersCohortIndexController;
