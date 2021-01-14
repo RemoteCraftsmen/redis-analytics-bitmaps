@@ -3,7 +3,7 @@ const timeSpans = require('./timeSpans');
 const scopes = require('./scopes');
 const stores = require('./stores');
 
-class Event {
+class EventService {
     constructor(prefix) {
         this.prefix = prefix;
     }
@@ -33,4 +33,4 @@ class Event {
     }
 }
 
-module.exports = Event;
+module.exports = EventService;

@@ -1,12 +1,12 @@
-const Event = require('./src/services/event/Event');
+const EventService = require('./src/services/event/EventService');
 
-const event = new Event('test');
+const eventService = new EventService('test');
 
 // userId, date, source, action, page;
-event.store(0, '2015-01-01', ['google', 'visit', 'homepage']).then(() => console.log('OK'));
-event.store(1, '2015-01-08', ['email', 'visit', 'product2']).then(() => console.log('OK'));
-event.store(0, '2015-01-20', ['facebook', 'visit', 'product1']).then(() => console.log('OK'));
-event.store(1, '2015-01-01', ['facebook', 'register']).then(() => console.log('OK'));
+eventService.store(0, '2015-01-01', ['google', 'visit', 'homepage']).then(() => console.log('OK'));
+eventService.store(1, '2015-01-08', ['email', 'visit', 'product2']).then(() => console.log('OK'));
+eventService.store(0, '2015-01-20', ['facebook', 'visit', 'product1']).then(() => console.log('OK'));
+eventService.store(1, '2015-01-01', ['facebook', 'register']).then(() => console.log('OK'));
 
 const test = ['abc', 'def'];
 
