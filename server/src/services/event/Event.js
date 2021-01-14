@@ -8,12 +8,12 @@ class Event {
         this.prefix = prefix;
     }
 
-    async store(userId, date, source, action, page) {
+    async store(userId, date, args) {
         const keys = Object.keys(timeSpans).flatMap(timeSpansKey => {
             const timeSpan = timeSpans[timeSpansKey].bind(timeSpans);
 
             return Object.keys(scopes).flatMap(scopesKey => {
-                const scope = scopes[scopesKey](source, action, page);
+                const scope = scopes[scopesKey](...args);
 
                 if (!scope) {
                     return [];
