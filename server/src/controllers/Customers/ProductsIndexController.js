@@ -38,29 +38,13 @@ class CustomersProductIndexController {
             const buyProduct1Key = await this.redisService.calculateUniques(keys.product1, true);
             const buyProduct2Key = await this.redisService.calculateUniques(keys.product2, true);
 
-            if (search.includes('product1')) {
-                result.product1 = await this.redisService.get(buyProduct1Key);
-            }
-
-            if (search.includes('product2')) {
-                result.product2 = await this.redisService.get(buyProduct2Key);
-            }
-
-            if (search.includes('product3')) {
-                const buyProduct3Key = await this.redisService.calculateUniques(keys.product3, true);
-
-                result.product3 = await this.redisService.get(buyProduct3Key);
-
-                await this.redisService.delete(buyProduct3Key);
-            }
-
             if (search.includes('product1and2')) {
                 const buyProduct1and2Key = await this.redisService.calculateIntersection(
                     [buyProduct1Key, buyProduct2Key],
                     true
                 );
 
-                result.product1and2 = await this.redisService.get(buyProduct1and2Key);
+                result.product1and2 = await this.redisService.generateArrayFromBits(buyProduct1and2Key, 'User');
 
                 await this.redisService.delete(buyProduct1and2Key);
             }
@@ -99,13 +83,29 @@ class CustomersProductIndexController {
 
                 const twoDifferetDatesKey = await this.redisService.calculateUniques(calculatedKeys, true);
 
-                result.twoDifferentDates = await this.redisService.get(twoDifferetDatesKey);
+                result.twoDifferentDates = await this.redisService.generateArrayFromBits(twoDifferetDatesKey, 'User');
 
                 await this.redisService.delete(twoDifferetDatesKey);
 
                 for (const calculatedKey of calculatedKeys) {
                     await this.redisService.delete(calculatedKey);
                 }
+            }
+
+            if (search.includes('product1')) {
+                result.product1 = await this.redisService.generateArrayFromBits(buyProduct1Key, 'User');
+            }
+
+            if (search.includes('product2')) {
+                result.product2 = await this.redisService.generateArrayFromBits(buyProduct2Key, 'User');
+            }
+
+            if (search.includes('product3')) {
+                const buyProduct3Key = await this.redisService.calculateUniques(keys.product3, true);
+
+                result.product3 = await this.redisService.generateArrayFromBits(buyProduct3Key, 'User');
+
+                await this.redisService.delete(buyProduct3Key);
             }
 
             await this.redisService.delete(buyProduct1Key);
