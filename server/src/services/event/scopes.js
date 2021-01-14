@@ -7,7 +7,7 @@ module.exports = {
         return action;
     },
 
-    actionPage: (source, action, object) => {
+    actionObject: (source, action, object) => {
         if (action === 'register') {
             return null;
         }

@@ -4,9 +4,10 @@ const scopes = require('./scopes');
 const stores = require('./stores');
 
 class EventService {
-    constructor(prefix, redisService) {
+    constructor(prefix, redisService, time = dayjs) {
         this.prefix = prefix;
         this.redisService = redisService;
+        this.time = time;
     }
 
     async store(userId, date, args) {
@@ -22,7 +23,7 @@ class EventService {
 
                 const scopeName = scope !== scopesKey ? `:${scope}` : '';
 
-                return `${scopesKey}${scopeName}:${timeSpansKey}:${timeSpan(dayjs(date))}`;
+                return `${scopesKey}${scopeName}:${timeSpansKey}:${timeSpan(this.time(date))}`;
             });
         });
 
