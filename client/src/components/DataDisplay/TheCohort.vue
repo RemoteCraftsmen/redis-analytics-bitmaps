@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="card">
         <v-card-title>Cohort Analysis</v-card-title>
 
         <v-card-subtitle> % people who registered in December and then bought some product </v-card-subtitle>

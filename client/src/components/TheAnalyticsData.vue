@@ -76,7 +76,7 @@
             </v-col>
 
             <v-col cols="12" lg="6">
-                <the-total-products-bought />
+                <the-customers-per-product />
             </v-col>
         </v-row>
 
@@ -102,7 +102,8 @@ export default {
         theTotalProductsBought: () => import('@/components/DataDisplay/TheTotalProductsBought'),
         theAbandonedCart: () => import('@/components/DataDisplay/TheAbandonedCart'),
         theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought'),
-        theCohort: () => import('@/components/DataDisplay/TheCohort')
+        theCohort: () => import('@/components/DataDisplay/TheCohort'),
+        theCustomersPerProduct: () => import('@/components/DataDisplay/TheCustomersPerProduct')
     }
 };
 </script>
