@@ -7,12 +7,12 @@ module.exports = {
         return action;
     },
 
-    actionPage: (source, action, page) => {
-        if (action !== 'visit') {
+    actionPage: (source, action, object) => {
+        if (action === 'register') {
             return null;
         }
 
-        return `${action}:${page}`;
+        return `${action}:${object}`;
     },
 
     sourceAction: (source, action) => {
