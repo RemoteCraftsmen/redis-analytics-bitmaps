@@ -16,7 +16,7 @@
 
             <v-row>
                 <v-col cols="12" lg="6">
-                    <base-card title="Dropoff" :data="`${dropoff}%`" :loading="loading" />
+                    <base-card title="Dropoff" :data="`${dropoff ? dropoff : '0'}%`" :loading="loading" />
                 </v-col>
                 <v-col cols="12" lg="6">
                     <base-horizontal-bar-chart :chart-data="chartData" />

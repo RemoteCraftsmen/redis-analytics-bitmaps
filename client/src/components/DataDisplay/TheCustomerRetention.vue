@@ -1,7 +1,9 @@
 <template>
-    <base-collection-card title="Customers who bought only" :data="customers" :loading="loading">
-        <v-select v-model="product" :items="values" item-text="text" item-value="value" label="Product" />
-    </base-collection-card>
+    <base-collection-card
+        title="Customer Retention: Customers who bought on tho different dates"
+        :data="customers"
+        :loading="loading"
+    />
 </template>
 
 <script>
@@ -15,12 +17,6 @@ export default {
     data() {
         return {
             customers: [],
-            product: 'product1',
-            values: [
-                { text: 'Product1', value: 'product1' },
-                { text: 'Product2', value: 'product2' },
-                { text: 'Product3', value: 'product3' }
-            ],
             loading: false
         };
     },
@@ -30,10 +26,6 @@ export default {
     },
 
     watch: {
-        product() {
-            this.fetchProductsData();
-        },
-
         refreshSignal() {
             this.fetchProductsData();
         }
@@ -49,10 +41,10 @@ export default {
         async fetchProductsData() {
             this.loading = true;
 
-            const data = await this.fetchProducts({ filter: { search: [this.product] } });
+            const { twoDifferentDates } = await this.fetchProducts({ filter: { search: ['twoDifferentDates'] } });
 
             this.loading = false;
-            this.customers = data[this.product];
+            this.customers = twoDifferentDates;
         }
     }
 };
