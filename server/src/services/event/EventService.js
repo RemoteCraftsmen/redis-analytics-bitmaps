@@ -4,8 +4,9 @@ const scopes = require('./scopes');
 const stores = require('./stores');
 
 class EventService {
-    constructor(prefix) {
+    constructor(prefix, redisService) {
         this.prefix = prefix;
+        this.redisService = redisService;
     }
 
     async store(userId, date, args) {
@@ -27,7 +28,7 @@ class EventService {
 
         for (const key of keys) {
             for (const store of stores) {
-                await store(this.prefix, key, userId);
+                await store(this.prefix, this.redisService, key, userId);
             }
         }
     }

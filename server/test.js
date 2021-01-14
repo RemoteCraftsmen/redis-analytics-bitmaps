@@ -1,6 +1,7 @@
 const EventService = require('./src/services/event/EventService');
+const RedisService = require('./src/services/RedisService');
 
-const eventService = new EventService('test');
+const eventService = new EventService('test', new RedisService());
 
 // userId, date, source, action, page;
 eventService.store(0, '2015-01-01', ['google', 'visit', 'homepage']).then(() => console.log('OK'));

@@ -1,8 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 
 class DataStoreController {
-    constructor(redisService, periodService) {
+    constructor(redisService, eventService) {
         this.redisService = redisService;
+        this.eventService = eventService;
     }
 
     async invoke(req, res) {
