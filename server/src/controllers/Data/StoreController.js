@@ -13,57 +13,57 @@ class DataStoreController {
             register: {
                 method: 'storeRegisterUsers',
                 params: [userId, date],
-                eventServiceParams: [userId, date, [source, 'register']]
+                eventServiceParams: [userId, date, { source, action: 'register' }]
             },
             homepage: {
                 method: 'storeTrafficPerPage',
                 params: [userId, date, 'homepage'],
-                eventServiceParams: [userId, date, [source, 'visit', 'homepage']]
+                eventServiceParams: [userId, date, { source, action: 'visit', object: 'homepage' }]
             },
             product1page: {
                 method: 'storeTrafficPerPage',
                 params: [userId, date, 'product1page'],
-                eventServiceParams: [userId, date, [source, 'visit', 'product1']]
+                eventServiceParams: [userId, date, { source, action: 'visit', object: 'product1' }]
             },
             product2page: {
                 method: 'storeTrafficPerPage',
                 params: [userId, date, 'product2page'],
-                eventServiceParams: [userId, date, [source, 'visit', 'product2']]
+                eventServiceParams: [userId, date, { source, action: 'visit', object: 'product2' }]
             },
             product3page: {
                 method: 'storeTrafficPerPage',
                 params: [userId, date, 'product3page'],
-                eventServiceParams: [userId, date, [source, 'visit', 'product3']]
+                eventServiceParams: [userId, date, { source, action: 'visit', object: 'product3' }]
             },
             product1cart: {
                 method: 'storeProductAddedToCart',
                 params: [userId, date, 1],
-                eventServiceParams: [userId, date, [source, 'addToCart', 'product1']]
+                eventServiceParams: [userId, date, { source, action: 'addToCart', object: 'product1' }]
             },
             product2cart: {
                 method: 'storeProductAddedToCart',
                 params: [userId, date, 2],
-                eventServiceParams: [userId, date, [source, 'addToCart', 'product2']]
+                eventServiceParams: [userId, date, { source, action: 'addToCart', object: 'product2' }]
             },
             product3cart: {
                 method: 'storeProductAddedToCart',
                 params: [userId, date, 3],
-                eventServiceParams: [userId, date, [source, 'addToCart', 'product3']]
+                eventServiceParams: [userId, date, { source, action: 'addToCart', object: 'product3' }]
             },
             product1buy: {
                 method: 'storeProductBought',
                 params: [userId, date, 1],
-                eventServiceParams: [userId, date, [source, 'buy', 'product1']]
+                eventServiceParams: [userId, date, { source, action: 'buy', object: 'product1' }]
             },
             product2buy: {
                 method: 'storeProductBought',
                 params: [userId, date, 2],
-                eventServiceParams: [userId, date, [source, 'buy', 'product2']]
+                eventServiceParams: [userId, date, { source, action: 'buy', object: 'product2' }]
             },
             product3buy: {
                 method: 'storeProductBought',
                 params: [userId, date, 3],
-                eventServiceParams: [userId, date, [source, 'buy', 'product3']]
+                eventServiceParams: [userId, date, { source, action: 'buy', object: 'product3' }]
             }
         };
 

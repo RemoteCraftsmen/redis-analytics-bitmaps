@@ -7,10 +7,11 @@ class AnalyzerService {
         this.redisService = redisService;
     }
 
-    async analyze(type, timeSpan, date, scope, args = []) {
-        const _timeSpan = typeof date === 'object' ? `${timeSpan}:${timeSpans[timeSpan](date)}` : `${timeSpan}:${date}`;
+    async analyze(type, timeSpan, scope, { args = {}, timeResolver = null, resolver = null } = {}) {
+        const _timeSpan =
+            typeof timeSpan === 'object' ? `${timeResolver}:${timeSpans[timeResolver](timeSpan)}` : timeSpan;
 
-        const _scope = scopes[scope](...args);
+        const _scope = scopes[scope](args);
 
         if (!_scope) {
             return;

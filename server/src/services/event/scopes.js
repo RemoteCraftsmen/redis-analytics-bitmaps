@@ -1,13 +1,13 @@
 module.exports = {
-    source: source => {
+    source: ({ source }) => {
         return source;
     },
 
-    action: (source, action) => {
+    action: ({ action }) => {
         return action;
     },
 
-    actionObject: (source, action, object) => {
+    actionObject: ({ action, object }) => {
         if (action === 'register') {
             return null;
         }
@@ -15,7 +15,7 @@ module.exports = {
         return `${action}:${object}`;
     },
 
-    sourceAction: (source, action) => {
+    sourceAction: ({ source, action }) => {
         return `${source}:${action}`;
     },
 

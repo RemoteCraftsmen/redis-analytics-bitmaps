@@ -10,12 +10,12 @@ class EventService {
         this.time = time;
     }
 
-    async store(userId, date, args) {
+    async store(userId, date, args = {}) {
         const keys = Object.keys(timeSpans).flatMap(timeSpansKey => {
             const timeSpan = timeSpans[timeSpansKey].bind(timeSpans);
 
             return Object.keys(scopes).flatMap(scopesKey => {
-                const scope = scopes[scopesKey](...args);
+                const scope = scopes[scopesKey](args);
 
                 if (!scope) {
                     return [];
