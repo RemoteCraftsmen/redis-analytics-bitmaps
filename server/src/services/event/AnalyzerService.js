@@ -1,28 +1,32 @@
 const timeSpans = require('./timeSpans');
 const scopes = require('./scopes');
 
-const resolvers = {
-    set: (key, redisService) => {
-        return redisService.getSetValues(key);
-    },
-
-    increment: (key, redisService) => {
-        return redisService.get(key).then(value => (value ? parseInt(value) : 0));
-    },
-
-    bitmap: (key, redisService) => {
-        return redisService.count(key);
-    },
-
-    key: key => {
-        return key;
-    }
-};
-
 class AnalyzerService {
     constructor(prefix, redisService) {
         this.prefix = prefix;
         this.redisService = redisService;
+    }
+
+    get resolvers() {
+        const redisService = this.redisService;
+
+        return {
+            set: key => {
+                return redisService.getSetValues(key);
+            },
+
+            increment: key => {
+                return redisService.get(key).then(value => (value ? parseInt(value) : 0));
+            },
+
+            bitmap: key => {
+                return redisService.count(key);
+            },
+
+            key: key => {
+                return key;
+            }
+        };
     }
 
     async analyze(type, timeSpan, scope, { args = {}, timeResolver = null, resolver = null } = {}) {
@@ -37,10 +41,7 @@ class AnalyzerService {
 
         const scopeName = _scope !== scope ? `:${_scope}` : '';
 
-        return resolvers[resolver ? resolver : type](
-            `${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`,
-            this.redisService
-        );
+        return this.resolvers[resolver ? resolver : type](`${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`);
     }
 }
 
