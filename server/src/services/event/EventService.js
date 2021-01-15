@@ -9,18 +9,20 @@ class EventService {
     }
 
     get stores() {
+        const redisService = this.redisService;
+
         return [
             function (prefix, key, userId) {
-                return this.redisService.setBit(`${prefix}:bitmap:${key}`, userId, 1);
-            }.bind(this),
+                return redisService.setBit(`${prefix}:bitmap:${key}`, userId, 1);
+            },
 
             async function (prefix, key) {
-                return this.redisService.increment(`${prefix}:increment:${key}`);
-            }.bind(this),
+                return redisService.increment(`${prefix}:increment:${key}`);
+            },
 
             async function (prefix, key, userId) {
-                return this.redisService.addToSet(`${prefix}:set:${key}`, userId);
-            }.bind(this)
+                return redisService.addToSet(`${prefix}:set:${key}`, userId);
+            }
         ];
     }
 
