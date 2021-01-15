@@ -4,7 +4,7 @@ const { redis } = require('../../config');
 
 const resolvers = {
     set: (key, redisService) => {
-        return redisService.get(key);
+        return redisService.getSetValues(key);
     },
 
     increment: (key, redisService) => {
@@ -12,7 +12,7 @@ const resolvers = {
     },
 
     bitmap: (key, redisService) => {
-        return 2;
+        return redisService.count(key);
     },
 
     key: key => {
