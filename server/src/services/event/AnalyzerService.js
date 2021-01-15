@@ -1,6 +1,5 @@
 const timeSpans = require('./timeSpans');
 const scopes = require('./scopes');
-const { redis } = require('../../config');
 
 const resolvers = {
     set: (key, redisService) => {
