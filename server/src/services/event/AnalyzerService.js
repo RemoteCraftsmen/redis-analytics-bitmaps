@@ -1,6 +1,23 @@
 const timeSpans = require('./timeSpans');
 const scopes = require('./scopes');
-const resolvers = require('./resolvers');
+
+const resolvers = {
+    set: (key, redisService) => {
+        return [1, 2, 3];
+    },
+
+    increment: (key, redisService) => {
+        return 5;
+    },
+
+    bitmap: (key, redisService) => {
+        return 2;
+    },
+
+    key: key => {
+        return key;
+    }
+};
 
 class AnalyzerService {
     constructor(prefix, redisService) {
