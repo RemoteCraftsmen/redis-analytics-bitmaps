@@ -1,5 +1,3 @@
-const dayjs = require('dayjs');
-
 module.exports = {
     year(date) {
         return date.year();
@@ -17,5 +15,9 @@ module.exports = {
         const week = Math.ceil(date.date() / 7);
 
         return `${this.month(date)}/${week}`;
+    },
+
+    anytime() {
+        return 'anytime';
     }
 };

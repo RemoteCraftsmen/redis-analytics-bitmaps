@@ -5,9 +5,25 @@ const redisClient = require('./RedisClient');
 class RedisService {
     constructor() {
         this.redis = redisClient;
-        ['SETBIT', 'GETBIT', 'BITCOUNT', 'BITOP', 'BITPOS', 'DEL', 'GET', 'SET', 'INCR', 'SADD', 'SMEMBERS'].forEach(
-            method => (this.redis[method] = promisify(this.redis[method]))
-        );
+        [
+            'SETBIT',
+            'GETBIT',
+            'BITCOUNT',
+            'BITOP',
+            'BITPOS',
+            'DEL',
+            'GET',
+            'SET',
+            'INCR',
+            'SADD',
+            'SMEMBERS',
+            'SCARD',
+            'LPUSH',
+            'LRANGE',
+            'ZADD',
+            'ZCARD',
+            'ZCOUNT'
+        ].forEach(method => (this.redis[method] = promisify(this.redis[method])));
     }
 
     storeTrafficPerPage(userId, date, page) {
@@ -113,6 +129,30 @@ class RedisService {
 
     getSetValues(key) {
         return this.redis.SMEMBERS(key);
+    }
+
+    getSetLength(key) {
+        return this.redis.SCARD(key);
+    }
+
+    addToList(key, value) {
+        return this.redis.LPUSH(key, value);
+    }
+
+    getListValues(key) {
+        return this.redis.LRANGE(key, 0, -1);
+    }
+
+    addToSortedSet(key, value, score) {
+        return this.redis.ZADD(key, score, value);
+    }
+
+    getSortedSetLenght(key, { min = null, max = null } = {}) {
+        if (min && max) {
+            return this.redis.ZCOUNT(key, min, max);
+        }
+
+        return this.redis.ZCARD(key);
     }
 
     async generateArrayFromBits(key, itemPrefix) {

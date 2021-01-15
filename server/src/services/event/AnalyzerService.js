@@ -15,6 +15,14 @@ class AnalyzerService {
                 return redisService.getSetValues(key);
             },
 
+            setLength: key => {
+                return redisService.getSetLength(key);
+            },
+
+            list: key => {
+                return redisService.getListValues(key);
+            },
+
             increment: key => {
                 return redisService.get(key).then(value => (value ? parseInt(value) : 0));
             },
