@@ -1,5 +1,6 @@
 const timeSpans = require('./timeSpans');
 const scopes = require('./scopes');
+const resolvers = require('./resolvers');
 
 class AnalyzerService {
     constructor(prefix, redisService) {
@@ -19,7 +20,7 @@ class AnalyzerService {
 
         const scopeName = _scope !== scope ? `:${_scope}` : '';
 
-        return `${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`;
+        return resolvers[resolver ? resolver : type](`${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`);
     }
 }
 
