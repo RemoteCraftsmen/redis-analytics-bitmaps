@@ -1,13 +1,17 @@
 module.exports = {
-    set: async () => {
+    set: async key => {
         return [1, 2, 3];
     },
 
-    increment: async () => {
+    increment: async key => {
         return 5;
     },
 
-    bitmap: async () => {
+    bitmap: async key => {
         return 2;
+    },
+
+    key: key => {
+        return key;
     }
 };
