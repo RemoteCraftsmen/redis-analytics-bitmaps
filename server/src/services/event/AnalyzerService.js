@@ -1,13 +1,14 @@
 const timeSpans = require('./timeSpans');
 const scopes = require('./scopes');
+const { redis } = require('../../config');
 
 const resolvers = {
     set: (key, redisService) => {
-        return [1, 2, 3];
+        return redisService.get(key);
     },
 
     increment: (key, redisService) => {
-        return 5;
+        return redisService.get(key).then(value => (value ? parseInt(value) : 0));
     },
 
     bitmap: (key, redisService) => {
@@ -37,7 +38,10 @@ class AnalyzerService {
 
         const scopeName = _scope !== scope ? `:${_scope}` : '';
 
-        return resolvers[resolver ? resolver : type](`${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`);
+        return resolvers[resolver ? resolver : type](
+            `${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`,
+            this.redisService
+        );
     }
 }
 
