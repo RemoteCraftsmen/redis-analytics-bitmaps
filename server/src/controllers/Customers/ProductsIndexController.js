@@ -2,9 +2,10 @@ const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
 
 class CustomersProductIndexController {
-    constructor(redisService, periodService) {
+    constructor(redisService, periodService, analyzerService) {
         this.redisService = redisService;
         this.periodService = periodService;
+        this.analyzerService = analyzerService;
     }
 
     async invoke(req, res) {

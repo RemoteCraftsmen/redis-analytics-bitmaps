@@ -89,51 +89,25 @@ export default {
     },
 
     methods: {
-        ...mapActions({ fetchTraffic: 'traffic/fetch' }),
+        ...mapActions({ fetchTrend: 'traffic/fetchTrend' }),
 
         async fetchTrafficData(period) {
             this.period = period;
             this.loading = true;
 
-            const periods = {
-                dec_week_1: {
-                    from: '2015-12-01',
-                    to: '2015-12-07'
-                },
-                dec_week_2: {
-                    from: '2015-12-08',
-                    to: '2015-12-14'
-                },
-                dec_week_3: {
-                    from: '2015-12-15',
-                    to: '2015-12-21'
-                },
-                dec_week_4: {
-                    from: '2015-12-22',
-                    to: '2015-12-28'
-                },
-                dec_week_5: {
-                    from: '2015-12-29',
-                    to: '2015-12-31'
-                }
-            };
-
             const filter = {
-                search: ['homepage', 'product1page', 'product2page', 'product3page'],
+                search: ['homepage', 'product1', 'product2', 'product3'],
                 type: 'page',
                 trend: true
             };
 
             if (period) {
-                filter.period = periods[period];
+                filter.period = period;
             }
 
-            const {
-                homepageTraffic: { trend: homepageTrend },
-                product1pageTraffic: { trend: product1pageTrend },
-                product2pageTraffic: { trend: product2pageTrend },
-                product3pageTraffic: { trend: product3pageTrend }
-            } = await this.fetchTraffic({ filter });
+            const { homepageTraffic, product1Traffic, product2Traffic, product3Traffic } = await this.fetchTrend({
+                filter
+            });
 
             this.loading = false;
             this.datasets = [];
@@ -144,13 +118,13 @@ export default {
             const product2pageData = [];
             const product3pageData = [];
 
-            const dates = Object.keys(homepageTrend);
+            const dates = Object.keys(homepageTraffic);
 
             dates.forEach(date => {
-                homepageData.push(homepageTrend[date]);
-                product1pageData.push(product1pageTrend[date]);
-                product2pageData.push(product2pageTrend[date]);
-                product3pageData.push(product3pageTrend[date]);
+                homepageData.push(homepageTraffic[date]);
+                product1pageData.push(product1Traffic[date]);
+                product2pageData.push(product2Traffic[date]);
+                product3pageData.push(product3Traffic[date]);
 
                 this.labels.push(date);
             });

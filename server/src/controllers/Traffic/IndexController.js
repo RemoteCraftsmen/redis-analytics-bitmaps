@@ -2,28 +2,57 @@ const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
 
 class TrafficIndexController {
-    constructor(redisService, periodService) {
+    constructor(redisService, periodService, analyzerService) {
         this.redisService = redisService;
         this.periodService = periodService;
+        this.analyzerService = analyzerService;
     }
 
     async invoke(req, res) {
         const { filter } = req.query;
 
         try {
-            const { period = null, search = null, type = 'source', trend = false } = filter ? JSON.parse(filter) : {};
+            const { period = 'month:2015-12', search = null, type = 'source', trend = false } = filter
+                ? JSON.parse(filter)
+                : {};
 
             if (search && Array.isArray(search)) {
                 const totals = {};
 
                 for (const item of search) {
-                    totals[`${item}Traffic`] = await this._search(period, item, type, trend);
+                    if (type === 'source') {
+                        totals[`${item}Traffic`] = await this.analyzerService.analyze('bitmap', period, 'source', {
+                            args: { source: item }
+                        });
+
+                        continue;
+                    }
+
+                    totals[`${item}Traffic`] = await this.analyzerService.analyze('bitmap', period, 'actionPage', {
+                        args: { action: 'visit', page: item }
+                    });
                 }
 
                 return res.send(totals);
             }
 
-            const totalTraffic = await this._search(period, search, type, trend);
+            if (search && type === 'source') {
+                const totalTraffic = await this.analyzerService.analyze('bitmap', period, 'source', {
+                    args: { source: search }
+                });
+
+                return res.send({ totalTraffic });
+            }
+
+            if (search && type === 'page') {
+                const totalTraffic = await this.analyzerService.analyze('bitmap', period, 'actionPage', {
+                    args: { action: 'visit', page: search }
+                });
+
+                return res.send({ totalTraffic });
+            }
+
+            const totalTraffic = await this.analyzerService.analyze('bitmap', period, 'global');
 
             return res.send({ totalTraffic });
         } catch (err) {
