@@ -32,7 +32,7 @@ class EventService {
                 const scope = scopes[scopesKey](args);
                 const _timeSpan = timeSpan(dayjs(date));
 
-                if (!scope || !_timeSpan || scope === '_custom') {
+                if (!scope || !_timeSpan || scopesKey === 'custom') {
                     return [];
                 }
 
