@@ -78,17 +78,22 @@ class DataStoreController {
         await this.redisService[_action.method](..._action.params);
 
         if (_action.eventServiceParams[2].action === 'buy') {
-            const todaySet = await this.analyzerService.analyze('set', dayjs(date), 'action', {
+            const todayKey = await this.analyzerService.analyze('bitmap', dayjs(date), 'action', {
                 args: { action: 'buy' },
-                timeResolver: 'day'
+                timeResolver: 'day',
+                resolver: 'key'
             });
 
-            const anytimeSet = await this.analyzerService.analyze('set', 'anytime', 'action', {
-                args: { action: 'buy' }
+            const anytimeKey = await this.analyzerService.analyze('bitmap', 'anytime', 'action', {
+                args: { action: 'buy' },
+                resolver: 'key'
             });
 
-            if (!todaySet.includes(userId.toString()) && anytimeSet.includes(userId.toString())) {
-                await this.eventService.storeCustom(userId, date, 'retention');
+            const todayBit = await this.redisService.getBit(todayKey, userId);
+            const anytimeBit = await this.redisService.getBit(anytimeKey, userId);
+
+            if (!todayBit && anytimeBit) {
+                // await this.eventService.storeCustom(userId, date, 'retention');
             }
         }
 
