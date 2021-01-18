@@ -21,24 +21,10 @@ class EventService {
             (prefix, key, userId) => {
                 return this.redisService.addToSet(`${prefix}:set:${key}`, userId);
             }
-
-            // async function (prefix, key, userId, { action }) {
-            //     if (!action || action !== 'buy' || !key.startsWith('global')) {
-            //         return;
-            //     }
-
-            //     const actionCount = await actionService.count(userId, 'buy');
-
-            //     if (actionCount < 2) {
-            //         return;
-            //     }
-
-            //     return redisService.addToSet(`${prefix}:retention:${key}`, userId);
-            // }
         ];
     }
 
-    async store(userId, date, args = {}) {
+    async storeAll(userId, date, args = {}) {
         const keys = Object.keys(timeSpans).flatMap(timeSpansKey => {
             const timeSpan = timeSpans[timeSpansKey].bind(timeSpans);
 
@@ -46,7 +32,7 @@ class EventService {
                 const scope = scopes[scopesKey](args);
                 const _timeSpan = timeSpan(dayjs(date));
 
-                if (!scope || !_timeSpan) {
+                if (!scope || !_timeSpan || scope === '_custom') {
                     return [];
                 }
 
@@ -59,7 +45,25 @@ class EventService {
 
         for (const key of keys) {
             for (const store of this.stores) {
-                await store(this.prefix, key, userId, { ...args, date });
+                await store(this.prefix, key, userId);
+            }
+        }
+    }
+
+    async storeCustom(userId, date, customKey) {
+        const keys = Object.keys(timeSpans).map(timeSpansKey => {
+            const timeSpan = timeSpans[timeSpansKey](dayjs(date));
+            const scope = scopes.custom({ customKey });
+
+            const timeSpanName = timeSpan !== timeSpansKey ? `:${timeSpan}` : '';
+            const scopeName = scope !== 'custom' ? `:${scope}` : '';
+
+            return `custom${scopeName}:${timeSpansKey}${timeSpanName}`;
+        });
+
+        for (const key of keys) {
+            for (const store of this.stores) {
+                await store(this.prefix, key, userId);
             }
         }
     }

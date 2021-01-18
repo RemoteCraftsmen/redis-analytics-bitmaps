@@ -21,5 +21,9 @@ module.exports = {
 
     global: () => {
         return 'global';
+    },
+
+    custom: ({ customKey }) => {
+        return customKey;
     }
 };

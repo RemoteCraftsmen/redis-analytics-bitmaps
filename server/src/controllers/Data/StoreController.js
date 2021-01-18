@@ -1,9 +1,11 @@
+const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
 
 class DataStoreController {
-    constructor(redisService, eventService) {
+    constructor(redisService, eventService, analyzerService) {
         this.redisService = redisService;
         this.eventService = eventService;
+        this.analyzerService = analyzerService;
     }
 
     async invoke(req, res) {
@@ -75,7 +77,22 @@ class DataStoreController {
 
         await this.redisService[_action.method](..._action.params);
 
-        await this.eventService.store(..._action.eventServiceParams);
+        if (_action.eventServiceParams[2].action === 'buy') {
+            const todaySet = await this.analyzerService.analyze('set', dayjs(date), 'action', {
+                args: { action: 'buy' },
+                timeResolver: 'day'
+            });
+
+            const anytimeSet = await this.analyzerService.analyze('set', 'anytime', 'action', {
+                args: { action: 'buy' }
+            });
+
+            if (!todaySet.includes(userId.toString()) && anytimeSet.includes(userId.toString())) {
+                await this.eventService.storeCustom(userId, date, 'retention');
+            }
+        }
+
+        await this.eventService.storeAll(..._action.eventServiceParams);
 
         await this.redisService.storeTrafficPerSource(userId, date, source);
 
