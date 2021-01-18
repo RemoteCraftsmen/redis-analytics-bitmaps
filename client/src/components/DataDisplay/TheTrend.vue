@@ -97,12 +97,34 @@ export default {
 
             const filter = {
                 search: ['homepage', 'product1', 'product2', 'product3'],
-                type: 'page',
-                trend: true
+                type: 'page'
+            };
+
+            const periods = {
+                'weekOfMonth:2015-12/1': {
+                    from: '2015-12-01',
+                    to: '2015-12-07'
+                },
+                'weekOfMonth:2015-12/2': {
+                    from: '2015-12-08',
+                    to: '2015-12-14'
+                },
+                'weekOfMonth:2015-12/3': {
+                    from: '2015-12-15',
+                    to: '2015-12-21'
+                },
+                'weekOfMonth:2015-12/4': {
+                    from: '2015-12-22',
+                    to: '2015-12-28'
+                },
+                'weekOfMonth:2015-12/5': {
+                    from: '2015-12-29',
+                    to: '2015-12-31'
+                }
             };
 
             if (period) {
-                filter.period = period;
+                filter.period = periods[period];
             }
 
             const { homepageTraffic, product1Traffic, product2Traffic, product3Traffic } = await this.fetchTrend({
