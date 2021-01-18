@@ -8,27 +8,25 @@ class AnalyzerService {
     }
 
     get resolvers() {
-        const redisService = this.redisService;
-
         return {
             set: key => {
-                return redisService.getSetValues(key);
+                return this.redisService.getSetValues(key);
             },
 
             setLength: key => {
-                return redisService.getSetLength(key);
+                return this.redisService.getSetLength(key);
             },
 
             list: key => {
-                return redisService.getListValues(key);
+                return this.redisService.getListValues(key);
             },
 
             increment: key => {
-                return redisService.get(key).then(value => (value ? parseInt(value) : 0));
+                return this.redisService.get(key).then(value => (value ? parseInt(value) : 0));
             },
 
             bitmap: key => {
-                return redisService.count(key);
+                return this.redisService.countBit(key);
             },
 
             key: key => {
