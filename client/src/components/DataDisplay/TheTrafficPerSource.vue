@@ -113,28 +113,18 @@ export default {
             this.period = period;
             this.loading = true;
 
-            const filter = { search: ['google', 'facebook', 'email', 'direct', 'referral', 'none'], type: 'source' };
-
-            if (period) {
-                filter.period = period;
-            }
-
-            const {
-                googleTraffic,
-                facebookTraffic,
-                emailTraffic,
-                directTraffic,
-                referralTraffic,
-                noneTraffic
-            } = await this.fetchTraffic({ filter });
+            const data = await this.fetchTraffic({
+                filter: { sources: ['google', 'facebook', 'email', 'direct', 'referral', 'none'] },
+                period
+            });
 
             this.loading = false;
-            this.googleTraffic = googleTraffic;
-            this.facebookTraffic = facebookTraffic;
-            this.emailTraffic = emailTraffic;
-            this.directTraffic = directTraffic;
-            this.referralTraffic = referralTraffic;
-            this.noneTraffic = noneTraffic;
+            this.googleTraffic = data.find(obj => obj.value === 'google').count;
+            this.facebookTraffic = data.find(obj => obj.value === 'facebook').count;
+            this.emailTraffic = data.find(obj => obj.value === 'email').count;
+            this.directTraffic = data.find(obj => obj.value === 'direct').count;
+            this.referralTraffic = data.find(obj => obj.value === 'referral').count;
+            this.noneTraffic = data.find(obj => obj.value === 'none').count;
         }
     }
 };

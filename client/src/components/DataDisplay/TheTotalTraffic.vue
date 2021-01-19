@@ -38,12 +38,10 @@ export default {
             this.period = period;
             this.loading = true;
 
-            const filter = period ? { period } : null;
-
-            const { totalTraffic } = await this.fetchTraffic({ filter });
+            const [totalTraffic] = await this.fetchTraffic({ filter: { total: true }, period });
 
             this.loading = false;
-            this.totalTraffic = totalTraffic;
+            this.totalTraffic = totalTraffic.count;
         }
     }
 };

@@ -65,21 +65,16 @@ export default {
             this.period = period;
             this.loading = true;
 
-            const filter = { search: ['homepage', 'product1', 'product2', 'product3'], type: 'page' };
-
-            if (period) {
-                filter.period = period;
-            }
-
-            const { homepageTraffic, product1Traffic, product2Traffic, product3Traffic } = await this.fetchTraffic({
-                filter
+            const data = await this.fetchTraffic({
+                filter: { pages: ['homepage', 'product1', 'product2', 'product3'] },
+                period
             });
 
             this.loading = false;
-            this.homepageTraffic = homepageTraffic;
-            this.product1pageTraffic = product1Traffic;
-            this.product2pageTraffic = product2Traffic;
-            this.product3pageTraffic = product3Traffic;
+            this.homepageTraffic = data.find(obj => obj.value === 'homepage').count;
+            this.product1pageTraffic = data.find(obj => obj.value === 'product1').count;
+            this.product2pageTraffic = data.find(obj => obj.value === 'product2').count;
+            this.product3pageTraffic = data.find(obj => obj.value === 'product3').count;
         }
     }
 };
