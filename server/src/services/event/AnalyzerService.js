@@ -21,7 +21,7 @@ class AnalyzerService {
                 return this.redisService.getSetValues(key);
 
             case JOIN:
-                return this.redisService.setIntersection(
+                return this.redisService.getSetIntersection(
                     keyGenerator({ ...args.first, prefix: this.prefix, type: SET, timeSpan }),
                     keyGenerator({ ...args.second, prefix: this.prefix, type: SET, timeSpan })
                 );

@@ -157,7 +157,7 @@ class RedisService {
         return this.redis.SCARD(key);
     }
 
-    setIntersection(key1, key2) {
+    getSetIntersection(key1, key2) {
         return this.redis.SINTER(key1, key2);
     }
 }
