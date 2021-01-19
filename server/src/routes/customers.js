@@ -4,6 +4,7 @@ const CustomersProductIndexController = require('../controllers/Customers/Produc
 const PeriodService = require('../services/PeriodService');
 const RedisService = require('../services/RedisService');
 const AnalyzerService = require('../services/event/AnalyzerService');
+const CustomersRetentionShowController = require('../controllers/Customers/RetentionShowController');
 const router = express.Router();
 
 module.exports = app => {
@@ -13,9 +14,11 @@ module.exports = app => {
 
     const cohortShowController = new CustomersCohortShowController(redisService, analyzerService);
     const productIndexController = new CustomersProductIndexController(redisService, periodService, analyzerService);
+    const retentionShowControlelr = new CustomersRetentionShowController(redisService, periodService, analyzerService);
 
     router.get('/cohort', (...args) => cohortShowController.invoke(...args));
     router.get('/products', (...args) => productIndexController.invoke(...args));
+    router.get('/retension', (...args) => retentionShowControlelr.invoke(...args));
 
     return router;
 };
