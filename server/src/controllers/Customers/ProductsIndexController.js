@@ -19,25 +19,29 @@ class CustomersProductIndexController {
             const results = [];
 
             for (const product of products) {
+                const boughtBy = await this.analyzerService
+                    .analyze(SET, period, { action: 'buy', page: product })
+                    .then(usersIds => usersIds.map(userId => `User${parseInt(userId) + 1}`));
+
                 results.push({
                     type: 'product',
                     value: product,
-                    boughtBy: await this.analyzerService
-                        .analyze(SET, period, { action: 'buy', page: product })
-                        .then(usersIds => usersIds.map(userId => `User${parseInt(userId) + 1}`))
+                    boughtBy
                 });
             }
 
             if (firstProduct && secondProduct) {
+                const boughtBy = await this.analyzerService
+                    .analyze(JOIN, period, {
+                        first: { action: 'buy', page: firstProduct },
+                        second: { action: 'buy', page: secondProduct }
+                    })
+                    .then(usersIds => usersIds.map(userId => `User${parseInt(userId) + 1}`));
+
                 results.push({
                     type: 'products_join',
                     value: `${firstProduct}_${secondProduct}`,
-                    boughtBy: await this.analyzerService
-                        .analyze(JOIN, period, {
-                            first: { action: 'buy', page: firstProduct },
-                            second: { action: 'buy', page: secondProduct }
-                        })
-                        .then(usersIds => usersIds.map(userId => `User${parseInt(userId) + 1}`))
+                    boughtBy
                 });
             }
 

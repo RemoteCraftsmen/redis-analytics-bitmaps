@@ -24,26 +24,32 @@ class TrafficIndexController {
             const results = [];
 
             if (total) {
+                const count = await this.analyzerService.analyze(BITMAP, period, { customName: 'global' });
+
                 results.push({
-                    count: await this.analyzerService.analyze(BITMAP, period, { customName: 'global' }),
+                    count,
                     type: 'total'
                 });
             }
 
             for (const source of sources) {
+                const count = await this.analyzerService.analyze(BITMAP, period, { source });
+
                 results.push({
-                    count: await this.analyzerService.analyze(BITMAP, period, { source }),
+                    count,
                     type: 'source',
                     value: source
                 });
             }
 
             for (const page of pages) {
+                const count = await this.analyzerService.analyze(BITMAP, period, {
+                    action: 'visit',
+                    page
+                });
+
                 results.push({
-                    count: await this.analyzerService.analyze(BITMAP, period, {
-                        action: 'visit',
-                        page
-                    }),
+                    count,
                     type: 'page',
                     value: page
                 });

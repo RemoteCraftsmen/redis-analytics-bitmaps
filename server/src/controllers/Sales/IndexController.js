@@ -20,22 +20,29 @@ class SalesIndexController {
             const results = [];
 
             if (total) {
+                const addedToCart = await this.analyzerService.analyze(COUNT, period, { action: 'addToCart' });
+                const bought = await this.analyzerService.analyze(COUNT, period, { action: 'buy' });
+
                 results.push({
                     type: 'total',
-                    addedToCart: await this.analyzerService.analyze(COUNT, period, { action: 'addToCart' }),
-                    bought: await this.analyzerService.analyze(COUNT, period, { action: 'buy' })
+                    addedToCart,
+                    bought
                 });
             }
 
             for (const product of products) {
+                const addedToCart = await this.analyzerService.analyze(COUNT, period, {
+                    action: 'addToCart',
+                    page: product
+                });
+
+                const bought = await this.analyzerService.analyze(COUNT, period, { action: 'buy', page: product });
+
                 results.push({
                     type: 'product',
                     value: product,
-                    addedToCart: await this.analyzerService.analyze(COUNT, period, {
-                        action: 'addToCart',
-                        page: product
-                    }),
-                    bought: await this.analyzerService.analyze(COUNT, period, { action: 'buy', page: product })
+                    addedToCart,
+                    bought
                 });
             }
 

@@ -32,10 +32,12 @@ class TrafficTrendIndexController {
                 const _date = date.format('YYYY-MM-DD');
 
                 for (const source of sources) {
+                    const count = await this.analyzerService.analyze(BITMAP, _date, {
+                        source
+                    });
+
                     results.push({
-                        count: await this.analyzerService.analyze(BITMAP, _date, {
-                            source
-                        }),
+                        count,
                         date: _date,
                         type: 'source',
                         value: source
@@ -43,11 +45,13 @@ class TrafficTrendIndexController {
                 }
 
                 for (const page of pages) {
+                    const count = await this.analyzerService.analyze(BITMAP, _date, {
+                        action: 'visit',
+                        page
+                    });
+
                     results.push({
-                        count: await this.analyzerService.analyze(BITMAP, _date, {
-                            action: 'visit',
-                            page
-                        }),
+                        count,
                         date: _date,
                         type: 'page',
                         value: page
