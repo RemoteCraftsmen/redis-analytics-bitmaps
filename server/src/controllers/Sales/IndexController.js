@@ -1,5 +1,6 @@
 const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
+const { COUNT } = require('../../services/event/types');
 
 class SalesIndexController {
     constructor(redisService, periodService, analyzerService) {
@@ -9,18 +10,35 @@ class SalesIndexController {
     }
 
     async invoke(req, res) {
-        const { filter } = req.query;
+        const { filter, period = '2015-12' } = req.query;
 
         try {
-            const { period = null, search = null } = filter ? JSON.parse(filter) : {};
+            const { products = [], total = false } = filter
+                ? JSON.parse(filter)
+                : { products: ['product1', 'product2', 'product3'], total: true };
 
-            const productsAddedToCart = await this._search(period, 'product_added_to_cart', search);
-            const productsBought = await this._search(period, 'product_bought', search);
+            const results = [];
 
-            return res.send({
-                productsAddedToCart,
-                productsBought
-            });
+            if (total) {
+                results.push({
+                    type: 'total',
+                    addedToCart: await this.analyzerService.analyze(COUNT, period, { action: 'addToCart' }),
+                    bought: await this.analyzerService.analyze(COUNT, period, { action: 'buy' })
+                });
+            }
+
+            for (const product of products) {
+                results.push({
+                    type: product,
+                    addedToCart: await this.analyzerService.analyze(COUNT, period, {
+                        action: 'addToCart',
+                        page: product
+                    }),
+                    bought: await this.analyzerService.analyze(COUNT, period, { action: 'buy', page: product })
+                });
+            }
+
+            return res.send(results);
         } catch (err) {
             if (err instanceof SyntaxError) {
                 return res.sendStatus(StatusCodes.BAD_REQUEST);
