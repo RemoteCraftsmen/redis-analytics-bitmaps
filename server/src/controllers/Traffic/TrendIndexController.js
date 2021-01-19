@@ -3,8 +3,7 @@ const dayjs = require('dayjs');
 const { BITMAP } = require('../../services/event/types');
 
 class TrafficTrendIndexController {
-    constructor(redisService, periodService, analyzerService) {
-        this.redisService = redisService;
+    constructor(periodService, analyzerService) {
         this.periodService = periodService;
         this.analyzerService = analyzerService;
     }

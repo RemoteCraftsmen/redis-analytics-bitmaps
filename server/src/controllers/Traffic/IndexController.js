@@ -1,11 +1,8 @@
-const dayjs = require('dayjs');
 const { StatusCodes } = require('http-status-codes');
 const { BITMAP } = require('../../services/event/types');
 
 class TrafficIndexController {
-    constructor(redisService, periodService, analyzerService) {
-        this.redisService = redisService;
-        this.periodService = periodService;
+    constructor(analyzerService) {
         this.analyzerService = analyzerService;
     }
 

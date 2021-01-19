@@ -2,9 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const { SET, JOIN } = require('../../services/event/types');
 
 class CustomersProductIndexController {
-    constructor(redisService, periodService, analyzerService) {
-        this.redisService = redisService;
-        this.periodService = periodService;
+    constructor(analyzerService) {
         this.analyzerService = analyzerService;
     }
 
