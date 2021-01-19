@@ -1,5 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const dayjs = require('dayjs');
+const { BITMAP } = require('../../services/event/types');
 
 class TrafficTrendIndexController {
     constructor(redisService, periodService, analyzerService) {
@@ -9,65 +10,52 @@ class TrafficTrendIndexController {
     }
 
     async invoke(req, res) {
-        const { filter } = req.query;
+        const { filter, period } = req.query;
 
         try {
-            const { period = null, search = null, type = 'source' } = filter ? JSON.parse(filter) : {};
+            const { sources = [], pages = [] } = filter
+                ? JSON.parse(filter)
+                : {
+                      sources: ['facebook', 'google', 'direct', 'email', 'referral', 'none'],
+                      pages: ['homepage', 'product1', 'product2', 'product3']
+                  };
 
-            const dates =
-                period && typeof period === 'object' && period.from && period.to
-                    ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [dayjs(period.from)])
-                    : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [
-                          dayjs('2015-12-01')
-                      ]);
+            const { from = '2015-12-01', to = '2015-12-31' } = period
+                ? JSON.parse(period)
+                : { from: '2015-12-01', to: '2015-12-31' };
 
-            if (search && Array.isArray(search)) {
-                const results = {};
+            const dates = this.periodService.getRangeOfDates(dayjs(from), to, 'day', [dayjs(from)]);
 
-                for (const item of search) {
-                    results[`${item}Traffic`] = {};
-
-                    if (type === 'source') {
-                        for (const date of dates) {
-                            results[`${item}Traffic`][date.format('YYYY-MM-DD')] = await this.analyzerService.analyze(
-                                'bitmap',
-                                `day:${date.format('YYYY-MM-DD')}`,
-                                'source',
-                                {
-                                    args: { source: item }
-                                }
-                            );
-                        }
-
-                        continue;
-                    }
-
-                    for (const date of dates) {
-                        results[`${item}Traffic`][date.format('YYYY-MM-DD')] = await this.analyzerService.analyze(
-                            'bitmap',
-                            `day:${date.format('YYYY-MM-DD')}`,
-                            'actionPage',
-                            {
-                                args: { action: 'visit', page: item }
-                            }
-                        );
-                    }
-                }
-
-                return res.send(results);
-            }
-
-            const results = {};
+            const results = [];
 
             for (const date of dates) {
-                results[date.format('YYYY-MM-DD')] = await this.analyzerService.analyze(
-                    'bitmap',
-                    `day:${date.format('YYYY-MM-DD')}`,
-                    'global'
-                );
+                const _date = date.format('YYYY-MM-DD');
+
+                for (const source of sources) {
+                    results.push({
+                        count: await this.analyzerService.analyze(BITMAP, _date, {
+                            source
+                        }),
+                        date: _date,
+                        type: 'source',
+                        value: source
+                    });
+                }
+
+                for (const page of pages) {
+                    results.push({
+                        count: await this.analyzerService.analyze(BITMAP, _date, {
+                            action: 'visit',
+                            page
+                        }),
+                        date: _date,
+                        type: 'page',
+                        value: page
+                    });
+                }
             }
 
-            return res.send({ results });
+            return res.send(results);
         } catch (err) {
             if (err instanceof SyntaxError) {
                 return res.sendStatus(StatusCodes.BAD_REQUEST);
