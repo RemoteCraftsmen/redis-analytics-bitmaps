@@ -29,7 +29,8 @@ class SalesIndexController {
 
             for (const product of products) {
                 results.push({
-                    type: product,
+                    type: 'product',
+                    value: product,
                     addedToCart: await this.analyzerService.analyze(COUNT, period, {
                         action: 'addToCart',
                         page: product

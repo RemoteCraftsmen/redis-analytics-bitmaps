@@ -20,7 +20,8 @@ class CustomersProductIndexController {
 
             for (const product of products) {
                 results.push({
-                    type: product,
+                    type: 'product',
+                    value: product,
                     boughtBy: await this.analyzerService
                         .analyze(SET, period, { action: 'buy', page: product })
                         .then(usersIds => usersIds.map(userId => `User${parseInt(userId) + 1}`))
@@ -29,7 +30,8 @@ class CustomersProductIndexController {
 
             if (firstProduct && secondProduct) {
                 results.push({
-                    type: `${firstProduct}_${secondProduct}`,
+                    type: 'products_join',
+                    value: `${firstProduct}_${secondProduct}`,
                     boughtBy: await this.analyzerService
                         .analyze(JOIN, period, {
                             first: { action: 'buy', page: firstProduct },
