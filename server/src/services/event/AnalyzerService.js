@@ -1,5 +1,5 @@
-const timeSpans = require('./timeSpans');
-const scopes = require('./scopes');
+const keyGenerator = require('./keyGenerator');
+const { BITMAP, COUNT, SET } = require('./types');
 
 class AnalyzerService {
     constructor(prefix, redisService) {
@@ -7,49 +7,19 @@ class AnalyzerService {
         this.redisService = redisService;
     }
 
-    get resolvers() {
-        const redisService = this.redisService;
+    async analyze(type, timeSpan, args) {
+        const key = keyGenerator({ prefix: this.prefix, type, timeSpan, ...args });
 
-        return {
-            set: key => {
-                return redisService.getSetValues(key);
-            },
+        switch (type) {
+            case BITMAP:
+                return this.redisService.countBit(key);
 
-            setLength: key => {
-                return redisService.getSetLength(key);
-            },
+            case COUNT:
+                return this.redisService.get(key).then(value => (value ? parseInt(value) : 0));
 
-            list: key => {
-                return redisService.getListValues(key);
-            },
-
-            increment: key => {
-                return redisService.get(key).then(value => (value ? parseInt(value) : 0));
-            },
-
-            bitmap: key => {
-                return redisService.count(key);
-            },
-
-            key: key => {
-                return key;
-            }
-        };
-    }
-
-    async analyze(type, timeSpan, scope, { args = {}, timeResolver = null, resolver = null } = {}) {
-        const _timeSpan =
-            typeof timeSpan === 'object' ? `${timeResolver}:${timeSpans[timeResolver](timeSpan)}` : timeSpan;
-
-        const _scope = scopes[scope](args);
-
-        if (!_scope) {
-            return;
+            case SET:
+                return this.redisService.getSetValues(key);
         }
-
-        const scopeName = _scope !== scope ? `:${_scope}` : '';
-
-        return this.resolvers[resolver ? resolver : type](`${this.prefix}:${type}:${scope}${scopeName}:${_timeSpan}`);
     }
 }
 
