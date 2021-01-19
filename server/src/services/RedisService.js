@@ -5,9 +5,20 @@ const redisClient = require('./RedisClient');
 class RedisService {
     constructor() {
         this.redis = redisClient;
-        ['SETBIT', 'GETBIT', 'BITCOUNT', 'DEL', 'GET', 'SET', 'INCR', 'SADD', 'SMEMBERS', 'SCARD', 'SINTER'].forEach(
-            method => (this.redis[method] = promisify(this.redis[method]))
-        );
+        [
+            'SETBIT',
+            'GETBIT',
+            'BITCOUNT',
+            'DEL',
+            'GET',
+            'SET',
+            'INCR',
+            'SADD',
+            'SMEMBERS',
+            'SCARD',
+            'SINTER',
+            'FLUSHALL'
+        ].forEach(method => (this.redis[method] = promisify(this.redis[method])));
     }
 
     delete(key) {
@@ -56,6 +67,10 @@ class RedisService {
 
     getSetIntersection(key1, key2) {
         return this.redis.SINTER(key1, key2);
+    }
+
+    flush() {
+        return this.redis.FLUSHALL();
     }
 }
 
