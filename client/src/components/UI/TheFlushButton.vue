@@ -5,11 +5,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
     methods: {
         ...mapActions({ flush: 'admin/flush' }),
+        ...mapMutations({ negateRefreshSignal: 'data/NEGATE_REFRESH_SIGNAL' }),
 
         async handleFlush() {
             if (!window.confirm('Are you sure, you want to flush redis? It cannot be undone.')) {
@@ -17,6 +18,8 @@ export default {
             }
 
             await this.flush();
+
+            this.negateRefreshSignal();
 
             this.$notify({
                 group: 'main',

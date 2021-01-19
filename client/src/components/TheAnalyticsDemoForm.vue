@@ -38,7 +38,7 @@
 
 <script>
 import dayjs from 'dayjs';
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
     props: {
@@ -106,9 +106,12 @@ export default {
 
     methods: {
         ...mapActions({ saveData: 'data/save' }),
+        ...mapMutations({ negateRefreshSignal: 'data/NEGATE_REFRESH_SIGNAL' }),
 
         async submitForm() {
             await this.saveData(this.form);
+
+            this.negateRefreshSignal();
 
             this.$notify({
                 group: 'main',
