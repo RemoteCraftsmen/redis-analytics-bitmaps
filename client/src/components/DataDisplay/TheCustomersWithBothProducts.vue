@@ -37,10 +37,13 @@ export default {
         async fetchProductsData() {
             this.loading = true;
 
-            const { product1and2 } = await this.fetchProducts({ filter: { search: ['product1and2'] } });
+            const [product1and2] = await this.fetchProducts({
+                filter: { products: [] },
+                join: JSON.stringify(['product1', 'product2'])
+            });
 
             this.loading = false;
-            this.customers = product1and2;
+            this.customers = product1and2.boughtBy;
         }
     }
 };
