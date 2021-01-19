@@ -41,7 +41,7 @@ export default {
         async fetchProductsData() {
             this.loading = true;
 
-            const data = await this.fetchRetention();
+            const data = await this.fetchRetention({ period: 'anytime' });
 
             this.loading = false;
             this.customers = data;

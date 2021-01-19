@@ -8,8 +8,10 @@ class CustomersRetentionShowController {
     }
 
     async invoke(req, res) {
+        const { period = '2015-12' } = req.query;
+
         const users = await this.analyzerService
-            .analyze(SET, 'anytime', { customName: 'retention-buy' })
+            .analyze(SET, period, { customName: 'retention-buy' })
             .then(usersIds => usersIds.map(userId => `User${parseInt(userId) + 1}`));
 
         return res.send(users);

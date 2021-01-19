@@ -39,7 +39,8 @@ export default {
 
             const [product1and2] = await this.fetchProducts({
                 filter: { products: [] },
-                join: JSON.stringify(['product1', 'product2'])
+                join: JSON.stringify(['product1', 'product2']),
+                period: 'anytime'
             });
 
             this.loading = false;
