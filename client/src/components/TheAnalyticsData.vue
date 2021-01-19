@@ -64,7 +64,7 @@
             </v-col>
         </v-row>
 
-        <!-- <v-row>
+        <v-row>
             <v-col cols="12">
                 <h2>Customer and Cohort Analysis</h2>
             </v-col>
@@ -74,8 +74,9 @@
             <v-col cols="12" lg="6">
                 <the-cohort />
             </v-col>
+        </v-row>
 
-            <v-col cols="12" lg="6">
+        <!-- <v-col cols="12" lg="6">
                 <the-customers-per-product />
             </v-col>
         </v-row>
@@ -102,8 +103,8 @@ export default {
         theTrend: () => import('@/components/DataDisplay/TheTrend'),
         theTotalProductsBought: () => import('@/components/DataDisplay/TheTotalProductsBought'),
         theAbandonedCart: () => import('@/components/DataDisplay/TheAbandonedCart'),
-        theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought')
-        // theCohort: () => import('@/components/DataDisplay/TheCohort'),
+        theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought'),
+        theCohort: () => import('@/components/DataDisplay/TheCohort')
         // theCustomersPerProduct: () => import('@/components/DataDisplay/TheCustomersPerProduct'),
         // theCustomersWithBothProducts: () => import('@/components/DataDisplay/TheCustomersWithBothProducts'),
         // theCustomerRetention: () => import('@/components/DataDisplay/TheCustomerRetention')
