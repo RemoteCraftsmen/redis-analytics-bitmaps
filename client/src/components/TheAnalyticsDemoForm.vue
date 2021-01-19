@@ -109,6 +109,15 @@ export default {
 
         async submitForm() {
             await this.saveData(this.form);
+
+            this.$notify({
+                group: 'main',
+                title: 'Form',
+                text: 'Data updated!',
+                type: 'success',
+                duration: 400,
+                speed: 400
+            });
         }
     }
 };

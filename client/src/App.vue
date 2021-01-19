@@ -10,7 +10,10 @@
             </p>
 
             <the-flush-button />
+
             <router-view />
+
+            <notifications group="main" position="bottom center" />
         </v-main>
     </v-app>
 </template>

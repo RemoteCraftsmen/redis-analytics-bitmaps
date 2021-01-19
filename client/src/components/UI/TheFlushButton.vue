@@ -17,6 +17,15 @@ export default {
             }
 
             await this.flush();
+
+            this.$notify({
+                group: 'main',
+                title: 'Redis',
+                text: 'Redis flushed!',
+                type: 'success',
+                duration: 400,
+                speed: 400
+            });
         }
     }
 };
