@@ -1,32 +1,24 @@
 const dayjs = require('dayjs');
 const keyGenerator = require('./keyGenerator');
-const TimeSpanService = require('./TimeSpanService');
-const timeSpanService = new TimeSpanService();
+const { BITMAP, COUNT, SET } = require('./types');
 
 class EventService {
-    static BITMAP = 'bitmap';
-    static SET = 'set';
-    static COUNT = 'count';
-
-    constructor(prefix, redisService) {
+    constructor(prefix, redisService, timeSpanService) {
         this.prefix = prefix;
         this.redisService = redisService;
+        this.timeSpanService = timeSpanService;
     }
 
-    get stores() {
-        return {
-            storeBitmap: (key, userId) => {
-                return this.redisService.setBit(key, userId, 1);
-            },
+    storeBitmap(key, userId) {
+        return this.redisService.setBit(key, userId, 1);
+    }
 
-            storeCount: key => {
-                return this.redisService.increment(key);
-            },
+    storeCount(key) {
+        return this.redisService.increment(key);
+    }
 
-            storeSet: (key, userId) => {
-                return this.redisService.addToSet(key, userId);
-            }
-        };
+    storeSet(key, userId) {
+        return this.redisService.addToSet(key, userId);
     }
 
     get scopes() {
@@ -47,6 +39,10 @@ class EventService {
                 return { action, page };
             },
 
+            ({ userId, action }) => {
+                return { userId, action };
+            },
+
             () => {
                 return { customName: 'global' };
             }
@@ -54,52 +50,41 @@ class EventService {
     }
 
     async storeAll(userId, date, args = {}) {
-        const timeSpans = timeSpanService.all(dayjs(date));
-
-        const keys = { bitmap: [], count: [], set: [] };
+        const timeSpans = this.timeSpanService.all(dayjs(date));
 
         for (const timeSpan of timeSpans) {
             for (const scope of this.scopes) {
-                keys.bitmap.push(
-                    keyGenerator({ prefix: this.prefix, type: EventService.BITMAP, timeSpan, ...scope(args) })
+                const scopedArgs = scope({ ...args, userId });
+
+                await this.storeCount(keyGenerator({ prefix: this.prefix, type: COUNT, timeSpan, ...scopedArgs }));
+
+                if (scopedArgs.hasOwnProperty('userId')) {
+                    continue;
+                }
+
+                await this.storeBitmap(
+                    keyGenerator({ prefix: this.prefix, type: BITMAP, timeSpan, ...scopedArgs }),
+                    userId
                 );
-                keys.count.push(
-                    keyGenerator({ prefix: this.prefix, type: EventService.COUNT, timeSpan, ...scope(args) })
-                );
-                keys.set.push(keyGenerator({ prefix: this.prefix, type: EventService.SET, timeSpan, ...scope(args) }));
+
+                await this.storeSet(keyGenerator({ prefix: this.prefix, type: SET, timeSpan, ...scopedArgs }), userId);
             }
-        }
-
-        const { storeBitmap, storeCount, storeSet } = this.stores;
-
-        for (const key of keys.bitmap) {
-            await storeBitmap(key, userId);
-        }
-
-        for (const key of keys.count) {
-            await storeCount(key);
-        }
-
-        for (const key of keys.set) {
-            await storeSet(key, userId);
         }
     }
 
     async store(type, customName, userId, timeSpans = []) {
-        const { storeBitmap, storeCount, storeSet } = this.stores;
-
         for (const timeSpan of timeSpans) {
             const key = keyGenerator({ prefix: this.prefix, type, customName, timeSpan });
 
             switch (type) {
-                case EventService.BITMAP:
-                    await storeBitmap(key, userId);
+                case BITMAP:
+                    await this.storeBitmap(key, userId);
                     break;
-                case EventService.COUNT:
-                    await storeCount(key);
+                case COUNT:
+                    await this.storeCount(key);
                     break;
-                case EventService.SET:
-                    await storeSet(key, userId);
+                case SET:
+                    await this.storeSet(key, userId);
                     break;
             }
         }

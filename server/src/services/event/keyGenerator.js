@@ -1,4 +1,4 @@
-module.exports = ({ prefix, type, customName, source, action, page, timeSpan }) => {
+module.exports = ({ prefix = 'analytics', type, customName, userId, source, action, page, timeSpan }) => {
     let key = '';
 
     if (prefix) {
@@ -11,6 +11,10 @@ module.exports = ({ prefix, type, customName, source, action, page, timeSpan }) 
 
     if (customName) {
         key += `:custom:${customName}`;
+    }
+
+    if (userId) {
+        key += `:user:${userId}`;
     }
 
     if (source) {

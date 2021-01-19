@@ -1,5 +1,5 @@
 const keyGenerator = require('./keyGenerator');
-const EventService = require('./EventService');
+const { BITMAP, COUNT, SET } = require('./types');
 
 class AnalyzerService {
     constructor(prefix, redisService) {
@@ -11,13 +11,13 @@ class AnalyzerService {
         const key = keyGenerator({ prefix: this.prefix, type, timeSpan, ...args });
 
         switch (type) {
-            case EventService.BITMAP:
+            case BITMAP:
                 return this.redisService.countBit(key);
 
-            case EventService.COUNT:
+            case COUNT:
                 return this.redisService.get(key).then(value => (value ? parseInt(value) : 0));
 
-            case EventService.SET:
+            case SET:
                 return this.redisService.getSetValues(key);
         }
     }
