@@ -49,39 +49,6 @@ class SalesIndexController {
             return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
         }
     }
-
-    async _search(period, prefix, search) {
-        const dates =
-            period && typeof period === 'object' && period.from && period.to
-                ? this.periodService.getRangeOfDates(dayjs(period.from), period.to, 'day', [dayjs(period.from)])
-                : this.periodService.getRangeOfDates(dayjs('2015-12-01'), '2015-12-31', 'day', [dayjs('2015-12-01')]);
-
-        if (search && typeof search === 'object' && Array.isArray(search)) {
-            const results = {};
-
-            for (const [index, productId] of search.entries()) {
-                results[`product${index + 1}`] = await this._search(period, prefix, productId);
-            }
-
-            return results;
-        }
-
-        const productsIds = search ? [search] : [1, 2, 3];
-
-        const keys = [];
-
-        productsIds.forEach(productId => {
-            const _key = `${prefix}:${productId}`;
-
-            dates.forEach(date => keys.push(`${_key}:${date.format('YYYY-MM-DD')}`));
-        });
-
-        if (keys.length === 0) {
-            return 0;
-        }
-
-        return this.redisService.calculateSum(keys);
-    }
 }
 
 module.exports = SalesIndexController;
