@@ -18,7 +18,7 @@ module.exports = app => {
 
     router.get('/cohort', (...args) => cohortShowController.invoke(...args));
     router.get('/products', (...args) => productIndexController.invoke(...args));
-    router.get('/retension', (...args) => retentionShowControlelr.invoke(...args));
+    router.get('/retention', (...args) => retentionShowControlelr.invoke(...args));
 
     return router;
 };

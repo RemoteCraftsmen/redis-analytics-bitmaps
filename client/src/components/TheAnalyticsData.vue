@@ -84,12 +84,11 @@
             <v-col cols="12" lg="6">
                 <the-customers-with-both-products />
             </v-col>
-        </v-row>
-        <!-- <v-col cols="12" lg="6">
+
+            <v-col cols="12" lg="6">
                 <the-customer-retention />
             </v-col>
         </v-row>
-        -->
     </div>
 </template>
 
@@ -105,8 +104,8 @@ export default {
         theShareOfProductsBought: () => import('@/components/DataDisplay/TheShareOfProductsBought'),
         theCohort: () => import('@/components/DataDisplay/TheCohort'),
         theCustomersPerProduct: () => import('@/components/DataDisplay/TheCustomersPerProduct'),
-        theCustomersWithBothProducts: () => import('@/components/DataDisplay/TheCustomersWithBothProducts')
-        // theCustomerRetention: () => import('@/components/DataDisplay/TheCustomerRetention')
+        theCustomersWithBothProducts: () => import('@/components/DataDisplay/TheCustomersWithBothProducts'),
+        theCustomerRetention: () => import('@/components/DataDisplay/TheCustomerRetention')
     }
 };
 </script>
