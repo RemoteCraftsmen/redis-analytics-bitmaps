@@ -30,6 +30,7 @@
         "getenv": "^1.0.0",
         "helmet": "^4.3.1",
         "http-status-codes": "^2.1.4",
+        "node-dependency-injection": "^2.6.8",
         "redis": "^3.0.2"
     },
     "devDependencies": {

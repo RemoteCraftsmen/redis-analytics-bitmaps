@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const di = require('./di');
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 
 require('./plugins/dayjs')();
 
-const router = require('./routes')(app);
+const router = require('./routes')(di);
 
 app.use('/', express.static(path.join(__dirname, '../dist')));
 

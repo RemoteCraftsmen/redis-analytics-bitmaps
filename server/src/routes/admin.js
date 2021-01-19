@@ -1,10 +1,8 @@
 const express = require('express');
-const AdminClearRedisController = require('../controllers/Admin/ClearRedisController');
-const RedisService = require('../services/RedisService');
 const router = express.Router();
 
-module.exports = app => {
-    const clearRedisController = new AdminClearRedisController(new RedisService());
+module.exports = di => {
+    const clearRedisController = di.get('controllers.admin.clearRedis');
 
     router.delete('/flush', (...args) => clearRedisController.invoke(...args));
 

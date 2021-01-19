@@ -1,21 +1,14 @@
 const express = require('express');
-const CustomersCohortShowController = require('../controllers/Customers/CohortShowController');
-const CustomersProductIndexController = require('../controllers/Customers/ProductsIndexController');
-const RedisService = require('../services/RedisService');
-const AnalyzerService = require('../services/event/AnalyzerService');
-const CustomersRetentionShowController = require('../controllers/Customers/RetentionShowController');
 const router = express.Router();
 
-module.exports = app => {
-    const analyzerService = new AnalyzerService('analytics', new RedisService());
-
-    const cohortShowController = new CustomersCohortShowController(analyzerService);
-    const productIndexController = new CustomersProductIndexController(analyzerService);
-    const retentionShowControlelr = new CustomersRetentionShowController(analyzerService);
+module.exports = di => {
+    const cohortShowController = di.get('controllers.customers.cohort.showController');
+    const productsIndexController = di.get('controllers.customers.products.indexController');
+    const retentionShowController = di.get('controllers.customers.retention.showController');
 
     router.get('/cohort', (...args) => cohortShowController.invoke(...args));
-    router.get('/products', (...args) => productIndexController.invoke(...args));
-    router.get('/retention', (...args) => retentionShowControlelr.invoke(...args));
+    router.get('/products', (...args) => productsIndexController.invoke(...args));
+    router.get('/retention', (...args) => retentionShowController.invoke(...args));
 
     return router;
 };
