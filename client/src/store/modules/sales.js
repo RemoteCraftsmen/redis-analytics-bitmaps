@@ -1,25 +1,25 @@
-import axios from '@/plugins/axios';
+// import axios from '@/plugins/axios';
 
-const namespaced = true;
+// const namespaced = true;
 
-const state = () => ({});
+// const state = () => ({});
 
-const getters = {};
+// const getters = {};
 
-const mutations = {};
+// const mutations = {};
 
-const actions = {
-    async fetch(vuexContext, params) {
-        const { data } = await axios.get('/api/sales', { params });
+// const actions = {
+//     async fetch(vuexContext, params) {
+//         const { data } = await axios.get('/api/sales', { params });
 
-        return data;
-    }
-};
+//         return data;
+//     }
+// };
 
-export default {
-    namespaced,
-    state,
-    getters,
-    mutations,
-    actions
-};
+// export default {
+//     namespaced,
+//     state,
+//     getters,
+//     mutations,
+//     actions
+// };

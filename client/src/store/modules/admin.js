@@ -1,23 +1,23 @@
-import axios from '@/plugins/axios';
+// import axios from '@/plugins/axios';
 
-const namespaced = true;
+// const namespaced = true;
 
-const state = () => ({});
+// const state = () => ({});
 
-const getters = {};
+// const getters = {};
 
-const mutations = {};
+// const mutations = {};
 
-const actions = {
-    async flush() {
-        await axios.delete('/api/flush');
-    }
-};
+// const actions = {
+//     async flush() {
+//         await axios.delete('/api/flush');
+//     }
+// };
 
-export default {
-    namespaced,
-    state,
-    getters,
-    mutations,
-    actions
-};
+// export default {
+//     namespaced,
+//     state,
+//     getters,
+//     mutations,
+//     actions
+// };

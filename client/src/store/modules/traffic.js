@@ -1,31 +1,31 @@
-import axios from '@/plugins/axios';
+// import axios from '@/plugins/axios';
 
-const namespaced = true;
+// const namespaced = true;
 
-const state = () => ({});
+// const state = () => ({});
 
-const getters = {};
+// const getters = {};
 
-const mutations = {};
+// const mutations = {};
 
-const actions = {
-    async fetch(vuexContext, params) {
-        const { data } = await axios.get('/api/traffic', { params });
+// const actions = {
+//     async fetch(vuexContext, params) {
+//         const { data } = await axios.get('/api/traffic', { params });
 
-        return data;
-    },
+//         return data;
+//     },
 
-    async fetchTrend(vuexContext, params) {
-        const { data } = await axios.get('/api/traffic/trend', { params });
+//     async fetchTrend(vuexContext, params) {
+//         const { data } = await axios.get('/api/traffic/trend', { params });
 
-        return data;
-    }
-};
+//         return data;
+//     }
+// };
 
-export default {
-    namespaced,
-    state,
-    getters,
-    mutations,
-    actions
-};
+// export default {
+//     namespaced,
+//     state,
+//     getters,
+//     mutations,
+//     actions
+// };
