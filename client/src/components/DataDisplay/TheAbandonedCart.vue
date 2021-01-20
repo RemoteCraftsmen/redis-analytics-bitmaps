@@ -9,9 +9,7 @@
         </v-card-actions>
 
         <v-card-text>
-            <div style="position: relative; width: 90%; margin: auto">
-                <base-pie-chart :chart-data="chartData" />
-            </div>
+            <base-pie-chart :chart-data="chartData" />
         </v-card-text>
     </v-card>
 </template>
