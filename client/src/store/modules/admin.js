@@ -10,7 +10,7 @@ const mutations = {};
 
 const actions = {
     async flush() {
-        await axios.delete('/api/admin/flush');
+        await axios.delete('/api/flush');
     }
 };
 

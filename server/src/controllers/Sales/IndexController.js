@@ -9,9 +9,9 @@ class SalesIndexController {
     async invoke(req, res) {
         const { filter, period = '2015-12' } = req.query;
 
-        const { products = [], total = false } = filter
-            ? JSON.parse(filter)
-            : { products: ['product1', 'product2', 'product3'], total: true };
+        const defaultFilter = { products: ['product1', 'product2', 'product3'], total: true };
+
+        const { products = [], total = false } = filter ? JSON.parse(filter) : defaultFilter;
 
         const results = [];
 

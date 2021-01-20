@@ -13,10 +13,6 @@ export default {
         ...mapMutations({ negateRefreshSignal: 'data/NEGATE_REFRESH_SIGNAL' }),
 
         async handleFlush() {
-            if (!window.confirm('Are you sure, you want to flush redis? It cannot be undone.')) {
-                return;
-            }
-
             await this.flush();
 
             this.negateRefreshSignal();
@@ -37,11 +33,18 @@ export default {
 <style scoped>
 .btn {
     position: fixed;
-    top: 90%;
+    top: 94%;
     left: 1%;
 }
 
 @media screen and (max-width: 1263px) {
+    .btn {
+        position: static;
+        padding: 1%;
+    }
+}
+
+@media screen and (max-height: 657px) {
     .btn {
         position: static;
         padding: 1%;

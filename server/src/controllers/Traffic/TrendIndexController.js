@@ -11,12 +11,12 @@ class TrafficTrendIndexController {
     async invoke(req, res) {
         const { filter, period } = req.query;
 
-        const { sources = [], pages = [] } = filter
-            ? JSON.parse(filter)
-            : {
-                  sources: ['facebook', 'google', 'direct', 'email', 'referral', 'none'],
-                  pages: ['homepage', 'product1', 'product2', 'product3']
-              };
+        const defaultFilter = {
+            sources: ['facebook', 'google', 'direct', 'email', 'referral', 'none'],
+            pages: ['homepage', 'product1', 'product2', 'product3']
+        };
+
+        const { sources = [], pages = [] } = filter ? JSON.parse(filter) : defaultFilter;
 
         const { from = '2015-12-01', to = '2015-12-31' } = period
             ? JSON.parse(period)
@@ -27,30 +27,30 @@ class TrafficTrendIndexController {
         const results = [];
 
         for (const date of dates) {
-            const _date = date.format('YYYY-MM-DD');
+            const dateFormatted = date.format('YYYY-MM-DD');
 
             for (const source of sources) {
-                const count = await this.analyzerService.analyze(BITMAP, _date, {
+                const count = await this.analyzerService.analyze(BITMAP, dateFormatted, {
                     source
                 });
 
                 results.push({
                     count,
-                    date: _date,
+                    date: dateFormatted,
                     type: 'source',
                     value: source
                 });
             }
 
             for (const page of pages) {
-                const count = await this.analyzerService.analyze(BITMAP, _date, {
+                const count = await this.analyzerService.analyze(BITMAP, dateFormatted, {
                     action: 'visit',
                     page
                 });
 
                 results.push({
                     count,
-                    date: _date,
+                    date: dateFormatted,
                     type: 'page',
                     value: page
                 });

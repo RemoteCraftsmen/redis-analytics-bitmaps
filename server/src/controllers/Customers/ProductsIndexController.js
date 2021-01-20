@@ -9,7 +9,9 @@ class CustomersProductIndexController {
     async invoke(req, res) {
         const { filter, join, period = '2015-12' } = req.query;
 
-        const { products = [] } = filter ? JSON.parse(filter) : { products: ['product1', 'product2', 'product3'] };
+        const defaultFilter = { products: ['product1', 'product2', 'product3'] };
+
+        const { products = [] } = filter ? JSON.parse(filter) : defaultFilter;
 
         const [firstProduct, secondProduct] = join ? JSON.parse(join) : [];
 

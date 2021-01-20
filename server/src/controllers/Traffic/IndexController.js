@@ -9,13 +9,13 @@ class TrafficIndexController {
     async invoke(req, res) {
         const { filter, period = '2015-12' } = req.query;
 
-        const { sources = [], pages = [], total = false } = filter
-            ? JSON.parse(filter)
-            : {
-                  sources: ['facebook', 'google', 'direct', 'email', 'referral', 'none'],
-                  pages: ['homepage', 'product1', 'product2', 'product3'],
-                  total: true
-              };
+        const defaultFilter = {
+            sources: ['facebook', 'google', 'direct', 'email', 'referral', 'none'],
+            pages: ['homepage', 'product1', 'product2', 'product3'],
+            total: true
+        };
+
+        const { sources = [], pages = [], total = false } = filter ? JSON.parse(filter) : defaultFilter;
 
         const results = [];
 
