@@ -1,15 +1,15 @@
-const { StatusCodes } = require('http-status-codes');
+// const { StatusCodes } = require('http-status-codes');
 
-class AdminClearRedisController {
-    constructor(redisService) {
-        this.redisService = redisService;
-    }
+// class AdminClearRedisController {
+//     constructor(redisService) {
+//         this.redisService = redisService;
+//     }
 
-    async invoke(req, res) {
-        await this.redisService.flush();
+//     async invoke(req, res) {
+//         await this.redisService.flush();
 
-        return res.sendStatus(StatusCodes.NO_CONTENT);
-    }
-}
+//         return res.sendStatus(StatusCodes.NO_CONTENT);
+//     }
+// }
 
-module.exports = AdminClearRedisController;
+// module.exports = AdminClearRedisController;
