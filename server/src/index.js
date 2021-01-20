@@ -3,12 +3,13 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-require('express-async-errors');
 const di = require('./di');
-const config = require('./config');
 const errorHandler = require('./plugins/errorHandler');
+const config = require('./config');
 
 const app = express();
+
+require('express-async-errors');
 
 app.use(helmet());
 app.use(
@@ -20,8 +21,6 @@ app.use(
     })
 );
 app.use(bodyParser.json());
-
-require('./plugins/dayjs')();
 
 const router = require('./routes')(di);
 
