@@ -7,7 +7,7 @@
                         <v-icon> mdi-help-box </v-icon>
                     </v-btn>
                 </template>
-                <span>(products: in cart vs bought)</span>
+                <span>Products: in cart vs bought</span>
             </v-tooltip>
 
             Abandoned Cart
