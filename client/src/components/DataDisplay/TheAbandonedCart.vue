@@ -1,14 +1,14 @@
 <template>
     <v-card class="card" :loading="loading" outlined>
-        <v-card-title>Abandoned Cart</v-card-title>
+        <v-card-title class="pa-3">Abandoned Cart</v-card-title>
 
-        <v-card-subtitle>(products in cart vs products bought)</v-card-subtitle>
+        <v-card-subtitle class="pa-3">(products in cart vs products bought)</v-card-subtitle>
 
-        <v-card-actions>
+        <v-card-actions class="pa-3">
             <base-period-select @onSelect="fetchSalesData" />
         </v-card-actions>
 
-        <v-card-text>
+        <v-card-text class="pa-3">
             <base-pie-chart :chart-data="chartData" />
         </v-card-text>
     </v-card>
