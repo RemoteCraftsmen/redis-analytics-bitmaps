@@ -16,11 +16,11 @@ class TrafficTrendIndexController {
             pages: ['homepage', 'product1', 'product2', 'product3']
         };
 
+        const defaultPeriod = { from: '2015-12-01', to: '2015-12-31' };
+
         const { sources = [], pages = [] } = filter ? JSON.parse(filter) : defaultFilter;
 
-        const { from = '2015-12-01', to = '2015-12-31' } = period
-            ? JSON.parse(period)
-            : { from: '2015-12-01', to: '2015-12-31' };
+        const { from = '2015-12-01', to = '2015-12-31' } = period ? JSON.parse(period) : defaultPeriod;
 
         const dates = this.periodService.getRangeOfDates(dayjs(from), to, 'day', [dayjs(from)]);
 
