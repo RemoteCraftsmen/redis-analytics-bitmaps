@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card">
+    <v-card class="card" outlined>
         <v-card-title>Traffic per Page</v-card-title>
 
         <v-card-actions>

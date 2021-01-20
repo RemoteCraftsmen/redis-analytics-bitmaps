@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card" :loading="loading">
+    <v-card class="card" :loading="loading" outlined>
         <v-card-title>Share of Products bought</v-card-title>
 
         <v-card-actions>

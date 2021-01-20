@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card" :loading="loading">
+    <v-card class="card" :loading="loading" outlined>
         <v-card-title>Abandoned Cart</v-card-title>
 
         <v-card-subtitle>(products in cart vs products bought)</v-card-subtitle>
