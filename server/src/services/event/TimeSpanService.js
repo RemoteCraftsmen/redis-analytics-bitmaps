@@ -21,10 +21,6 @@ class TimeSpanService {
         return 'anytime';
     }
 
-    toArray() {
-        return [this.year, this.month, this.day, this.weekOfMonth.bind(this), this.anytime];
-    }
-
     all(date) {
         return [this.year(date), this.month(date), this.day(date), this.weekOfMonth(date), this.anytime()];
     }
