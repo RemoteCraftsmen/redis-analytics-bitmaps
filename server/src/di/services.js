@@ -25,14 +25,16 @@ module.exports = {
             arguments: ['@services.redis', '@services.event.keyGenerator']
         },
         'services.event.timeSpan': {
-            class: 'services/event/TimeSpanService'
+            class: 'services/event/TimeSpanService',
+            arguments: ['%dayjs']
         },
         'services.event.event': {
             class: 'services/event/EventService',
             arguments: ['@services.redis', '@services.event.timeSpan', '@services.event.keyGenerator']
         },
         'services.period': {
-            class: 'services/PeriodService'
+            class: 'services/PeriodService',
+            arguments: ['%dayjs']
         }
     }
 };

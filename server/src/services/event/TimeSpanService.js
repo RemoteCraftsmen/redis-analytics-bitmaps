@@ -1,18 +1,30 @@
 class TimeSpanService {
+    constructor(dayjs) {
+        this.dayjs = dayjs;
+    }
+
     year(date) {
-        return date.year();
+        const _date = this.dayjs(date);
+
+        return _date.year();
     }
 
     month(date) {
-        return `${date.year()}-${(date.month() + 1).toString().padStart(2, '0')}`;
+        const _date = this.dayjs(date);
+
+        return `${_date.year()}-${(_date.month() + 1).toString().padStart(2, '0')}`;
     }
 
     day(date) {
-        return date.format('YYYY-MM-DD');
+        const _date = this.dayjs(date);
+
+        return _date.format('YYYY-MM-DD');
     }
 
     weekOfMonth(date) {
-        const week = Math.ceil(date.date() / 7);
+        const _date = this.dayjs(date);
+
+        const week = Math.ceil(_date.date() / 7);
 
         return `${this.month(date)}/${week}`;
     }

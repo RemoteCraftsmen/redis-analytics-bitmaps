@@ -1,4 +1,3 @@
-const dayjs = require('dayjs');
 const { BITMAP, COUNT, SET } = require('./types');
 
 class EventService {
@@ -49,7 +48,7 @@ class EventService {
     }
 
     async storeAll(userId, date, args = {}) {
-        const timeSpans = this.timeSpanService.all(dayjs(date));
+        const timeSpans = this.timeSpanService.all(date);
 
         for (const timeSpan of timeSpans) {
             for (const scope of this.scopes) {
