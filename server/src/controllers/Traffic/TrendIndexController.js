@@ -1,4 +1,3 @@
-const { StatusCodes } = require('http-status-codes');
 const dayjs = require('dayjs');
 const { BITMAP } = require('../../services/event/types');
 

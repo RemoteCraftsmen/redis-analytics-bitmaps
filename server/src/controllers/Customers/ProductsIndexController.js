@@ -1,4 +1,3 @@
-const { StatusCodes } = require('http-status-codes');
 const { SET, SET_AND } = require('../../services/event/types');
 
 class CustomersProductIndexController {
