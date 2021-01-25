@@ -1,8 +1,12 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="12" lg="4">
+            <v-col cols="9">
                 <h2>Traffic Analytics Data</h2>
+            </v-col>
+
+            <v-col cols="3">
+                <slot />
             </v-col>
         </v-row>
 
