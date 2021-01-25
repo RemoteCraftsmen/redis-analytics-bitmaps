@@ -1,5 +1,7 @@
 <template>
-    <v-select v-model="period" :items="values" item-text="text" item-value="value" label="Time Period" outlined />
+    <div class="select">
+        <v-select v-model="period" :items="values" item-text="text" item-value="value" label="Time Period" outlined />
+    </div>
 </template>
 
 <script>
@@ -29,3 +31,13 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.select {
+    .v-input {
+        width: 50% !important;
+        margin: 0 auto !important;
+    }
+    width: 100%;
+}
+</style>

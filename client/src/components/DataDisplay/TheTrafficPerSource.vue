@@ -1,49 +1,43 @@
 <template>
-    <v-card outlined>
-        <v-card-title class="pa-3">Traffic per Source</v-card-title>
+    <base-card title="Traffic per Source" :loading="loading">
+        <v-row>
+            <v-col cols="12" lg="6">
+                <v-row>
+                    <v-col cols="12" sm="6">
+                        <base-card title="Google Ads" :data="googleTraffic" :loading="loading" />
+                    </v-col>
 
-        <v-card-actions class="pa-3">
+                    <v-col cols="12" sm="6">
+                        <base-card title="Facebook Ads" :data="facebookTraffic" :loading="loading" />
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+                        <base-card title="Email" :data="emailTraffic" :loading="loading" />
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+                        <base-card title="Direct" :data="directTraffic" :loading="loading" />
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+                        <base-card title="Referral" :data="referralTraffic" :loading="loading" />
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+                        <base-card title="None" :data="noneTraffic" :loading="loading" />
+                    </v-col>
+                </v-row>
+            </v-col>
+
+            <v-col class="chart" cols="12" lg="6">
+                <base-pie-chart class="w65" :chart-data="chartData" />
+            </v-col>
+        </v-row>
+
+        <template #actions>
             <base-period-select @onSelect="fetchTrafficData" />
-        </v-card-actions>
-
-        <v-card-text class="pa-3">
-            <v-row>
-                <v-col cols="12" lg="9">
-                    <v-row>
-                        <v-col cols="12" sm="6">
-                            <base-card title="Google Ads" :data="googleTraffic" :loading="loading" />
-                        </v-col>
-
-                        <v-col cols="12" sm="6">
-                            <base-card title="Facebook Ads" :data="facebookTraffic" :loading="loading" />
-                        </v-col>
-
-                        <v-col cols="12" sm="6">
-                            <base-card title="Email" :data="emailTraffic" :loading="loading" />
-                        </v-col>
-
-                        <v-col cols="12" sm="6">
-                            <base-card title="Direct" :data="directTraffic" :loading="loading" />
-                        </v-col>
-
-                        <v-col cols="12" sm="6">
-                            <base-card title="Referral" :data="referralTraffic" :loading="loading" />
-                        </v-col>
-
-                        <v-col cols="12" sm="6">
-                            <base-card title="None" :data="noneTraffic" :loading="loading" />
-                        </v-col>
-                    </v-row>
-                </v-col>
-
-                <v-col cols="12" lg="3">
-                    <div style="position: relative">
-                        <base-pie-chart :chart-data="chartData" />
-                    </div>
-                </v-col>
-            </v-row>
-        </v-card-text>
-    </v-card>
+        </template>
+    </base-card>
 </template>
 
 <script>

@@ -1,31 +1,27 @@
 <template>
-    <v-card class="card" outlined>
-        <v-card-title class="pa-3">Traffic per Page</v-card-title>
+    <base-card title="Traffic per Page" :loading="loading">
+        <v-row>
+            <v-col cols="12" sm="6">
+                <base-card title="Homepage" :data="homepageTraffic" :loading="loading" />
+            </v-col>
 
-        <v-card-actions class="pa-3">
+            <v-col cols="12" sm="6">
+                <base-card title="Product 1 Page" :data="product1pageTraffic" :loading="loading" />
+            </v-col>
+
+            <v-col cols="12" sm="6">
+                <base-card title="Product 2 Page" :data="product2pageTraffic" :loading="loading" />
+            </v-col>
+
+            <v-col cols="12" sm="6">
+                <base-card title="Product 3 Page" :data="product3pageTraffic" :loading="loading" />
+            </v-col>
+        </v-row>
+
+        <template #actions>
             <base-period-select @onSelect="fetchTrafficData" />
-        </v-card-actions>
-
-        <v-card-text class="pa-3">
-            <v-row>
-                <v-col cols="12" sm="6">
-                    <base-card title="Homepage" :data="homepageTraffic" :loading="loading" />
-                </v-col>
-
-                <v-col cols="12" sm="6">
-                    <base-card title="Product 1 Page" :data="product1pageTraffic" :loading="loading" />
-                </v-col>
-
-                <v-col cols="12" sm="6">
-                    <base-card title="Product 2 Page" :data="product2pageTraffic" :loading="loading" />
-                </v-col>
-
-                <v-col cols="12" sm="6">
-                    <base-card title="Product 3 Page" :data="product3pageTraffic" :loading="loading" />
-                </v-col>
-            </v-row>
-        </v-card-text>
-    </v-card>
+        </template>
+    </base-card>
 </template>
 
 <script>

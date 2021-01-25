@@ -4,6 +4,7 @@
     }
 
     @media screen and (min-width: 960px) {
+        background-color: #f8f8fb;
         background-image: url('../assets/RedisLabs_Illustration.svg');
         background-repeat: no-repeat;
         background-size: 22% auto;
@@ -19,5 +20,39 @@
 .card {
     @media screen and (min-width: 1264px) {
         height: 100%;
+    }
+}
+
+.middle-col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.first-col {
+    padding-right: 0 !important;
+}
+
+canvas {
+    height: auto !important;
+    width: 100% !important;
+}
+
+.v-card__actions {
+    width: 100% !important;
+}
+
+.v-card__title {
+    height: 60px !important;
+}
+
+.chart {
+    .w65 {
+        width: 65% !important;
+        margin: 0 auto;
+    }
+
+    .w80 {
+        width: 80% !important;
+        margin: 0 auto;
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <v-card class="card" outlined>
-        <v-card-title class="pa-3">
+    <base-card class="card" :loading="loading">
+        <template #title>
             <v-tooltip top>
                 <template #activator="{ on, attrs }">
                     <v-btn icon v-bind="attrs" v-on="on">
@@ -11,28 +11,28 @@
             </v-tooltip>
 
             Cohort Analysis
-        </v-card-title>
+        </template>
 
-        <v-card-text class="pa-3">
-            <v-row>
-                <v-col cols="12" lg="6">
-                    <base-card title="People who registered" :data="register" :loading="loading" />
-                </v-col>
-                <v-col cols="12" lg="6">
-                    <base-card title="People who bought" :data="registerThenBought" :loading="loading" />
-                </v-col>
-            </v-row>
+        <v-row>
+            <v-col cols="12" lg="6">
+                <base-card title="People who registered" :data="register" :loading="loading" />
+            </v-col>
+            <v-col cols="12" lg="6">
+                <base-card title="People who bought" :data="registerThenBought" :loading="loading" />
+            </v-col>
+        </v-row>
 
-            <v-row>
-                <v-col cols="12" lg="6">
-                    <base-card title="Dropoff" :data="`${dropoff ? dropoff : '0'}%`" :loading="loading" />
-                </v-col>
-                <v-col cols="12" lg="6">
+        <v-row>
+            <v-col cols="12" lg="6">
+                <base-card title="Dropoff" :data="`${dropoff ? dropoff : '0'}%`" :loading="loading" />
+            </v-col>
+            <v-col cols="12" lg="6">
+                <div class="chart">
                     <base-horizontal-bar-chart :chart-data="chartData" />
-                </v-col>
-            </v-row>
-        </v-card-text>
-    </v-card>
+                </div>
+            </v-col>
+        </v-row>
+    </base-card>
 </template>
 
 <script>

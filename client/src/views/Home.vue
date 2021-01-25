@@ -12,24 +12,24 @@
             </v-col>
 
             <v-col cols="12" lg="9">
-                <v-card outlined>
-                    <v-row>
-                        <v-col cols="6">
-                            <v-card-title>Analytics Data</v-card-title>
-                        </v-col>
+                <!-- <v-card outlined> -->
+                <v-row>
+                    <v-col cols="6">
+                        <v-card-title>Analytics Data</v-card-title>
+                    </v-col>
 
-                        <v-col cols="6">
-                            <v-card-actions>
-                                <v-spacer />
-                                <v-icon @click="negateRefreshSignal">mdi-refresh</v-icon>
-                            </v-card-actions>
-                        </v-col>
-                    </v-row>
+                    <v-col cols="6">
+                        <v-card-actions>
+                            <v-spacer />
+                            <v-icon @click="negateRefreshSignal">mdi-refresh</v-icon>
+                        </v-card-actions>
+                    </v-col>
+                </v-row>
 
-                    <v-card-text>
-                        <the-analytics-data />
-                    </v-card-text>
-                </v-card>
+                <!-- <v-card-text> -->
+                <the-analytics-data />
+                <!-- </v-card-text> -->
+                <!-- </v-card> -->
             </v-col>
         </v-row>
     </v-container>

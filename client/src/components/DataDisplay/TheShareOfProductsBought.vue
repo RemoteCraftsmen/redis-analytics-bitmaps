@@ -1,15 +1,13 @@
 <template>
-    <v-card class="card" :loading="loading" outlined>
-        <v-card-title class="pa-3">Share of Products bought</v-card-title>
-
-        <v-card-actions class="pa-3">
+    <base-card class="card" title="Share of Products bought" :loading="loading">
+        <template #actions>
             <base-period-select @onSelect="fetchSalesData" />
-        </v-card-actions>
+        </template>
 
-        <v-card-text class="pa-3">
-            <base-pie-chart :chart-data="chartData" />
-        </v-card-text>
-    </v-card>
+        <div class="chart">
+            <base-pie-chart class="w65" :chart-data="chartData" />
+        </div>
+    </base-card>
 </template>
 
 <script>
@@ -18,7 +16,8 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
     components: {
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect'),
-        basePieChart: () => import('@/components/UI/Charts/BasePieChart')
+        basePieChart: () => import('@/components/UI/Charts/BasePieChart'),
+        baseCard: () => import('@/components/UI/BaseCard')
     },
 
     data() {

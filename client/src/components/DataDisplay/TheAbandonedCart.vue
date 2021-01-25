@@ -1,26 +1,26 @@
 <template>
-    <v-card class="card" :loading="loading" outlined>
-        <v-card-title class="pa-3">
+    <base-card class="card" :loading="loading">
+        <template #title>
             <v-tooltip top>
                 <template #activator="{ on, attrs }">
                     <v-btn icon v-bind="attrs" v-on="on">
                         <v-icon> mdi-help-box </v-icon>
                     </v-btn>
                 </template>
-                <span>Products: in cart vs bought</span>
+                Products: in cart vs bought
             </v-tooltip>
 
             Abandoned Cart
-        </v-card-title>
+        </template>
 
-        <v-card-actions class="pa-3">
+        <template #actions>
             <base-period-select @onSelect="fetchSalesData" />
-        </v-card-actions>
+        </template>
 
-        <v-card-text class="pa-3">
-            <base-pie-chart :chart-data="chartData" />
-        </v-card-text>
-    </v-card>
+        <div class="chart">
+            <base-pie-chart class="w65" :chart-data="chartData" />
+        </div>
+    </base-card>
 </template>
 
 <script>
@@ -29,7 +29,8 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
     components: {
         basePeriodSelect: () => import('@/components/UI/BasePeriodSelect'),
-        basePieChart: () => import('@/components/UI/Charts/BasePieChart')
+        basePieChart: () => import('@/components/UI/Charts/BasePieChart'),
+        baseCard: () => import('@/components/UI/BaseCard')
     },
 
     data() {

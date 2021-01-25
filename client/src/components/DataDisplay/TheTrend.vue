@@ -1,15 +1,13 @@
 <template>
-    <v-card class="card" :loading="loading" outlined>
-        <v-card-title class="pa-3">Trend chart (pages)</v-card-title>
+    <base-card title="Trend chart (pages)" :loading="loading">
+        <div class="chart">
+            <base-line-chart class="w80" :chart-data="chartData" />
+        </div>
 
-        <v-card-actions class="pa-3">
+        <template #actions>
             <base-period-select @onSelect="fetchTrafficData" />
-        </v-card-actions>
-
-        <v-card-text class="pa-3">
-            <base-line-chart :chart-data="chartData" />
-        </v-card-text>
-    </v-card>
+        </template>
+    </base-card>
 </template>
 
 <script>
@@ -18,7 +16,8 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     components: {
         baseLineChart: () => import('@/components/UI/Charts/BaseLineChart'),
-        basePeriodSelect: () => import('@/components/UI/BasePeriodSelect')
+        basePeriodSelect: () => import('@/components/UI/BasePeriodSelect'),
+        baseCard: () => import('@/components/UI/BaseCard')
     },
 
     data() {

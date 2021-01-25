@@ -1,6 +1,8 @@
 <template>
     <base-card class="card" title="Total Traffic" :data="totalTraffic" :loading="loading">
-        <base-period-select @onSelect="fetchTrafficData" />
+        <template #actions>
+            <base-period-select @onSelect="fetchTrafficData" />
+        </template>
     </base-card>
 </template>
 
