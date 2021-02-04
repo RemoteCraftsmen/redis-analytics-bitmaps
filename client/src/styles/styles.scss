@@ -1,13 +1,18 @@
-#app {
-    * {
-        word-break: normal !important;
-    }
-
+body {
     @media screen and (min-width: 960px) {
         background-image: url('../assets/RedisLabs_Illustration.svg');
+        background-color:#F8F8FB;
         background-repeat: no-repeat;
-        background-size: 22% auto;
-        background-position: 104% -70px;
+        background-size: 1300px;
+        background-position: 111% -230px;
+    }
+}
+
+#app {
+    background:none;
+
+    * {
+        word-break: normal !important;
     }
 }
 
