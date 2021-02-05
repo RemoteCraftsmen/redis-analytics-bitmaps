@@ -8,6 +8,62 @@
            </v-tabs>
        </v-card>
 
+        <v-alert
+                text
+                dense
+                color="info"
+                class="mt-6 mb-0"
+                border="left"
+        >
+            <v-row
+                align="center"
+                no-gutters
+            >
+                <v-col class="grow">
+                    <h3 class="headline">
+                        How it works?
+                    </h3>
+                </v-col>
+                <v-col class="shrink">
+                    <v-btn
+                        color="info"
+                        outlined
+                        @click="alert = !alert"
+                    >
+                        {{ alert ? 'Collapse' : 'View more'}}
+                    </v-btn>
+                </v-col>
+            </v-row>
+
+            <v-divider v-show="alert"
+                class="my-4 info"
+                style="opacity: 0.22"
+            ></v-divider>
+
+            <div v-show="alert">
+                <p>Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci.</p>
+                <ol>
+                    <li>Proin viverra, ligula sit amet ultrices semper:</li>
+                    <ul class="mb-5">
+                        <li>ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis.</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                        <li>Sed in odio eget orci convallis pellentesque eu ut felis</li>
+                    </ul>
+
+                    <li>Proin viverra, ligula sit ultrices accumsan:</li>
+                    <ul class="mb-5">
+                        <li>- ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis.</li>
+                        <li>- Sed in odio eget orci convallis pellentesque eu ut felis</li>
+                    </ul>
+
+                    <li>Proin viverra, ligula sit amet ultrices:</li>
+                    <ul class="mb-5">
+                        <li>- Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+                </ol>
+             </div>
+        </v-alert>
+
         <v-tabs-items v-model="tab" style="background:none;" class="pb-6 mb-6">
             <v-tab-item>
                 <v-row class="mt-3">
@@ -73,6 +129,7 @@ export default {
     data() {
         return {
             tab: null,
+            alert: false,
         };
     },
     components: {

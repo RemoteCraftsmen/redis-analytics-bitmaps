@@ -4,6 +4,15 @@
             <v-col cols="12" lg="3">
                 <period-select-card/>
 
+                <v-alert
+                    type="info"
+                    border="left"
+                    class="mb-6"
+                    text
+                >
+                    Below you can select date, source (the page user came from), user and action (register, visit, add to cart and buy product) performed on a website. When selected, click UPDATE button.
+                </v-alert>
+
                 <v-card>
                     <v-card-title class="pa-5">Analytics Demo Form</v-card-title>
 
@@ -15,8 +24,8 @@
                 <v-card-actions class="my-4 justify-md-space-around">
                     <v-btn depressed
                         color="info"
+                        large
                         @click="negateRefreshSignal"
-                       large
                     >
                         Refresh
                         <v-icon right dark >mdi-refresh</v-icon>

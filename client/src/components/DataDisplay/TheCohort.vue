@@ -5,7 +5,7 @@
         </v-card-title>
 
         <v-card-subtitle class="px-4">
-            % people who registered in December and then bought some product
+            % of people who registered in December and then bought some product
         </v-card-subtitle>
 
         <v-card-text class="px-4">
@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <td>Dropoff</td>
-                            <td>{{ dropoff ? dropoff : '0' }}</td>
+                            <td>{{ dropoff || '0' }}</td>
                         </tr>
                         </tbody>
                     </v-simple-table>

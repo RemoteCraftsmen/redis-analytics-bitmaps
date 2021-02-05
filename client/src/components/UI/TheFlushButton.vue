@@ -2,8 +2,8 @@
     <v-btn
             depressed
             color="error"
-            @click="handleFlush"
             large
+            @click="handleFlush"
     >
         Flush Redis
         <v-icon right dark >mdi-delete</v-icon>

@@ -23,7 +23,7 @@ export default new Vuex.Store({
 
     mutations: {
         NEGATE_REFRESH_SIGNAL: state => (state.refreshSignal = !state.refreshSignal),
-        setPeriod: (state, period) => (state.period = period),
+        SET_PERIOD: (state, period) => (state.period = period),
     },
 
     actions: {
@@ -68,7 +68,7 @@ export default new Vuex.Store({
         },
 
         updatePeriod({ commit }, period) {
-            commit('setPeriod', period);
+            commit('SET_PERIOD', period);
         },
 
         saveData(vuexContext, data) {
