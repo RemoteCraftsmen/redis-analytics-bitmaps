@@ -41,9 +41,8 @@
             ></v-divider>
 
             <div v-show="alert">
-                <p>Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci.</p>
                 <ol>
-                    <li>How the data is stored:</li>
+                    <li class="font-weight-bold">How the data is stored:</li>
                     <ul class="mb-5">
                         <li>The event data is stored in various keys and various data types.</li>
                         <ul class="mb-5">
@@ -79,7 +78,7 @@
                         <li>Cohort data is stored like: <code>SETBIT {prefix}:bitmap:custom:cohort-buy:timeSpan:{timeSpan} userId 1</code></li>
                     </ul>
 
-                    <li>How the data is accessed:</li>
+                    <li class="font-weight-bold">How the data is accessed:</li>
                     <ul class="mb-5">
 
                         <li>Total Traffic:</li>
@@ -137,11 +136,6 @@
                         <li>Customers who bought only specified product ({productPage} is one of: product1, product2, product3): <code>SMEMBERS {prefix}:set:action:buy:page:{productPage}:timeSpan:2015-12</code></li>
                         <li>Customers who bought Product1 and Product2: <code>SINTER {prefix}:set:action:buy:page:product1:timeSpan:2015-12 {prefix}:set:action:buy:page:product2:timeSpan:2015-12</code></li>
                         <li>Customer Retention (customers who bought on the different dates): <code>SMEMBERS {prefix}:set:custom:retention-buy:timeSpan:2015-12</code></li>
-                    </ul>
-
-                    <li></li>
-                    <ul class="mb-5">
-                        <li></li>
                     </ul>
                 </ol>
              </div>
