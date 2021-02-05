@@ -12,8 +12,8 @@
 
             <router-view />
 
-            <v-container>
-                Analytics Demo (Via Redis Bitmaps)
+            <v-container class="my-5">
+                © Copyright 2021 | All Rights Reserved to Redis Labs
             </v-container>
 
             <notifications group="main" position="bottom center" />
