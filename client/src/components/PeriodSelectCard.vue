@@ -1,6 +1,6 @@
 <template>
     <v-card class="mb-6">
-        <v-card-title class="px-5">Select date preoid</v-card-title>
+        <v-card-title class="px-5">Select date period</v-card-title>
 
         <v-card-actions class="px-5">
             <base-period-select @onSelect="updatePeriod" />

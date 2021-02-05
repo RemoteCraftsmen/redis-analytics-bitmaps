@@ -1,6 +1,6 @@
 <template>
     <div>
-       <v-card>
+       <v-card class="mx-1">
            <v-tabs v-model="tab">
                <v-tab>Traffic Analytics Data</v-tab>
                <v-tab>Sales Analytics Data</v-tab>
@@ -12,8 +12,9 @@
                 text
                 dense
                 color="info"
-                class="mt-6 mb-0"
+                class="mt-6 mb-0 mx-1"
                 border="left"
+                @click="alert = !alert"
         >
             <v-row
                 align="center"
@@ -28,7 +29,6 @@
                     <v-btn
                         color="info"
                         outlined
-                        @click="alert = !alert"
                     >
                         {{ alert ? 'Collapse' : 'View more'}}
                     </v-btn>
@@ -64,7 +64,7 @@
              </div>
         </v-alert>
 
-        <v-tabs-items v-model="tab" style="background:none;" class="pb-6 mb-6">
+        <v-tabs-items v-model="tab" style="background:none;" class="pb-6 px-1 mb-6">
             <v-tab-item>
                 <v-row class="mt-3">
                     <v-col cols="12" lg="6">

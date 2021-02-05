@@ -12,6 +12,10 @@
 
             <router-view />
 
+            <v-container>
+                Analytics Demo (Via Redis Bitmaps)
+            </v-container>
+
             <notifications group="main" position="bottom center" />
         </v-main>
     </v-app>

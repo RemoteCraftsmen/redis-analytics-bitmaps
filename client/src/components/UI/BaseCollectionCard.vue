@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card" :loading="loading" outlined>
+    <v-card class="card" :loading="loading">
         <v-card-title class="px-4"> {{ title }} </v-card-title>
 
         <v-card-subtitle v-if="subtitle && subtitle.length" class="px-4">
