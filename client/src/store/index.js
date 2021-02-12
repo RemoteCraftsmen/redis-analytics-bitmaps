@@ -13,22 +13,26 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: () => ({
         refreshSignal: true,
-        period: null,
+        period: null
     }),
 
     getters: {
         refreshSignal: state => state.refreshSignal,
-        getPeriod: state => state.period,
+        getPeriod: state => state.period
     },
 
     mutations: {
         NEGATE_REFRESH_SIGNAL: state => (state.refreshSignal = !state.refreshSignal),
-        SET_PERIOD: (state, period) => (state.period = period),
+        SET_PERIOD: (state, period) => (state.period = period)
     },
 
     actions: {
         async flush() {
             await axios.delete('/api/flush');
+        },
+
+        async reset() {
+            await axios.delete('/api/reset');
         },
 
         async fetchCohort(vuexContext, params) {
