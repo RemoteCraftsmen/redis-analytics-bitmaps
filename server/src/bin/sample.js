@@ -38,4 +38,4 @@ for (let i = 0; i < actionsCount; i++) {
     });
 }
 
-fs.writeFileSync(samplePath, JSON.stringify(data, null, 4));
+fs.writeFileSync(samplePath, JSON.stringify(data, null, 4).concat('\n'));
