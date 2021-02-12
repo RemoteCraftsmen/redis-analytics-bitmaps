@@ -32,12 +32,17 @@ module.exports = {
             class: 'services/event/EventService',
             arguments: ['@services.redis', '@services.event.timeSpan', '@services.event.keyGenerator']
         },
+        'services.data.store': {
+            class: 'services/data/StoreDataService',
+            arguments: ['@services.event.event', '@services.event.analyzer', '@services.event.timeSpan']
+        },
+        'services.data.sample': {
+            class: 'services/data/SampleDataService',
+            arguments: ['@services.data.store']
+        },
         'services.period': {
             class: 'services/PeriodService',
             arguments: ['%dayjs']
-        },
-        'services.sampleData': {
-            class: 'services/SampleDataService'
         }
     }
 };

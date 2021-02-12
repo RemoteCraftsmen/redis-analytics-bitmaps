@@ -6,7 +6,7 @@ module.exports = {
         },
         'controllers.data.storeController': {
             class: 'controllers/Data/StoreController',
-            arguments: ['@services.event.event', '@services.event.analyzer', '@services.event.timeSpan']
+            arguments: ['@services.data.store']
         },
         'controllers.customers.cohort.showController': {
             class: 'controllers/Customers/CohortShowController',

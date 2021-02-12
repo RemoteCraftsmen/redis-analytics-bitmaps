@@ -32,7 +32,7 @@ app.use(errorHandler);
 
 const { port } = config.server;
 
-di.get('services.sampleData').generate();
+di.get('services.data.sample').generate();
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}...`);
