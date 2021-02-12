@@ -35,6 +35,9 @@ module.exports = {
         'services.period': {
             class: 'services/PeriodService',
             arguments: ['%dayjs']
+        },
+        'services.sampleData': {
+            class: 'services/SampleDataService'
         }
     }
 };
