@@ -38,7 +38,7 @@ module.exports = {
         },
         'services.data.sample': {
             class: 'services/data/SampleDataService',
-            arguments: ['@services.data.store']
+            arguments: ['@services.data.store', '@services.redis']
         },
         'services.period': {
             class: 'services/PeriodService',

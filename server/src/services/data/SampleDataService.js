@@ -1,9 +1,18 @@
 class SampleDataService {
-    generate() {
-        try {
-            const data = require('../../sample.json');
+    constructor(storeDataService, redisService) {
+        this.storeDataService = storeDataService;
+        this.redisService = redisService;
+    }
 
-            console.log(data);
+    async generate() {
+        try {
+            await this.redisService.flush();
+
+            const events = require('../../sample.json');
+
+            for (const event of events) {
+                // await this.storeDataService.store(event);
+            }
         } catch (err) {}
     }
 }

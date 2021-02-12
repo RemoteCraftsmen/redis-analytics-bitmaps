@@ -32,8 +32,12 @@ app.use(errorHandler);
 
 const { port } = config.server;
 
-di.get('services.data.sample').generate();
+di.get('services.data.sample')
+    .generate()
+    .then(() => {
+        console.log('Sample data loaded...');
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}...`);
-});
+        app.listen(port, () => {
+            console.log(`Server is listening on port ${port}...`);
+        });
+    });
