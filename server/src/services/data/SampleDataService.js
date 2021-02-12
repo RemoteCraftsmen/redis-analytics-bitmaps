@@ -11,7 +11,7 @@ class SampleDataService {
             const events = require('../../sample.json');
 
             for (const event of events) {
-                // await this.storeDataService.store(event);
+                await this.storeDataService.store(event);
             }
         } catch (err) {}
     }

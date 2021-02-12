@@ -21,11 +21,11 @@ const actions = [
 
 const sources = ['google', 'facebook', 'email', 'direct', 'referral', 'none'];
 
-const usersCount = 20;
+const usersCount = 10;
 
 const period = { from: '2015-12-01', to: '2015-12-31' };
 
-const actionsCount = 800;
+const actionsCount = 10;
 
 const data = [];
 
