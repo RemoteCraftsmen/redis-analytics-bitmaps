@@ -4,6 +4,10 @@ module.exports = {
             class: 'controllers/FlushController',
             arguments: ['@services.redis']
         },
+        'controllers.reset': {
+            class: 'controllers/ResetController',
+            arguments: ['@services.data.sample']
+        },
         'controllers.data.storeController': {
             class: 'controllers/Data/StoreController',
             arguments: ['@services.data.store']
