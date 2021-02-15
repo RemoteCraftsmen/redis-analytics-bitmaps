@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const faker = require('faker');
-const dayjs = require('dayjs');
 const di = require('../di');
 
 const periodService = di.get('services.period');

@@ -3,10 +3,10 @@
         depressed
         color="warning"
         large
-        :loading="loading"
-        :disabled="loading"
+        :loading="redisLoading"
+        :disabled="redisLoading"
         style="width: 100%"
-        @click="handleFlush"
+        @click="handleReset"
     >
         Reset Data
         <v-icon right dark>mdi-restart</v-icon>
@@ -14,21 +14,19 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
-    data() {
-        return {
-            loading: false
-        };
+    computed: {
+        ...mapGetters({ redisLoading: 'getRedisLoading' })
     },
 
     methods: {
         ...mapActions({ reset: 'reset' }),
-        ...mapMutations({ negateRefreshSignal: 'NEGATE_REFRESH_SIGNAL' }),
+        ...mapMutations({ negateRefreshSignal: 'NEGATE_REFRESH_SIGNAL', setRedisLoading: 'SET_REDIS_LOADING' }),
 
-        async handleFlush() {
-            this.loading = true;
+        async handleReset() {
+            this.setRedisLoading(true);
 
             try {
                 await this.reset();
@@ -56,7 +54,7 @@ export default {
                 });
             }
 
-            this.loading = false;
+            this.setRedisLoading(false);
         }
     }
 };

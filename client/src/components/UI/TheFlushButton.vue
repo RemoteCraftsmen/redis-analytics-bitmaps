@@ -1,36 +1,52 @@
 <template>
-    <v-btn
-            depressed
-            color="error"
-            large
-            @click="handleFlush"
-    >
+    <v-btn depressed color="error" large :loading="redisLoading" :disabled="redisLoading" @click="handleFlush">
         Flush Redis
-        <v-icon right dark >mdi-delete</v-icon>
+        <v-icon right dark>mdi-delete</v-icon>
     </v-btn>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
+    computed: {
+        ...mapGetters({ redisLoading: 'getRedisLoading' })
+    },
+
     methods: {
         ...mapActions({ flush: 'flush' }),
-        ...mapMutations({ negateRefreshSignal: 'NEGATE_REFRESH_SIGNAL' }),
+        ...mapMutations({ negateRefreshSignal: 'NEGATE_REFRESH_SIGNAL', setRedisLoading: 'SET_REDIS_LOADING' }),
 
         async handleFlush() {
-            await this.flush();
+            this.setRedisLoading(true);
 
-            this.negateRefreshSignal();
+            try {
+                await this.flush();
 
-            this.$notify({
-                group: 'main',
-                title: 'Redis',
-                text: 'Redis flushed!',
-                type: 'success',
-                duration: 400,
-                speed: 400
-            });
+                this.negateRefreshSignal();
+
+                this.$notify({
+                    group: 'main',
+                    title: 'Redis',
+                    text: 'Redis flushed!',
+                    type: 'success',
+                    duration: 400,
+                    speed: 400
+                });
+            } catch (err) {
+                console.error(err);
+
+                this.$notify({
+                    group: 'main',
+                    title: 'Error',
+                    text: 'Unexpected error occured.',
+                    type: 'error',
+                    duration: 400,
+                    speed: 400
+                });
+            }
+
+            this.setRedisLoading(false);
         }
     }
 };
