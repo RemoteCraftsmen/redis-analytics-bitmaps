@@ -1,7 +1,34 @@
 [
     {
         "date": "2015-12-01",
-        "source": "facebook",
+        "source": "referral",
+        "actionParams": {
+            "action": "visit",
+            "page": "product3"
+        },
+        "userId": 0
+    },
+    {
+        "date": "2015-12-01",
+        "source": "google",
+        "actionParams": {
+            "action": "visit",
+            "page": "homepage"
+        },
+        "userId": 6
+    },
+    {
+        "date": "2015-12-02",
+        "source": "referral",
+        "actionParams": {
+            "action": "addToCart",
+            "page": "product3"
+        },
+        "userId": 2
+    },
+    {
+        "date": "2015-12-03",
+        "source": "referral",
         "actionParams": {
             "action": "addToCart",
             "page": "product2"
@@ -9,103 +36,13 @@
         "userId": 2
     },
     {
-        "date": "2015-12-01",
-        "source": "facebook",
-        "actionParams": {
-            "action": "buy",
-            "page": "product1"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-01",
-        "source": "email",
-        "actionParams": {
-            "action": "visit",
-            "page": "homepage"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-01",
+        "date": "2015-12-03",
         "source": "none",
         "actionParams": {
-            "action": "buy",
-            "page": "product3"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-01",
-        "source": "referral",
-        "actionParams": {
             "action": "addToCart",
             "page": "product2"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-02",
-        "source": "google",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product1"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-02",
-        "source": "email",
-        "actionParams": {
-            "action": "buy",
-            "page": "product2"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-03",
-        "source": "google",
-        "actionParams": {
-            "action": "buy",
-            "page": "product3"
-        },
-        "userId": 1
-    },
-    {
-        "date": "2015-12-03",
-        "source": "google",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 1
-    },
-    {
-        "date": "2015-12-03",
-        "source": "google",
-        "actionParams": {
-            "action": "buy",
-            "page": "product3"
         },
         "userId": 7
-    },
-    {
-        "date": "2015-12-04",
-        "source": "email",
-        "actionParams": {
-            "action": "visit",
-            "page": "product1"
-        },
-        "userId": 0
-    },
-    {
-        "date": "2015-12-04",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
-            "page": "product2"
-        },
-        "userId": 0
     },
     {
         "date": "2015-12-04",
@@ -114,393 +51,162 @@
             "action": "addToCart",
             "page": "product3"
         },
-        "userId": 7
-    },
-    {
-        "date": "2015-12-04",
-        "source": "google",
-        "actionParams": {
-            "action": "buy",
-            "page": "product2"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-05",
-        "source": "email",
-        "actionParams": {
-            "action": "register"
-        },
-        "userId": 3
+        "userId": 4
     },
     {
         "date": "2015-12-05",
         "source": "direct",
         "actionParams": {
             "action": "addToCart",
-            "page": "product2"
+            "page": "product1"
         },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-05",
-        "source": "google",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 9
+        "userId": 2
     },
     {
         "date": "2015-12-06",
+        "source": "google",
+        "actionParams": {
+            "action": "register"
+        },
+        "userId": 5
+    },
+    {
+        "date": "2015-12-07",
+        "source": "direct",
+        "actionParams": {
+            "action": "addToCart",
+            "page": "product1"
+        },
+        "userId": 5
+    },
+    {
+        "date": "2015-12-08",
+        "source": "none",
+        "actionParams": {
+            "action": "visit",
+            "page": "product1"
+        },
+        "userId": 7
+    },
+    {
+        "date": "2015-12-08",
         "source": "facebook",
+        "actionParams": {
+            "action": "visit",
+            "page": "product2"
+        },
+        "userId": 8
+    },
+    {
+        "date": "2015-12-09",
+        "source": "referral",
+        "actionParams": {
+            "action": "visit",
+            "page": "product2"
+        },
+        "userId": 8
+    },
+    {
+        "date": "2015-12-10",
+        "source": "direct",
         "actionParams": {
             "action": "register"
         },
         "userId": 6
     },
     {
-        "date": "2015-12-06",
-        "source": "direct",
-        "actionParams": {
-            "action": "visit",
-            "page": "homepage"
-        },
-        "userId": 3
-    },
-    {
-        "date": "2015-12-06",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
-            "page": "product2"
-        },
-        "userId": 3
-    },
-    {
-        "date": "2015-12-06",
-        "source": "direct",
-        "actionParams": {
-            "action": "visit",
-            "page": "product2"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-06",
-        "source": "referral",
-        "actionParams": {
-            "action": "buy",
-            "page": "product3"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-07",
-        "source": "email",
-        "actionParams": {
-            "action": "buy",
-            "page": "product1"
-        },
-        "userId": 2
-    },
-    {
-        "date": "2015-12-07",
-        "source": "none",
-        "actionParams": {
-            "action": "visit",
-            "page": "product1"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-07",
-        "source": "none",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product2"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-08",
-        "source": "referral",
-        "actionParams": {
-            "action": "buy",
-            "page": "product3"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-08",
-        "source": "none",
-        "actionParams": {
-            "action": "buy",
-            "page": "product1"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-09",
-        "source": "none",
-        "actionParams": {
-            "action": "visit",
-            "page": "product1"
-        },
-        "userId": 2
-    },
-    {
-        "date": "2015-12-09",
-        "source": "referral",
-        "actionParams": {
-            "action": "visit",
-            "page": "homepage"
-        },
-        "userId": 2
-    },
-    {
-        "date": "2015-12-09",
-        "source": "direct",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 7
-    },
-    {
         "date": "2015-12-10",
-        "source": "email",
-        "actionParams": {
-            "action": "visit",
-            "page": "product2"
-        },
-        "userId": 0
-    },
-    {
-        "date": "2015-12-10",
-        "source": "google",
+        "source": "direct",
         "actionParams": {
             "action": "addToCart",
-            "page": "product3"
+            "page": "product2"
         },
-        "userId": 0
+        "userId": 5
     },
     {
         "date": "2015-12-11",
-        "source": "direct",
+        "source": "email",
         "actionParams": {
             "action": "addToCart",
             "page": "product3"
         },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-12",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
-            "page": "homepage"
-        },
-        "userId": 5
-    },
-    {
-        "date": "2015-12-12",
-        "source": "referral",
-        "actionParams": {
-            "action": "visit",
-            "page": "product3"
-        },
-        "userId": 5
-    },
-    {
-        "date": "2015-12-12",
-        "source": "referral",
-        "actionParams": {
-            "action": "visit",
-            "page": "product3"
-        },
-        "userId": 7
-    },
-    {
-        "date": "2015-12-12",
-        "source": "google",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 7
+        "userId": 3
     },
     {
         "date": "2015-12-12",
         "source": "email",
         "actionParams": {
-            "action": "buy",
-            "page": "product3"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-12",
-        "source": "none",
-        "actionParams": {
             "action": "addToCart",
             "page": "product1"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-13",
-        "source": "email",
-        "actionParams": {
-            "action": "register"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-13",
-        "source": "referral",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product1"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-13",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
-            "page": "product3"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-13",
-        "source": "google",
-        "actionParams": {
-            "action": "buy",
-            "page": "product1"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-14",
-        "source": "referral",
-        "actionParams": {
-            "action": "register"
         },
         "userId": 4
     },
     {
-        "date": "2015-12-14",
-        "source": "direct",
+        "date": "2015-12-13",
+        "source": "referral",
         "actionParams": {
             "action": "visit",
             "page": "homepage"
         },
-        "userId": 2
+        "userId": 4
     },
     {
-        "date": "2015-12-14",
-        "source": "google",
+        "date": "2015-12-13",
+        "source": "direct",
         "actionParams": {
-            "action": "addToCart",
+            "action": "buy",
             "page": "product2"
         },
-        "userId": 2
+        "userId": 8
     },
     {
         "date": "2015-12-14",
-        "source": "facebook",
+        "source": "none",
         "actionParams": {
-            "action": "visit",
+            "action": "addToCart",
             "page": "product3"
         },
-        "userId": 3
+        "userId": 0
     },
     {
         "date": "2015-12-15",
-        "source": "direct",
+        "source": "referral",
+        "actionParams": {
+            "action": "addToCart",
+            "page": "product3"
+        },
+        "userId": 2
+    },
+    {
+        "date": "2015-12-16",
+        "source": "email",
         "actionParams": {
             "action": "visit",
             "page": "homepage"
+        },
+        "userId": 2
+    },
+    {
+        "date": "2015-12-16",
+        "source": "direct",
+        "actionParams": {
+            "action": "buy",
+            "page": "product3"
         },
         "userId": 8
     },
     {
-        "date": "2015-12-16",
-        "source": "facebook",
-        "actionParams": {
-            "action": "register"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-16",
-        "source": "email",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-16",
-        "source": "google",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-17",
-        "source": "google",
-        "actionParams": {
-            "action": "buy",
-            "page": "product1"
-        },
-        "userId": 3
-    },
-    {
         "date": "2015-12-17",
         "source": "email",
         "actionParams": {
             "action": "visit",
-            "page": "product3"
-        },
-        "userId": 3
-    },
-    {
-        "date": "2015-12-17",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
             "page": "homepage"
         },
-        "userId": 5
+        "userId": 1
     },
     {
         "date": "2015-12-17",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
-            "page": "homepage"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-17",
-        "source": "none",
-        "actionParams": {
-            "action": "buy",
-            "page": "product2"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-18",
-        "source": "google",
+        "source": "direct",
         "actionParams": {
             "action": "addToCart",
             "page": "product2"
@@ -509,119 +215,111 @@
     },
     {
         "date": "2015-12-18",
-        "source": "referral",
+        "source": "facebook",
         "actionParams": {
-            "action": "visit",
-            "page": "product1"
+            "action": "addToCart",
+            "page": "product2"
+        },
+        "userId": 8
+    },
+    {
+        "date": "2015-12-18",
+        "source": "email",
+        "actionParams": {
+            "action": "buy",
+            "page": "product2"
         },
         "userId": 9
     },
     {
         "date": "2015-12-19",
-        "source": "referral",
+        "source": "none",
         "actionParams": {
-            "action": "register"
+            "action": "addToCart",
+            "page": "product2"
         },
-        "userId": 6
+        "userId": 3
     },
     {
         "date": "2015-12-19",
         "source": "email",
         "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 7
-    },
-    {
-        "date": "2015-12-19",
-        "source": "direct",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product1"
-        },
-        "userId": 7
-    },
-    {
-        "date": "2015-12-19",
-        "source": "none",
-        "actionParams": {
             "action": "visit",
+            "page": "homepage"
+        },
+        "userId": 9
+    },
+    {
+        "date": "2015-12-20",
+        "source": "facebook",
+        "actionParams": {
+            "action": "buy",
             "page": "product2"
         },
-        "userId": 8
+        "userId": 2
     },
     {
         "date": "2015-12-20",
         "source": "email",
         "actionParams": {
-            "action": "visit",
+            "action": "addToCart",
+            "page": "product1"
+        },
+        "userId": 6
+    },
+    {
+        "date": "2015-12-21",
+        "source": "direct",
+        "actionParams": {
+            "action": "addToCart",
+            "page": "product2"
+        },
+        "userId": 9
+    },
+    {
+        "date": "2015-12-22",
+        "source": "referral",
+        "actionParams": {
+            "action": "addToCart",
             "page": "product3"
         },
         "userId": 8
     },
     {
-        "date": "2015-12-21",
-        "source": "google",
-        "actionParams": {
-            "action": "visit",
-            "page": "homepage"
-        },
-        "userId": 1
-    },
-    {
-        "date": "2015-12-21",
+        "date": "2015-12-22",
         "source": "none",
         "actionParams": {
             "action": "addToCart",
             "page": "product2"
         },
-        "userId": 2
-    },
-    {
-        "date": "2015-12-22",
-        "source": "facebook",
-        "actionParams": {
-            "action": "visit",
-            "page": "product1"
-        },
-        "userId": 2
+        "userId": 9
     },
     {
         "date": "2015-12-23",
         "source": "direct",
         "actionParams": {
-            "action": "addToCart",
-            "page": "product1"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-23",
-        "source": "facebook",
-        "actionParams": {
             "action": "visit",
             "page": "product1"
         },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-23",
-        "source": "email",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product1"
-        },
-        "userId": 8
+        "userId": 3
     },
     {
         "date": "2015-12-24",
-        "source": "facebook",
+        "source": "email",
         "actionParams": {
             "action": "visit",
-            "page": "homepage"
+            "page": "product1"
         },
-        "userId": 6
+        "userId": 2
+    },
+    {
+        "date": "2015-12-24",
+        "source": "none",
+        "actionParams": {
+            "action": "visit",
+            "page": "product1"
+        },
+        "userId": 5
     },
     {
         "date": "2015-12-25",
@@ -630,177 +328,95 @@
             "action": "buy",
             "page": "product3"
         },
-        "userId": 8
+        "userId": 6
     },
     {
         "date": "2015-12-26",
-        "source": "referral",
+        "source": "facebook",
         "actionParams": {
-            "action": "visit",
-            "page": "homepage"
+            "action": "register"
         },
         "userId": 1
     },
     {
-        "date": "2015-12-26",
+        "date": "2015-12-27",
         "source": "none",
         "actionParams": {
+            "action": "addToCart",
+            "page": "product2"
+        },
+        "userId": 4
+    },
+    {
+        "date": "2015-12-27",
+        "source": "google",
+        "actionParams": {
             "action": "visit",
+            "page": "product3"
+        },
+        "userId": 5
+    },
+    {
+        "date": "2015-12-28",
+        "source": "direct",
+        "actionParams": {
+            "action": "addToCart",
+            "page": "product3"
+        },
+        "userId": 3
+    },
+    {
+        "date": "2015-12-28",
+        "source": "none",
+        "actionParams": {
+            "action": "buy",
+            "page": "product3"
+        },
+        "userId": 8
+    },
+    {
+        "date": "2015-12-29",
+        "source": "facebook",
+        "actionParams": {
+            "action": "addToCart",
             "page": "product2"
         },
         "userId": 1
     },
     {
-        "date": "2015-12-27",
-        "source": "referral",
-        "actionParams": {
-            "action": "buy",
-            "page": "product3"
-        },
-        "userId": 3
-    },
-    {
-        "date": "2015-12-27",
-        "source": "facebook",
-        "actionParams": {
-            "action": "buy",
-            "page": "product2"
-        },
-        "userId": 3
-    },
-    {
-        "date": "2015-12-27",
-        "source": "email",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product1"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-27",
+        "date": "2015-12-29",
         "source": "direct",
         "actionParams": {
             "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 6
-    },
-    {
-        "date": "2015-12-28",
-        "source": "referral",
-        "actionParams": {
-            "action": "visit",
             "page": "product1"
         },
-        "userId": 7
+        "userId": 8
     },
     {
-        "date": "2015-12-28",
-        "source": "facebook",
-        "actionParams": {
-            "action": "buy",
-            "page": "product2"
-        },
-        "userId": 9
-    },
-    {
-        "date": "2015-12-28",
+        "date": "2015-12-30",
         "source": "referral",
         "actionParams": {
-            "action": "visit",
-            "page": "homepage"
+            "action": "addToCart",
+            "page": "product2"
         },
-        "userId": 9
+        "userId": 5
     },
     {
-        "date": "2015-12-29",
-        "source": "email",
-        "actionParams": {
-            "action": "visit",
-            "page": "product3"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-29",
+        "date": "2015-12-30",
         "source": "google",
         "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 5
-    },
-    {
-        "date": "2015-12-29",
-        "source": "email",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product2"
-        },
-        "userId": 5
-    },
-    {
-        "date": "2015-12-29",
-        "source": "direct",
-        "actionParams": {
             "action": "visit",
-            "page": "product2"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-30",
-        "source": "direct",
-        "actionParams": {
-            "action": "visit",
-            "page": "product3"
-        },
-        "userId": 8
-    },
-    {
-        "date": "2015-12-30",
-        "source": "referral",
-        "actionParams": {
-            "action": "buy",
             "page": "product1"
         },
-        "userId": 8
+        "userId": 6
     },
     {
         "date": "2015-12-31",
-        "source": "direct",
+        "source": "google",
         "actionParams": {
-            "action": "addToCart",
-            "page": "product2"
-        },
-        "userId": 3
-    },
-    {
-        "date": "2015-12-31",
-        "source": "facebook",
-        "actionParams": {
-            "action": "addToCart",
+            "action": "visit",
             "page": "product1"
         },
         "userId": 4
-    },
-    {
-        "date": "2015-12-31",
-        "source": "facebook",
-        "actionParams": {
-            "action": "buy",
-            "page": "product2"
-        },
-        "userId": 4
-    },
-    {
-        "date": "2015-12-31",
-        "source": "referral",
-        "actionParams": {
-            "action": "addToCart",
-            "page": "product3"
-        },
-        "userId": 9
     }
 ]

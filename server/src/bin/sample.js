@@ -17,6 +17,9 @@ const actions = [
     { action: 'addToCart', page: 'product1' },
     { action: 'addToCart', page: 'product2' },
     { action: 'addToCart', page: 'product3' },
+    { action: 'addToCart', page: 'product1' },
+    { action: 'addToCart', page: 'product2' },
+    { action: 'addToCart', page: 'product3' },
     { action: 'buy', page: 'product1' },
     { action: 'buy', page: 'product2' },
     { action: 'buy', page: 'product3' }
@@ -28,24 +31,18 @@ const sources = ['google', 'facebook', 'email', 'direct', 'referral', 'none'];
 
 const users = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const usersPerDay = [1, 2, 3];
-
-const actionsPerDay = [1, 2];
+const maxUsersPerDay = 2;
 
 const data = [];
 
 for (const date of dates) {
-    const _users = faker.random.arrayElements(users, faker.random.arrayElement(usersPerDay));
+    const _users = faker.random.arrayElements(users, faker.random.number(maxUsersPerDay - 1) + 1);
 
     for (const userId of _users) {
-        const _actionsPerDay = faker.random.arrayElement(actionsPerDay);
+        const actionParams = faker.random.arrayElement(actions);
+        const source = faker.random.arrayElement(sources);
 
-        for (let i = 0; i < _actionsPerDay; i++) {
-            const actionParams = faker.random.arrayElement(actions);
-            const source = faker.random.arrayElement(sources);
-
-            data.push({ date, source, actionParams, userId });
-        }
+        data.push({ date, source, actionParams, userId });
     }
 }
 
