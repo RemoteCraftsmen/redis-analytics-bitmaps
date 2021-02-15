@@ -17,7 +17,7 @@
         "start": "node ./src/index.js",
         "dev": "nodemon ./src/index.js",
         "prettier-fix": "prettier --write .",
-        "generateData": "node ./src/bin/sample.js"
+        "generateData": "node ./src/scripts/sample.js"
     },
     "author": "RemoteCraftsmen.com",
     "license": "MIT",

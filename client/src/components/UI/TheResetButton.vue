@@ -5,8 +5,8 @@
         large
         :loading="loading"
         :disabled="loading"
-        @click="handleFlush"
         style="width: 100%"
+        @click="handleFlush"
     >
         Reset Data
         <v-icon right dark>mdi-restart</v-icon>
@@ -30,20 +30,33 @@ export default {
         async handleFlush() {
             this.loading = true;
 
-            await this.reset();
+            try {
+                await this.reset();
+
+                this.negateRefreshSignal();
+
+                this.$notify({
+                    group: 'main',
+                    title: 'Data',
+                    text: 'Data reseted!',
+                    type: 'success',
+                    duration: 400,
+                    speed: 400
+                });
+            } catch (err) {
+                console.error(err);
+
+                this.$notify({
+                    group: 'main',
+                    title: 'Error',
+                    text: 'Unexpected error occured.',
+                    type: 'error',
+                    duration: 400,
+                    speed: 400
+                });
+            }
 
             this.loading = false;
-
-            this.negateRefreshSignal();
-
-            this.$notify({
-                group: 'main',
-                title: 'Data',
-                text: 'Data reseted!',
-                type: 'success',
-                duration: 400,
-                speed: 400
-            });
         }
     }
 };

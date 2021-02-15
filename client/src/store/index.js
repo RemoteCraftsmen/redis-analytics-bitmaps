@@ -32,7 +32,7 @@ export default new Vuex.Store({
         },
 
         async reset() {
-            await axios.delete('/api/reset');
+            await axios.post('/api/reset');
         },
 
         async fetchCohort(vuexContext, params) {
