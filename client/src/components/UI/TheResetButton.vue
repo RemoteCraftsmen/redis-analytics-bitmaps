@@ -1,5 +1,13 @@
 <template>
-    <v-btn depressed color="warning" large :loading="loading" @click="handleFlush" style="width: 100%">
+    <v-btn
+        depressed
+        color="warning"
+        large
+        :loading="loading"
+        :disabled="loading"
+        @click="handleFlush"
+        style="width: 100%"
+    >
         Reset Data
         <v-icon right dark>mdi-restart</v-icon>
     </v-btn>

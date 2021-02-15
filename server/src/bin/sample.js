@@ -2,6 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const faker = require('faker');
 const dayjs = require('dayjs');
+const di = require('../di');
+
+const periodService = di.get('services.period');
 
 const samplePath = path.join(__dirname, '..', 'sample.json');
 
@@ -19,23 +22,47 @@ const actions = [
     { action: 'buy', page: 'product3' }
 ];
 
+const dates = periodService.getRangeOfDates('2015-12-01', '2015-12-31', 'day').map(date => date.format('YYYY-MM-DD'));
+
 const sources = ['google', 'facebook', 'email', 'direct', 'referral', 'none'];
 
-const usersCount = 10;
+const users = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const period = { from: '2015-12-01', to: '2015-12-31' };
+const usersPerDay = [1, 2, 3];
 
-const actionsCount = 10;
+const actionsPerDay = [1, 2];
 
 const data = [];
 
-for (let i = 0; i < actionsCount; i++) {
-    data.push({
-        actionParams: faker.random.arrayElement(actions),
-        date: dayjs(faker.date.between(period.from, period.to)).format('YYYY-MM-DD'),
-        source: faker.random.arrayElement(sources),
-        userId: faker.random.number(usersCount)
-    });
+for (const date of dates) {
+    const _users = faker.random.arrayElements(users, faker.random.arrayElement(usersPerDay));
+
+    for (const userId of _users) {
+        const _actionsPerDay = faker.random.arrayElement(actionsPerDay);
+
+        for (let i = 0; i < _actionsPerDay; i++) {
+            const actionParams = faker.random.arrayElement(actions);
+            const source = faker.random.arrayElement(sources);
+
+            data.push({ date, source, actionParams, userId });
+        }
+    }
 }
+
+data.sort((a, b) => {
+    if (a.date === b.date) {
+        if (a.actionParams.action === 'register' && b.actionParams !== 'register') {
+            return -1;
+        }
+
+        if (a.actionParams.action !== 'register' && b.actionParams === 'register') {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    return dayjs(a.date).isAfter(b.date) ? 1 : -1;
+});
 
 fs.writeFileSync(samplePath, JSON.stringify(data, null, 4).concat('\n'));
