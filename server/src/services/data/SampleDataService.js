@@ -13,7 +13,9 @@ class SampleDataService {
             for (const event of events) {
                 await this.storeDataService.store(event);
             }
-        } catch (err) {}
+        } catch (err) {
+            console.error(err);
+        }
     }
 }
 
