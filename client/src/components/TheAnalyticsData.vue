@@ -11,7 +11,7 @@
         <v-alert
                 text
                 dense
-                color="info"
+                color="blue-grey lighten-2"
                 class="mt-6 mb-0 mx-1"
                 border="left"
         >
@@ -20,14 +20,14 @@
                 no-gutters
                 @click="alert = !alert"
             >
-                <v-col class="grow">
+                <v-col class="grow black--text">
                     <h3 class="headline">
                         How it works?
                     </h3>
                 </v-col>
                 <v-col class="shrink">
                     <v-btn
-                        color="info"
+                        color="black"
                         outlined
                     >
                         {{ alert ? 'Collapse' : 'View more'}}
@@ -36,12 +36,12 @@
             </v-row>
 
             <v-divider v-show="alert"
-                class="my-4 info"
+                class="my-4 black"
                 style="opacity: 0.22"
             ></v-divider>
 
             <div v-show="alert">
-                <ol>
+                <ol class="black--text">
                     <li class="font-weight-bold">How the data is stored:</li>
                     <ul class="mb-5">
                         <li>The event data is stored in various keys and various data types.</li>
