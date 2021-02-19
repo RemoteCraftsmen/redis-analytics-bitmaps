@@ -9,10 +9,8 @@
        </v-card>
 
         <v-alert
-                text
                 dense
-                color="blue-grey lighten-2"
-                class="mt-6 mb-0 mx-1"
+                class="mt-6 mb-0 mx-1 card v-card"
                 border="left"
         >
             <v-row
