@@ -12,4 +12,4 @@ RUN npm install
 COPY ./server .
 COPY --from=vue-build /app/dist ./../client-dist
 EXPOSE ${PORT}
-CMD ["node", "./server/src/index.js"]
+CMD ["node", "./src/index.js"]
